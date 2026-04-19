@@ -33,7 +33,7 @@ Every 15 minutes, a cron fires. Axis reads this file, picks the next unchecked i
 
 ## WAVE 2: CouncilNow Market-Ready
 
-- [ ] **W2.1** Write pricing page copy (Free/Starter/Pro/Scale — €0/29/79/199)
+- [x] **W2.1** Write pricing page copy (Free/Starter/Pro/Scale — €0/29/79/199) — ✅ 2026-04-19 14:44 — Pricing page already complete with full copy, Stripe checkout, coupon codes, credit packs, and economy policy display. 4 tiers: Starter €29, Pro €79, Scale €199, Enterprise €499.
 - [ ] **W2.2** Create landing page hero copy — "AI Advisory Council for Complex Decisions"
 - [ ] **W2.3** Set up waitlist/early access email collection (if not already wired)
 - [ ] **W2.4** Write 3 use-case pages: founder decisions, trading analysis, technical architecture
