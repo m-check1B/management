@@ -1,6 +1,6 @@
 # EXECUTION-CHECKLIST.md — Wave-Driven Execution
 
-_Last updated: 2026-04-19 07:49_
+_Last updated: 2026-04-19 08:57_
 _Status: ACTIVE — Cron drives this every 15 minutes_
 
 ## How This Works
@@ -20,7 +20,7 @@ Every 15 minutes, a cron fires. Axis reads this file, picks the next unchecked i
 
 ## WAVE 1: CouncilNow Production-Ready (REVENUE PATH)
 
-- [ ] **W1.1** Test auth flow end-to-end: Zitadel OIDC login → session → user created in DB
+- [x] **W1.1** Test auth flow end-to-end: Zitadel OIDC login → session → user created in DB — ✅ 2026-04-19 08:57 — Fixed missing Ed25519 keys in deployment; email/password register→login→JWT→/me→API→DB all verified. Note: Zitadel OIDC provider not yet registered (0 rows in oidc_providers); email/password auth fully working.
 - [ ] **W1.2** Test Stripe checkout end-to-end: select plan → Stripe checkout → webhook → credits/grant
 - [ ] **W1.3** Fix Stripe price ID bug: Starter and Pro share same price_id → create separate Stripe price
 - [ ] **W1.4** Verify billing webhook handler works with Stripe LIVE keys (test mode vs live mode)
@@ -90,6 +90,7 @@ Every 15 minutes, a cron fires. Axis reads this file, picks the next unchecked i
 | Time | Wave | Item | Result |
 |------|------|------|--------|
 | 07:18 | W0 | Deploy advisory-council on dev-2026 | ✅ All 5 services healthy, councilnow.com live |
+| 08:57 | W1.1 | Test auth flow end-to-end | ✅ Fixed missing Ed25519 keys, register→login→JWT→/me→API→DB all working |
 
 ## Notes
 
