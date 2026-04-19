@@ -13,7 +13,7 @@ _Last updated: 2026-04-19 13:55_
 - 08:50 — Marketing site had wrong `_app` routing. Simplified: everything goes through SvelteKit frontend (port 5180). Rebuilt frontend with latest source. Buttons should now hydrate correctly.
 - 09:06 — Rebuilt frontend Docker image with latest advisory-council-app source. Awaiting Matej confirmation that buttons work.
 - 13:55 — **CouncilNow price ID bug FIXED.** Starter and Pro were both using $29 USD price. Updated to correct EUR prices (€29/€79/€199/€499). Verified full checkout chain: internet → Traefik → LXD → hub → Stripe → valid €79 Pro session. Ready for first customer.
-- 16:03 — Selfcheck: Stripped non-AgentJack automation (6 cron disabled, crontab 87→21 lines). Fixed SCALE price ID (was missing from prod .env). All 4 CouncilNow tiers E2E verified. AgentJack autodev task 01 marked done. Steering board updated. Workspace pushed.
+- 18:03 — Selfcheck: ALL 4 AgentJack steering tasks shipped by Axis directly (tenants API + page, memory ABC, overview verified). CouncilNow revenue E2E verified. Zero cron errors. Autodev board empty — need new tasks from inbox or fresh priorities from Matej.
 
 ## Active Sprint: AXIS SETUP
 
