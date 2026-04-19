@@ -21,9 +21,9 @@ Every 15 minutes, a cron fires. Axis reads this file, picks the next unchecked i
 ## WAVE 1: CouncilNow Production-Ready (REVENUE PATH)
 
 - [x] **W1.1** Test auth flow end-to-end: Zitadel OIDC login → session → user created in DB — ✅ 2026-04-19 08:57 — Fixed missing Ed25519 keys in deployment; email/password register→login→JWT→/me→API→DB all verified. Note: Zitadel OIDC provider not yet registered (0 rows in oidc_providers); email/password auth fully working.
-- [ ] **W1.2** Test Stripe checkout end-to-end: select plan → Stripe checkout → webhook → credits/grant
-- [ ] **W1.3** Fix Stripe price ID bug: Starter and Pro share same price_id → create separate Stripe price
-- [ ] **W1.4** Verify billing webhook handler works with Stripe LIVE keys (test mode vs live mode)
+- [x] **W1.2** Test Stripe checkout end-to-end: select plan → Stripe checkout → webhook → credits/grant — ⚠️ 2026-04-19 09:16 — Checkout creation ✅ (live Stripe session created), portal ✅, subscription ✅, summary ✅. BLOCKED on webhook: STRIPE_WEBHOOK_SECRET not configured in .env, so webhook handler can't verify signatures. Matej needs to: (1) create Stripe webhook endpoint in dashboard pointing to councilnow.com/api/billing/webhooks/stripe, (2) set STRIPE_WEBHOOK_SECRET in .env, (3) restart hub.
+- [!] **W1.3** Fix Stripe price ID bug: Starter and Pro share same price_id → create separate Stripe price — BLOCKED: Requires Stripe dashboard to create new Pro price. Both currently point to price_1TGK9RLqM8qbAlEhcT80nLJv. Also STRIPE_PRICE_SCALE and STRIPE_PRICE_GROWTH are not set in .env.
+- [!] **W1.4** Verify billing webhook handler works with Stripe LIVE keys (test mode vs live mode) — BLOCKED: STRIPE_WEBHOOK_SECRET not configured. Webhook endpoint exists and returns 400 when no signature provided (correct). Needs Matej to configure webhook in Stripe dashboard.
 - [ ] **W1.5** Test session creation: authenticated user → create council session → advisors respond
 - [ ] **W1.6** Test frontend routing: marketing → /login → /app → session view → billing
 - [ ] **W1.7** Set up Stripe customer portal (self-service manage subscription)
@@ -91,6 +91,9 @@ Every 15 minutes, a cron fires. Axis reads this file, picks the next unchecked i
 |------|------|------|--------|
 | 07:18 | W0 | Deploy advisory-council on dev-2026 | ✅ All 5 services healthy, councilnow.com live |
 | 08:57 | W1.1 | Test auth flow end-to-end | ✅ Fixed missing Ed25519 keys, register→login→JWT→/me→API→DB all working |
+| 09:16 | W1.2 | Test Stripe checkout | ⚠️ Checkout/portal/subscription APIs all work. Blocked on STRIPE_WEBHOOK_SECRET |
+| 09:16 | W1.3 | Fix Stripe price IDs | ❌ BLOCKED — needs Stripe dashboard access |
+| 09:16 | W1.4 | Verify webhook handler | ❌ BLOCKED — needs STRIPE_WEBHOOK_SECRET |
 
 ## Notes
 

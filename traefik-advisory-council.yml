@@ -4,7 +4,7 @@ http:
       rule: "Host(`councilnow.com`) || Host(`www.councilnow.com`)"
       entryPoints:
         - web
-      service: councilnow-frontend
+      service: councilnow-marketing
       middlewares:
         - redirect-to-https
 
@@ -26,30 +26,54 @@ http:
       tls:
         certResolver: letsencrypt
 
+    councilnow-frontend-assets:
+      rule: "Host(`councilnow.com`) && PathPrefix(`/_app`)"
+      entryPoints:
+        - websecure
+      service: councilnow-frontend
+      priority: 25
+      tls:
+        certResolver: letsencrypt
+
+    councilnow-frontend:
+      rule: "Host(`councilnow.com`) && (PathPrefix(`/app`) || PathPrefix(`/login`) || PathPrefix(`/shared`))"
+      entryPoints:
+        - websecure
+      service: councilnow-frontend
+      priority: 20
+      tls:
+        certResolver: letsencrypt
+
     councilnow-marketing:
       rule: "Host(`councilnow.com`) || Host(`www.councilnow.com`)"
       entryPoints:
         - websecure
-      service: councilnow-frontend
+      service: councilnow-marketing
       priority: 10
       tls:
         certResolver: letsencrypt
 
   services:
+    councilnow-marketing:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://10.181.203.100:5181"
+
     councilnow-frontend:
       loadBalancer:
         passHostHeader: true
         servers:
-          - url: "http://172.24.0.1:5180"
+          - url: "http://10.181.203.100:5180"
 
     councilnow-api:
       loadBalancer:
         passHostHeader: true
         servers:
-          - url: "http://172.24.0.1:8210"
+          - url: "http://10.181.203.100:8210"
 
     councilnow-hub:
       loadBalancer:
         passHostHeader: true
         servers:
-          - url: "http://172.24.0.1:8211"
+          - url: "http://10.181.203.100:8211"

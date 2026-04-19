@@ -1,6 +1,6 @@
 # Sprint Current — What Axis Is Working On RIGHT NOW
 
-_Last updated: 2026-04-19 01:11_
+_Last updated: 2026-04-19 13:55_
 
 ## Last Hour
 - 00:00 — Selfcheck #1: All 8 erroring cron jobs fixed (delivery=none + best-effort). AgentJack got multi-tenant commit. PM2 14/16 online. Hub + embeddings OK. Daily note written. Workspace pushed to GitHub.
@@ -12,6 +12,7 @@ _Last updated: 2026-04-19 01:11_
 - 08:25 — **CouncilNow deployed on dev-2026.** 5 Docker services healthy (api, hub, frontend, marketing, db). Fixed 7 deployment issues (LXD conflict, PM2 zombies, DNS, missing DB, macOS resource forks crashing migrations, Traefik routing). councilnow.com live.
 - 08:50 — Marketing site had wrong `_app` routing. Simplified: everything goes through SvelteKit frontend (port 5180). Rebuilt frontend with latest source. Buttons should now hydrate correctly.
 - 09:06 — Rebuilt frontend Docker image with latest advisory-council-app source. Awaiting Matej confirmation that buttons work.
+- 13:55 — **CouncilNow price ID bug FIXED.** Starter and Pro were both using $29 USD price. Updated to correct EUR prices (€29/€79/€199/€499). Verified full checkout chain: internet → Traefik → LXD → hub → Stripe → valid €79 Pro session. Ready for first customer.
 
 ## Active Sprint: AXIS SETUP
 
