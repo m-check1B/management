@@ -6,7 +6,7 @@ _Last updated: 2026-04-18 23:21_
 
 | Project | Location | Status | Priority | Notes |
 |---------|----------|--------|----------|-------|
-| **AgentJack** | `/github/agentjack` | 🔄 Development | P1 — THE product | Agentic orchestration. Agent core first → apps → surpass Garry |
+| **AgentJack** | `/github/agentjack` | 🔄 Development | P1 — THE product | Agentic orchestration. SvelteKit UI. Port GoClaw B2B patterns. APPROVED plan. |
 | **CouncilNow** | `/github/applications/advisory-council-app` + `/github/websites/councilnow.com` | 🔄 Active | P1 — Revenue first | Multi-agent debate. Run as real business ASAP |
 | **open-kraliki** | `/github/open-kraliki` | ✅ Stable | P2 | Automation templates. Substrate for AgentJack Automations |
 
