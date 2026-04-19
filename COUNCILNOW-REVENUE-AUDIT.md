@@ -1,7 +1,7 @@
 # CouncilNow — Revenue Readiness Audit
 
-_Audited: 2026-04-19 13:55 by Axis_
-_Status: ✅ READY FOR FIRST CUSTOMER. Price ID bug fixed, full checkout verified end-to-end._
+_Audited: 2026-04-19 15:55 by Axis_
+_Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE), full checkout chain verified end-to-end._
 
 ## What's Working ✅
 
@@ -14,8 +14,8 @@ _Status: ✅ READY FOR FIRST CUSTOMER. Price ID bug fixed, full checkout verifie
 | Pricing page | ✅ LIVE | 4 tiers: Free, €29/mo, €79/mo, €199/mo |
 | Login page | ✅ LIVE | Zitadel OIDC wired |
 | Stripe keys | ✅ LIVE | `sk_live_` + `pk_live_` in hub-fork/.env |
-| Stripe checkout API | ✅ REACHES STRIPE | `/api/billing/checkout` — returned "No such customer: cus_test" (means Stripe connection works) |
-| Stripe prices configured | ✅ | Starter/Pro/Enterprise price IDs set |
+| Stripe checkout API | ✅ ALL TIERS VERIFIED | `/api/billing/checkout` — starter, pro, scale, enterprise all resolve correctly via internet → CF → Traefik → LXD → hub → Stripe |
+| Stripe prices configured | ✅ | All 4 tiers: Starter (€29), Pro (€79), Scale (€199), Enterprise (€499) EUR prices |
 | Customer portal | ✅ BUILT | `/api/billing/portal` endpoint exists |
 | Credits purchase | ✅ BUILT | `/api/billing/checkout/credits` endpoint |
 | Zitadel SSO | ✅ CONFIGURED | identity.verduona.dev, Google working |
