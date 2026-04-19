@@ -13,6 +13,7 @@ _Last updated: 2026-04-19 13:55_
 - 08:50 — Marketing site had wrong `_app` routing. Simplified: everything goes through SvelteKit frontend (port 5180). Rebuilt frontend with latest source. Buttons should now hydrate correctly.
 - 09:06 — Rebuilt frontend Docker image with latest advisory-council-app source. Awaiting Matej confirmation that buttons work.
 - 13:55 — **CouncilNow price ID bug FIXED.** Starter and Pro were both using $29 USD price. Updated to correct EUR prices (€29/€79/€199/€499). Verified full checkout chain: internet → Traefik → LXD → hub → Stripe → valid €79 Pro session. Ready for first customer.
+- 14:03 — Selfcheck: PM2 14 online, repos clean, management pushed. Matej asked to work on AgentJack — awaiting specific direction on priority.
 
 ## Active Sprint: AXIS SETUP
 
