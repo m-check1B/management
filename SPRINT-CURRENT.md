@@ -9,6 +9,9 @@ _Last updated: 2026-04-19 01:11_
 - 03:00 — Selfcheck #4: Overnight maintenance ran OK (first old-error job cleared). System stable.
 - 04:00 — Selfcheck #5: Daily backup OK. Apple Notes OK. workspace-github-push running. 3 old-error jobs remain (fire at 08:00/09:00). **Delivery fix fully confirmed — all fixed jobs now running clean.**
 - 07:20 — **Harness + UI analysis complete. Matej APPROVED plan:** Keep AgentJack SvelteKit webchat, port GoClaw B2B admin patterns (tenants, teams, API keys, usage), study GoClaw architecture for multi-tenant/security reimplement in Python. GoClaw CC BY-NC license — patterns only, no code.
+- 08:25 — **CouncilNow deployed on dev-2026.** 5 Docker services healthy (api, hub, frontend, marketing, db). Fixed 7 deployment issues (LXD conflict, PM2 zombies, DNS, missing DB, macOS resource forks crashing migrations, Traefik routing). councilnow.com live.
+- 08:50 — Marketing site had wrong `_app` routing. Simplified: everything goes through SvelteKit frontend (port 5180). Rebuilt frontend with latest source. Buttons should now hydrate correctly.
+- 09:06 — Rebuilt frontend Docker image with latest advisory-council-app source. Awaiting Matej confirmation that buttons work.
 
 ## Active Sprint: AXIS SETUP
 

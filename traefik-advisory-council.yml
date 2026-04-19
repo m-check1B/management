@@ -1,0 +1,55 @@
+http:
+  routers:
+    councilnow-http:
+      rule: "Host(`councilnow.com`) || Host(`www.councilnow.com`)"
+      entryPoints:
+        - web
+      service: councilnow-frontend
+      middlewares:
+        - redirect-to-https
+
+    councilnow-auth:
+      rule: "Host(`councilnow.com`) && (PathPrefix(`/auth`) || PathPrefix(`/api/waitlist`) || PathPrefix(`/api/billing`) || PathPrefix(`/billing`) || PathPrefix(`/webhooks`))"
+      entryPoints:
+        - websecure
+      service: councilnow-hub
+      priority: 40
+      tls:
+        certResolver: letsencrypt
+
+    councilnow-api:
+      rule: "Host(`councilnow.com`) && (PathPrefix(`/api/v1`) || PathPrefix(`/health`))"
+      entryPoints:
+        - websecure
+      service: councilnow-api
+      priority: 30
+      tls:
+        certResolver: letsencrypt
+
+    councilnow-marketing:
+      rule: "Host(`councilnow.com`) || Host(`www.councilnow.com`)"
+      entryPoints:
+        - websecure
+      service: councilnow-frontend
+      priority: 10
+      tls:
+        certResolver: letsencrypt
+
+  services:
+    councilnow-frontend:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://172.24.0.1:5180"
+
+    councilnow-api:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://172.24.0.1:8210"
+
+    councilnow-hub:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://172.24.0.1:8211"
