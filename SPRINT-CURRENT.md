@@ -1,6 +1,6 @@
 # Sprint Current — What Axis Is Working On RIGHT NOW
 
-_Last updated: 2026-04-19 13:55_
+_Last updated: 2026-04-20 08:04_
 
 ## Last Hour
 - 00:00 — Selfcheck #1: All 8 erroring cron jobs fixed (delivery=none + best-effort). AgentJack got multi-tenant commit. PM2 14/16 online. Hub + embeddings OK. Daily note written. Workspace pushed to GitHub.
@@ -19,6 +19,14 @@ _Last updated: 2026-04-19 13:55_
 - 00:03 (Mon) — Selfcheck: Quiet overnight. Zero cron errors. All systems green. Day summary: shipped 4 AgentJack tasks, fixed CouncilNow pricing, stripped automation to AgentJack-only, wrote mail VM migration plan.
 - 02:03 (Mon) — Selfcheck: Overnight stable. Zero cron errors. All green.
 - 04:08 (Mon) — Selfcheck: Deep overnight stable. Zero errors. All green.
+- 07:20 — **AgentJack product completion sprint started.** Matej: "complete product, plan for today and all, define final product and then do it."
+- 07:35 — **Product audit complete.** Backend 85% (30K lines), Frontend 60% (10K lines). 30+ sections with real data loaders already working.
+- 07:40 — **3-site chain wired:** kraliki.com (brand CTAs) → agentjack.kraliki.com (product landing) → agentjack-dev.verduona.dev (app). CTAs updated in both marketing repos.
+- 07:45 — **Settings page shipped** (4 tabs: Profile, Integrations, API Keys, Preferences). **Dashboard redesigned** (Quick Actions, Svelte 5 $derived migration).
+- 07:48 — **Privacy + Terms pages shipped.** All in (public) route group (no sidebar).
+- 07:50 — **Login page using shared Hub auth** (same as CouncilNow). Created $lib/auth.ts mirroring CouncilNow's auth module exactly. One userbase via Zitadel/Hub.
+- 07:52 — **Finding: Zitadel not wired** in Hub DB. Env vars exist but no OIDC provider entry. Google SSO works fine, Zitadel-without-Google impossible until DB insert.
+- 08:04 — Selfcheck: Active session building AgentJack. 4 pages shipped, auth wired, marketing CTAs updated. Continuing product completion.
 
 ## Active Sprint: AXIS SETUP
 
