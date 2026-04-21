@@ -1,8 +1,9 @@
 # Sprint Current — What Axis Is Working On RIGHT NOW
 
-_Last updated: 2026-04-21 16:09_
+_Last updated: 2026-04-21 17:21_
 
 ## Last Hour
+- 17:21 — Selfcheck: mail-tba migration plan pushed, Zitadel password-only login proved without Google, `hub.verduona.dev` now resolves to dev-2026 and serves Hub health, but TLS is still blocked by Traefik serving the default cert.
 - 16:09 — Selfcheck: CouncilNow live auth→checkout/portal now fully verified on `https://councilnow.com` with fresh test users (all `/api/billing` tiers + credits + subscription + portal), and cron/job baseline stayed healthy (`consecutiveErrors > 2` remains 0).
 - 15:20 — Selfcheck: AgentJack waves remain complete on `main`; NOW priority is CouncilNow revenue blocker (auth→checkout/portal), enabled cron jobs have no consecutiveErrors > 2 and no overdue runs, local health baseline is green (PM2 14, hub/openviking/embeddings/hermes).
 - 16:08 — Selfcheck: AgentJack remaining waves confirmed complete on `main` (1854046, 2f9d7c0, a771997), CouncilNow auth/billing fallback deployed to dev-2026, enabled cron jobs have no consecutiveErrors > 2, and live pricing auth→checkout validation is in progress.
