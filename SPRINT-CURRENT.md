@@ -1,8 +1,13 @@
 # Sprint Current — What Axis Is Working On RIGHT NOW
 
-_Last updated: 2026-04-20 08:04_
+_Last updated: 2026-04-21 16:09_
 
 ## Last Hour
+- 16:09 — Selfcheck: CouncilNow live auth→checkout/portal now fully verified on `https://councilnow.com` with fresh test users (all `/api/billing` tiers + credits + subscription + portal), and cron/job baseline stayed healthy (`consecutiveErrors > 2` remains 0).
+- 15:20 — Selfcheck: AgentJack waves remain complete on `main`; NOW priority is CouncilNow revenue blocker (auth→checkout/portal), enabled cron jobs have no consecutiveErrors > 2 and no overdue runs, local health baseline is green (PM2 14, hub/openviking/embeddings/hermes).
+- 16:08 — Selfcheck: AgentJack remaining waves confirmed complete on `main` (1854046, 2f9d7c0, a771997), CouncilNow auth/billing fallback deployed to dev-2026, enabled cron jobs have no consecutiveErrors > 2, and live pricing auth→checkout validation is in progress.
+- 13:13 — Matej directive: top priority is to finish AgentJack today. Run Codex in YOLO mode for all remaining waves and keep focus there until shipped.
+- 12:04 — Selfcheck: Reconciled today’s AgentJack session history, confirmed Wave 0 truth-pass pushed and ship gate + Telegram are green, now executing Wave 1 runtime/recovery hardening; no cron jobs over consecutiveErrors > 2, workspace clean.
 - 10:03 — Selfcheck: AgentJack autodev remains the focus, no cron jobs over consecutiveErrors > 2, management repo clean.
 - 00:00 — Selfcheck #1: All 8 erroring cron jobs fixed (delivery=none + best-effort). AgentJack got multi-tenant commit. PM2 14/16 online. Hub + embeddings OK. Daily note written. Workspace pushed to GitHub.
 - 01:00 — Selfcheck #2: AgentJack dev sprint shipped (scheduler + evaluator wired, 39 new tests, 488 passed). dev-2026 verified healthy (19 Docker containers, PM2 all online). Memory consolidation from 15 previous lifetime files completed → obsidian-memory/Knowledge/consolidated-memory.md. Management hub + workspace pushed to GitHub.

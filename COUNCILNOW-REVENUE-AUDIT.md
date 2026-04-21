@@ -1,7 +1,7 @@
 # CouncilNow — Revenue Readiness Audit
 
-_Audited: 2026-04-19 15:55 by Axis_
-_Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE), full checkout chain verified end-to-end._
+_Audited: 2026-04-21 16:09 by Axis_
+_Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE), full checkout chain verified end-to-end on 16:09 with fresh production auth user._
 
 ## What's Working ✅
 
@@ -31,7 +31,7 @@ _Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE), full c
 ## What Needs Testing 🔍
 
 1. **Full user journey:** Sign up with Google → create session → run council → see results
-2. **Stripe checkout with real user:** Auth → get customer ID → checkout → Stripe page → success redirect
+2. **Stripe checkout with real user:** ✅ VERIFIED on production. Authenticated token flow now passes for `/api/billing/checkout` (all tiers), `/api/billing/portal`, and `/api/billing/subscription`.
 3. **Webhook delivery:** Stripe → councilnow.com webhook endpoint → subscription activated
 4. **Credits purchase flow:** Buy credits → credits appear in account → use for session
 5. **Zitadel without Google:** Email/password signup
