@@ -1,7 +1,7 @@
 # CouncilNow — Revenue Readiness Audit
 
-_Audited: 2026-04-21 23:21 by Axis_
-_Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE), full checkout chain verified end-to-end again at 23:21 with a fresh production auth user on the real frontend contract._
+_Audited: 2026-04-22 01:45 by Axis_
+_Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE), full checkout chain verified end-to-end again at 01:45 with a fresh production auth user on the real frontend contract._
 
 ## What's Working ✅
 
@@ -35,10 +35,18 @@ _Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE), full c
    - Fresh 19:21 recheck PASS with new production account `axis-reminder-6178313952@gmail.com`.
    - Fresh 21:21 recheck PASS with new production account `axis-reminder-73074093@gmail.com`.
    - Fresh 23:21 recheck PASS with new production account `axis-reminder-1975726468@gmail.com`.
+   - Fresh 01:45 recheck PASS with new production account `axis-reminder-3216957425@gmail.com`.
    - `/api/billing/checkout` returned live Stripe sessions for `starter`, `pro`, `scale`, and `enterprise`.
-   - Latest `/api/billing/portal` pass returned `bps_1TOlkWLqM8qbAlEh0NrmDjQf`.
-   - Latest `/api/billing/subscription` pass returned the linked Stripe customer `cus_UNWnO5VqxBYuJM`.
-   - Important test-contract note: bare API payloads with only `tier` fail validation because the live endpoint correctly requires `success_url` and `cancel_url`; the customer path is healthy because the production pricing page sends the full contract (`tier_name`, success/cancel URLs, mode).
+   - Latest 01:45 checkout recheck returned session IDs:
+     - starter: `cs_live_b1QsqeGLAUTfLi7CxT4c2XnjeoAtxHDKtXQucJWbRL8lfsAMqBFjB37H71`
+     - pro: `cs_live_b1Q1HxxE20Tz6WbrQElPYp214CZpX2uimorLlc7uw0LsO66T0iihHLHZlR`
+     - scale: `cs_live_b1nAAyGujgf8abaiPAGOGW9AGTcvwRvINlqbPLJqNDDfWewYrjkX70dMGm`
+     - enterprise: `cs_live_b1aWcxgj1zlAVIfZjUSNQawQrGqTwEET7vKKpAVv02fDMAw6iTbmD97TG7`
+   - Each 01:45 live Stripe checkout URL returned `HEAD 200`.
+   - Latest `/api/billing/portal` pass returned `bps_1TOnyDLqM8qbAlEhGEqpo6Fq`.
+   - Latest `/api/billing/subscription` pass returned the linked Stripe customer `cus_UNZ6HEyE24tCo1`.
+   - Important test-contract note: bare API payloads with only `tier` fail validation because the live endpoint correctly requires `success_url` and `cancel_url`; `/api/billing/portal` likewise requires `return_url`; the customer path is healthy because the production pricing page sends the full contract (`tier_name`, success/cancel URLs, `mode`, and `return_url` for portal).
+   - Response-shape note: live checkout returns `checkout_url` and live portal returns `portal_url`, not only a generic `url` field.
 3. **Webhook delivery:** Stripe → councilnow.com webhook endpoint → subscription activated
 4. **Credits purchase flow:** Buy credits → credits appear in account → use for session
 5. **Zitadel without Google:** Email/password signup
