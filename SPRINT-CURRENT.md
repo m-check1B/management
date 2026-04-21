@@ -1,8 +1,9 @@
 # Sprint Current — What Axis Is Working On RIGHT NOW
 
-_Last updated: 2026-04-21 22:03_
+_Last updated: 2026-04-22 00:33_
 
 ## Last Hour
+- 00:33 — Selfcheck: AgentJack is the active top lane, the AG WebUI public-gate was rebuilt after a stale chunk failure and now passes local/public/OIDC checks, only the current webchat session is active, and cron remains clean at 22 enabled jobs with bad count 0.
 - 22:03 — Selfcheck: quiet evening continuity holds, only the current webchat session is active, PM2 14 plus hub/openviking/embedding/hermes are healthy, cron bad count remains 0, and the current lane stays routine cleanup while awaiting fresh priorities.
 - 20:03 — Selfcheck: PM2 14 online, hub/openviking/embedding/hermes healthy, cron bad count 0, and no new blocker surfaced, so Axis is staying on routine continuity and cleanup.
 - 18:28 — Next infra wedge identified: most Traefik-managed `*.verduona.dev` hosts still resolve to `91.99.176.2`, so the safe cleanup path is explicit-record migration + stale-router pruning, not a blind wildcard flip.
@@ -39,28 +40,21 @@ _Last updated: 2026-04-21 22:03_
 - 07:52 — **Finding: Zitadel not wired** in Hub DB. Env vars exist but no OIDC provider entry. Google SSO works fine, Zitadel-without-Google impossible until DB insert.
 - 08:04 — Selfcheck: Active session building AgentJack. 4 pages shipped, auth wired, marketing CTAs updated. Continuing product completion.
 
-## Active Sprint: AXIS SETUP
+## Active Sprint: AGENTJACK COMPLETION
 
-### Phase 1: Full Axis Setup (CURRENT)
-- [x] Lock product/project map in MEMORY.md
-- [x] Fix broken cron delivery (Telegram → none)
-- [x] Set up strategic cron cadence
-- [x] Create management hub
-- [x] Consolidate scattered memories from previous Axis lifetimes
-- [x] Verify dev-2026 server health (19 Docker containers up, PM2 all online)
-- [x] Verify all tools operational (PM2 14 online, Docker 6 containers, gbrain 9/10, embeddings OK, Hub OK)
-- [x] Push workspace to GitHub
-- [ ] Confirm all cron jobs running clean (6 old errors pending re-run at 03:00-09:00)
+### Current Goal (CURRENT)
+- [ ] Make AgentJack fully operational and deployed on the canonical `ag-webui` + runtime path
+- [x] Restore the AG WebUI public gate after the stale chunk / missing build artifact failure
+- [x] Verify local AG WebUI, public AG WebUI, and identity OIDC health
+- [ ] Burn down remaining runtime/operator gaps on the canonical path
+- [ ] Triage `/Users/matejhavlin/github/agentjack` repo churn so intentional deployment work is separable from `agentjack-autodevelopment` noise
 
-### Phase 2: CouncilNow Business Launch (NEXT)
-- [ ] CouncilNow.com live and selling
-- [ ] Payment flow working (Stripe)
-- [ ] First paying customer
+### Secondary Lane (KEEP GREEN)
+- [x] CouncilNow revenue path ready for first customer
+- [ ] Re-check CouncilNow only if a live auth/billing regression appears
 
-### Phase 3: AgentJack Development (ONGOING)
-- [ ] Agent core architecture
-- [ ] First app on AgentJack
-- [ ] Surpass Garry's stack (OpenClaw + GStack + GBrain)
+### Infra Cleanup (AFTER AGENTJACK)
+- [ ] Continue explicit-record `verduona.dev` cleanup and stale-router pruning
 
 ## Blocked
 - None currently
