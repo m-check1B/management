@@ -1,8 +1,9 @@
 # Sprint Current — What Axis Is Working On RIGHT NOW
 
-_Last updated: 2026-04-22 22:12_
+_Last updated: 2026-04-23 00:03_
 
 ## Last Hour
+- 00:03 — Selfcheck: the last hour shipped and pushed the CouncilNow Google verifier adapter plus its warning/docs follow-ups (`f4eecb0`, `ae0b605`, `18cc157`), cron bad count remains 0 across 23 enabled jobs, no active sessions surfaced, AgentJack doctor still says the top lane is waiting on one real Telegram reply for token `AJ-ED58ED`, and the passive proof watcher was re-armed.
 - 22:12 — Selfcheck: the last hour shipped and pushed the CouncilNow verifier shadow contract plus the AgentJack Telegram proof watcher, repaired the accidental memory-log overwrite immediately, cleared the `openclaw-control-ui` test blocker by installing the missing Playwright Chromium runtime, cron bad count remains 0 across 23 enabled jobs, no other active sessions surfaced, and NOW the top lane still stays AgentJack until one real Telegram reply lands on token `AJ-6FB30E`.
 - 22:01 — Shipped and pushed both overnight product lanes: `advisory-council-app` commit `1715ac6` adds the v1 outcome-verifier shadow contract/spec for the separate Google verifier lane, and `agentjack` commit `b7724d6` adds the passive `telegram-proof-watch` CLI plus token-strict continuity proof handling. Focused suites passed (`8 passed` on CouncilNow verifier slice, `17 passed` on AgentJack Telegram slice), so NOW the only remaining AgentJack Telegram gate is still the real human reply with token `AJ-6FB30E`.
 - 21:46 — CouncilNow reminder recheck: reran the full public auth → billing proof on `https://councilnow.com` with fresh production account `axis-reminder-1776887190084@gmail.com`; `/auth/api/v1/auth/register` returned 201, `/auth/api/v1/auth/login` + `/auth/api/v1/auth/me` returned 200, `/api/billing/subscription` and `/api/billing/portal` returned 200 with Stripe customer `cus_UNsUUfYiWstT29` and portal session `bps_1TP6jELqM8qbAlEhSBIfvvri`, all four `/api/billing/checkout` tiers returned live Stripe sessions whose checkout URLs resolved `HEAD 200`, so CouncilNow is still **ready for first customer** while AgentJack remains the top lane.
