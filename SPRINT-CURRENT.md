@@ -62,6 +62,15 @@ _Last updated: 2026-04-22 06:03_
 ### Infra Cleanup (AFTER AGENTJACK)
 - [ ] Continue explicit-record `verduona.dev` cleanup and stale-router pruning
 
+### Today Schedule (2026-04-22, founder away)
+- 11:40-13:00 — AgentJack Telegram ownership/runtime cutover pass on the canonical `ag-webui` path (`matejs_agent_jack_bot` + `com.agentjack.gateway` truth pass, doctor/status/readiness alignment).
+- 11:40-12:30 in parallel — CouncilNow fresh production auth→checkout recheck and audit refresh if still green.
+- 13:00-15:00 — Rerun canonical AgentJack gate end-to-end and close the next real blocker, not side noise.
+- 15:00-16:00 — Commit/push/proof pass across `agentjack`, `management`, and workspace where needed; update docs only for reality already proven.
+- 16:00-18:00 — If AgentJack gate is green, move to explicit-record `verduona.dev` cleanup; if not green, stay on AgentJack until the blocker is removed or isolated.
+- 18:00-19:00 — Turn Apple Notes + `space-agent` intake into a short adopt/borrow/ignore memo only if the top product lane is stable.
+- All day — Keep hourly selfcheck discipline and do not idle between proof/fix loops.
+
 ## Blocked
 - AgentJack Telegram live delivery is currently blocked by live bot-identity drift (`TELEGRAM_BOT_TOKEN` on Hermes Axis differs from `AGENTJACK_TELEGRAM_BOT_TOKEN`) plus the active OpenClaw polling conflict on the shared bot lane.
 
