@@ -1,8 +1,9 @@
 # Sprint Current — What Axis Is Working On RIGHT NOW
 
-_Last updated: 2026-04-22 16:03_
+_Last updated: 2026-04-22 18:00_
 
 ## Last Hour
+- 18:00 — Selfcheck: shipped the AgentJack continuity/doctor repair so live Telegram checks now read the real `~/.agentjack/state/sessions.db` session store instead of the stale Hermes `state.db`, added regression coverage (`tests/test_continuity.py`, `tests/test_telegram_doctor.py`), and reran the live doctor which now truthfully reports `attention`, `telegram_session_count=1`, and the real remaining blocker: the newest delivery test on the OpenAI `gpt-5.4-mini` + `xhigh` lane is still awaiting a fresh Telegram reply (`AJ-A5BBD5`), so AgentJack is still the top lane and not moving to the Apple Notes / `space-agent` memo or `verduona.dev` cleanup wedge yet.
 - 16:03 — Selfcheck: the last hour refreshed CouncilNow with another green 15:47 public auth→billing proof, only the active main webchat session surfaced, cron remains clean with 23 enabled jobs and bad count 0, and NOW the live plan still says stay on AgentJack’s external Telegram pairing blocker, not the `verduona.dev` cleanup wedge, until `matejs_agent_jack_bot` can actually DM the allowlisted user.
 - 15:10 — Selfcheck: reran the canonical AgentJack live gate after attempting the local `/start` handoff to `matejs_agent_jack_bot`; runtime/ownership truth is still green (`probe.success=true`, public `readyz.ok=true`, `check-dev2026-deploy.sh` passes), but the dedicated bot still cannot DM allowlisted chat `177557562` and live validation remains blocked on external pairing with fresh token `AJ-52C9A5`, so AgentJack is not moving to the `verduona.dev` cleanup wedge yet.
 - 14:03 — Selfcheck: the last hour locked AgentJack Telegram cutover proof plus a fresh 13:55 CouncilNow auth→checkout pass, only the active main webchat session surfaced, cron remains clean with 24 enabled jobs and bad count 0, and NOW the top lane stays AgentJack’s external pairing blocker: start `matejs_agent_jack_bot` or refresh `TELEGRAM_ALLOWED_USERS`, then rerun live delivery validation.
