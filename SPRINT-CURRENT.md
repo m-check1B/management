@@ -64,6 +64,7 @@ _Last updated: 2026-04-22 22:12_
 - 23:14 — AgentJack Telegram proof path refreshed. Initial watcher for `AJ-6FB30E` timed out with no inbound continuity reply; reran live validation successfully, new token is `AJ-ED58ED`, and the passive watcher is re-armed on that token.
 - 23:23 — CouncilNow verifier lane advanced again. Added config-gated shadow adapter boundary plus response persistence on verifier records, verified `8 passed`, pushed `advisory-council-app` commit `7179cbc`.
 - 23:37 — CouncilNow verifier lane now has a real Google Agent Platform / Vertex AI Agent Engine adapter behind the shadow boundary. Added config-gated adapter wiring, fake-transport tests, verified `5 passed`, pushed `advisory-council-app` commit `f4eecb0`.
+- 23:41 — Cleaned the remaining Pydantic v2 config deprecation points in the verifier path (`SettingsConfigDict` / `ConfigDict`), then re-ran the focused shadow test slice cleanly with `5 passed` and no warnings.
 
 ## Active Sprint: AGENTJACK COMPLETION
 
