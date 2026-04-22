@@ -59,6 +59,7 @@ _Last updated: 2026-04-22 22:12_
 - 07:50 — **Login page using shared Hub auth** (same as CouncilNow). Created $lib/auth.ts mirroring CouncilNow's auth module exactly. One userbase via Zitadel/Hub.
 - 07:52 — **Finding: Zitadel not wired** in Hub DB. Env vars exist but no OIDC provider entry. Google SSO works fine, Zitadel-without-Google impossible until DB insert.
 - 08:04 — Selfcheck: Active session building AgentJack. 4 pages shipped, auth wired, marketing CTAs updated. Continuing product completion.
+- 22:28 — OpenClaw control UI xhigh/state bug fixed. Root cause was stale thinking-option logic in shared/UI helpers; shipped the minimal fix plus regression coverage so `/think` and related suggestion paths include `xhigh` again.
 
 ## Active Sprint: AGENTJACK COMPLETION
 
