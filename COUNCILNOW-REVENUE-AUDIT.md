@@ -1,7 +1,7 @@
 # CouncilNow — Revenue Readiness Audit
 
-_Audited: 2026-04-22 15:47 by Axis_
-_Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE), and the full production auth → billing chain passed again at 15:47 with a fresh public registration/login and live checkout contract on councilnow.com._
+_Audited: 2026-04-22 19:43 by Axis_
+_Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE), and the full production auth → billing chain passed again at 19:43 with a fresh public registration/login and live checkout contract on councilnow.com._
 
 ## What's Working ✅
 
@@ -43,9 +43,11 @@ _Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE), and th
    - Fresh 11:46 recheck PASS with new production account `axis-reminder-1776851170922@gmail.com`.
    - Fresh 13:55 recheck PASS with new production account `axis-reminder-1776858922695@gmail.com`.
    - Fresh 15:47 recheck PASS with new production account `axis-reminder-1776865665043@gmail.com`.
+   - Fresh 19:43 recheck PASS with new production account `axis-reminder-1776879945204@gmail.com`.
    - Public auth proof at 11:46: `/auth/api/v1/auth/register` returned 201, `/auth/api/v1/auth/login` returned 200, and `/auth/api/v1/auth/me` resolved the linked Stripe customer `cus_UNinroo8E90k7Z` for the fresh user.
    - Public auth proof at 13:55: `/auth/api/v1/auth/register` returned 201, `/auth/api/v1/auth/login` returned 200, and `/auth/api/v1/auth/me` resolved the linked Stripe customer `cus_UNkt4tawshEqII` for the fresh user.
    - Public auth proof at 15:47: `/auth/api/v1/auth/register` returned 201, `/auth/api/v1/auth/login` returned 200, `/auth/api/v1/auth/me` returned 200, and both `/auth/api/v1/auth/me` plus `/api/billing/subscription` resolved the linked Stripe customer `cus_UNmhRUF31ahKJ2` for the fresh user.
+   - Public auth proof at 19:43: `/auth/api/v1/auth/register` returned 201, `/auth/api/v1/auth/login` returned 200, `/auth/api/v1/auth/me` returned 200, and both `/auth/api/v1/auth/me` plus `/api/billing/subscription` resolved the linked Stripe customer `cus_UNqXcZ0xxU4dCD` for the fresh user.
    - `/api/billing/checkout` returned live Stripe sessions for `starter`, `pro`, `scale`, and `enterprise`.
    - Latest 01:45 checkout recheck returned session IDs:
      - starter: `cs_live_b1QsqeGLAUTfLi7CxT4c2XnjeoAtxHDKtXQucJWbRL8lfsAMqBFjB37H71`
@@ -95,8 +97,14 @@ _Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE), and th
      - scale: `cs_live_b1mRSu9yPJhNflJwUUcHQbg0ePmXBm4Q73Is4YFhCiZEGAcXFmfNfCiOSt`
      - enterprise: `cs_live_b1lqDJJQ06PbkDdwFbqFFwdF1D3CY2HwLLpz0KoaN0Lzyv8aV0s1ELqF8z`
    - Each 15:47 live Stripe checkout URL returned `HEAD 200`.
-   - Latest `/api/billing/portal` pass returned `bps_1TP182LqM8qbAlEhcH9Q0hIA`.
-   - Latest `/api/billing/subscription` pass returned the linked Stripe customer `cus_UNmhRUF31ahKJ2`.
+   - Latest 19:43 checkout recheck returned session IDs:
+     - starter: `cs_live_b1xWbrKUUuLibfTBmIyx4ybZcZpma2bFvBu3qcuJNQlcuJc717bzK1EGZ7`
+     - pro: `cs_live_b1AvJCFIl7O2qGsD731rbDodAnY48jIui5MTxYio7pfUaNLey4NHD8WGco`
+     - scale: `cs_live_b1WrIikxLWgqD7wPcPs1aTgkUsMVNYQyVrzbdpcWybxfd9hkQoScLTOk6Z`
+     - enterprise: `cs_live_b1745sUz5iCdblNSgmrswjYCyC5lEp2XVwsGRtOCk6nxv0iflg3zqbyrBL`
+   - Each 19:43 live Stripe checkout URL returned `HEAD 200`.
+   - Latest `/api/billing/portal` pass returned `bps_1TP4qNLqM8qbAlEhaFtXW5hb`.
+   - Latest `/api/billing/subscription` pass returned the linked Stripe customer `cus_UNqXcZ0xxU4dCD`.
    - Important test-contract note: bare API payloads with only `tier` fail validation because the live endpoint correctly requires `success_url` and `cancel_url`; `/api/billing/portal` likewise requires `return_url`; the customer path is healthy because the production pricing page sends the full contract (`tier_name`, success/cancel URLs, `mode`, and `return_url` for portal).
    - Response-shape note: live checkout returns `checkout_url` and live portal returns `portal_url`, not only a generic `url` field.
 3. **Webhook delivery:** Stripe → councilnow.com webhook endpoint → subscription activated
