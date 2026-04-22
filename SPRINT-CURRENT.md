@@ -63,6 +63,7 @@ _Last updated: 2026-04-22 22:12_
 - 22:38 — CouncilNow verifier lane advanced from schema-only to real shadow persistence. Added feature-flagged post-run request capture plus dedicated verifier table, verified `7 passed`, pushed `advisory-council-app` commit `10866f6`.
 - 23:14 — AgentJack Telegram proof path refreshed. Initial watcher for `AJ-6FB30E` timed out with no inbound continuity reply; reran live validation successfully, new token is `AJ-ED58ED`, and the passive watcher is re-armed on that token.
 - 23:23 — CouncilNow verifier lane advanced again. Added config-gated shadow adapter boundary plus response persistence on verifier records, verified `8 passed`, pushed `advisory-council-app` commit `7179cbc`.
+- 23:37 — CouncilNow verifier lane now has a real Google Agent Platform / Vertex AI Agent Engine adapter behind the shadow boundary. Added config-gated adapter wiring, fake-transport tests, verified `5 passed`, pushed `advisory-council-app` commit `f4eecb0`.
 
 ## Active Sprint: AGENTJACK COMPLETION
 
