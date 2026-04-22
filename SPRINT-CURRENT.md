@@ -1,8 +1,9 @@
 # Sprint Current — What Axis Is Working On RIGHT NOW
 
-_Last updated: 2026-04-22 14:03_
+_Last updated: 2026-04-22 15:10_
 
 ## Last Hour
+- 15:10 — Selfcheck: reran the canonical AgentJack live gate after attempting the local `/start` handoff to `matejs_agent_jack_bot`; runtime/ownership truth is still green (`probe.success=true`, public `readyz.ok=true`, `check-dev2026-deploy.sh` passes), but the dedicated bot still cannot DM allowlisted chat `177557562` and live validation remains blocked on external pairing with fresh token `AJ-52C9A5`, so AgentJack is not moving to the `verduona.dev` cleanup wedge yet.
 - 14:03 — Selfcheck: the last hour locked AgentJack Telegram cutover proof plus a fresh 13:55 CouncilNow auth→checkout pass, only the active main webchat session surfaced, cron remains clean with 24 enabled jobs and bad count 0, and NOW the top lane stays AgentJack’s external pairing blocker: start `matejs_agent_jack_bot` or refresh `TELEGRAM_ALLOWED_USERS`, then rerun live delivery validation.
 - 13:49 — Selfcheck: after locking the dedicated AgentJack Telegram cutover proof and pushing it, the next real blocker surfaced cleanly: live `telegram-validate --live` now records its delivery attempt and shows the dedicated bot is healthy but cannot DM the configured user yet because Telegram returns `Bad Request: chat not found`; public `readyz` now carries the real next action, which is to start `matejs_agent_jack_bot` from Telegram first or refresh `TELEGRAM_ALLOWED_USERS`, then rerun the delivery test (`AJ-10B836`).
 - 13:36 — Selfcheck: the last hour closed the main AgentJack Telegram ownership/runtime blocker on the canonical `ag-webui` path by retargeting status/doctor/conflicts/telemetry to `com.agentjack.gateway` plus `~/.agentjack`, wiring the dedicated `matejs_agent_jack_bot` token into the live gateway, proving `getMe.username=matejs_agent_jack_bot`, and rerunning the gate so `telegram-status` is `ready`, public `readyz` shows runtime + live/stable Telegram green, `check-public-ag-webui.sh` passes, and `check-dev2026-deploy.sh` now passes with only the expected human continuity-reply warning (`AJ-525153`).
