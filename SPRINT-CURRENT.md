@@ -62,6 +62,7 @@ _Last updated: 2026-04-22 22:12_
 - 22:28 — OpenClaw control UI xhigh/state bug fixed. Root cause was stale thinking-option logic in shared/UI helpers; shipped the minimal fix plus regression coverage so `/think` and related suggestion paths include `xhigh` again.
 - 22:38 — CouncilNow verifier lane advanced from schema-only to real shadow persistence. Added feature-flagged post-run request capture plus dedicated verifier table, verified `7 passed`, pushed `advisory-council-app` commit `10866f6`.
 - 23:14 — AgentJack Telegram proof path refreshed. Initial watcher for `AJ-6FB30E` timed out with no inbound continuity reply; reran live validation successfully, new token is `AJ-ED58ED`, and the passive watcher is re-armed on that token.
+- 23:23 — CouncilNow verifier lane advanced again. Added config-gated shadow adapter boundary plus response persistence on verifier records, verified `8 passed`, pushed `advisory-council-app` commit `7179cbc`.
 
 ## Active Sprint: AGENTJACK COMPLETION
 
