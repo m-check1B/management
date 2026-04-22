@@ -1,8 +1,9 @@
 # Sprint Current — What Axis Is Working On RIGHT NOW
 
-_Last updated: 2026-04-22 00:33_
+_Last updated: 2026-04-22 02:05_
 
 ## Last Hour
+- 02:05 — Selfcheck: AgentJack remains the top lane, the last hour shipped `7ef359f` to make Telegram readiness truthful, public `readyz` now correctly reports live delivery blocked, only the current webchat session is active, and cron remains clean at 22 enabled jobs with bad count 0.
 - 00:33 — Selfcheck: AgentJack is the active top lane, the AG WebUI public-gate was rebuilt after a stale chunk failure and now passes local/public/OIDC checks, only the current webchat session is active, and cron remains clean at 22 enabled jobs with bad count 0.
 - 22:03 — Selfcheck: quiet evening continuity holds, only the current webchat session is active, PM2 14 plus hub/openviking/embedding/hermes are healthy, cron bad count remains 0, and the current lane stays routine cleanup while awaiting fresh priorities.
 - 20:03 — Selfcheck: PM2 14 online, hub/openviking/embedding/hermes healthy, cron bad count 0, and no new blocker surfaced, so Axis is staying on routine continuity and cleanup.
@@ -57,7 +58,7 @@ _Last updated: 2026-04-22 00:33_
 - [ ] Continue explicit-record `verduona.dev` cleanup and stale-router pruning
 
 ## Blocked
-- None currently
+- AgentJack Telegram live delivery is currently blocked by live bot-identity drift (`TELEGRAM_BOT_TOKEN` on Hermes Axis differs from `AGENTJACK_TELEGRAM_BOT_TOKEN`) plus the active OpenClaw polling conflict on the shared bot lane.
 
 ## Notes
 - Matej confirmed: GLM-5.1 for my coding, Codex (GPT-5.4 xhigh) for heavy lifting, Kimi for web design, Grok 4.3 for current info
