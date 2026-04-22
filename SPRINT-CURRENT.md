@@ -1,8 +1,9 @@
 # Sprint Current — What Axis Is Working On RIGHT NOW
 
-_Last updated: 2026-04-22 15:10_
+_Last updated: 2026-04-22 16:03_
 
 ## Last Hour
+- 16:03 — Selfcheck: the last hour refreshed CouncilNow with another green 15:47 public auth→billing proof, only the active main webchat session surfaced, cron remains clean with 23 enabled jobs and bad count 0, and NOW the live plan still says stay on AgentJack’s external Telegram pairing blocker, not the `verduona.dev` cleanup wedge, until `matejs_agent_jack_bot` can actually DM the allowlisted user.
 - 15:10 — Selfcheck: reran the canonical AgentJack live gate after attempting the local `/start` handoff to `matejs_agent_jack_bot`; runtime/ownership truth is still green (`probe.success=true`, public `readyz.ok=true`, `check-dev2026-deploy.sh` passes), but the dedicated bot still cannot DM allowlisted chat `177557562` and live validation remains blocked on external pairing with fresh token `AJ-52C9A5`, so AgentJack is not moving to the `verduona.dev` cleanup wedge yet.
 - 14:03 — Selfcheck: the last hour locked AgentJack Telegram cutover proof plus a fresh 13:55 CouncilNow auth→checkout pass, only the active main webchat session surfaced, cron remains clean with 24 enabled jobs and bad count 0, and NOW the top lane stays AgentJack’s external pairing blocker: start `matejs_agent_jack_bot` or refresh `TELEGRAM_ALLOWED_USERS`, then rerun live delivery validation.
 - 13:49 — Selfcheck: after locking the dedicated AgentJack Telegram cutover proof and pushing it, the next real blocker surfaced cleanly: live `telegram-validate --live` now records its delivery attempt and shows the dedicated bot is healthy but cannot DM the configured user yet because Telegram returns `Bad Request: chat not found`; public `readyz` now carries the real next action, which is to start `matejs_agent_jack_bot` from Telegram first or refresh `TELEGRAM_ALLOWED_USERS`, then rerun the delivery test (`AJ-10B836`).
