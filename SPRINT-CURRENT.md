@@ -1,8 +1,9 @@
 # Sprint Current — What Axis Is Working On RIGHT NOW
 
-_Last updated: 2026-04-22 13:36_
+_Last updated: 2026-04-22 13:49_
 
 ## Last Hour
+- 13:49 — Selfcheck: after locking the dedicated AgentJack Telegram cutover proof and pushing it, the next real blocker surfaced cleanly: live `telegram-validate --live` now records its delivery attempt and shows the dedicated bot is healthy but cannot DM the configured user yet because Telegram returns `Bad Request: chat not found`; public `readyz` now carries the real next action, which is to start `matejs_agent_jack_bot` from Telegram first or refresh `TELEGRAM_ALLOWED_USERS`, then rerun the delivery test (`AJ-10B836`).
 - 13:36 — Selfcheck: the last hour closed the main AgentJack Telegram ownership/runtime blocker on the canonical `ag-webui` path by retargeting status/doctor/conflicts/telemetry to `com.agentjack.gateway` plus `~/.agentjack`, wiring the dedicated `matejs_agent_jack_bot` token into the live gateway, proving `getMe.username=matejs_agent_jack_bot`, and rerunning the gate so `telegram-status` is `ready`, public `readyz` shows runtime + live/stable Telegram green, `check-public-ag-webui.sh` passes, and `check-dev2026-deploy.sh` now passes with only the expected human continuity-reply warning (`AJ-525153`).
 - 12:03 — Selfcheck: the last hour launched the founder-away execution schedule, kicked off the AgentJack Telegram cutover pass plus a fresh CouncilNow production auth→checkout recheck, CouncilNow stayed green and refreshed the revenue audit, only the current main webchat session surfaced, cron remains clean with 25 enabled jobs (up from 22 after adding timed checkpoints), and NOW the top lane stays AgentJack’s Telegram blocker on the dedicated `matejs_agent_jack_bot` / `com.agentjack.gateway` path.
 - 10:47 — Selfcheck: the last hour stayed on AgentJack and cleaned up the control layer, including correcting the Codex effort lane to xhigh, recording the digital-twin rule to stop ending with optional handoff prompts, and pulling only technical Apple Notes signals for later evaluation while keeping the canonical ag-webui/runtime path as the main product lane.
@@ -74,7 +75,7 @@ _Last updated: 2026-04-22 13:36_
 - All day — Keep hourly selfcheck discipline and do not idle between proof/fix loops.
 
 ## Blocked
-- No runtime/ownership blocker remains on the canonical AgentJack Telegram lane. The remaining warning is proof-only: send a real Telegram reply with token `AJ-525153` to convert doctor status from attention to healthy and close inbound continuity verification.
+- No runtime/ownership blocker remains on the canonical AgentJack Telegram lane. The current live blocker is operator pairing: `telegram-validate --live` now fails with `Bad Request: chat not found` for allowlisted chat `177557562`, which means the dedicated `matejs_agent_jack_bot` cannot DM the configured user yet. Next step is external: start the bot from Telegram first or refresh `TELEGRAM_ALLOWED_USERS`, then rerun the delivery test.
 
 ## Notes
 - Matej confirmed: GLM-5.1 for my coding, Codex (GPT-5.4 xhigh) for heavy lifting, Kimi for web design, Grok 4.3 for current info
