@@ -3,6 +3,7 @@
 _Last updated: 2026-04-22 06:03_
 
 ## Last Hour
+- 08:03 — Selfcheck: the last hour refreshed CouncilNow again with a fresh 07:24 production auth→checkout pass and pushed the revenue audit, heartbeat health stayed green, `openclaw-doctor-daily` was moved to Codex, only the current webchat session is active, cron remains clean at 22 enabled jobs with bad count 0, and NOW the top lane stays AgentJack's remaining live Telegram blocker on the canonical ag-webui/runtime path.
 - 06:03 — Selfcheck: the last hour refreshed CouncilNow again with a fresh 05:24 production auth→checkout pass and pushed the revenue audit, only the current webchat session is active, cron remains clean at 22 enabled jobs with bad count 0, and NOW the top lane stays AgentJack's remaining live Telegram blocker on the canonical ag-webui/runtime path.
 - 04:06 — Selfcheck: the last hour refreshed CouncilNow with a fresh 03:24 production auth→checkout pass and pushed the revenue audit, only the current webchat session is active, cron remains clean at 22 enabled jobs with bad count 0, and NOW the top lane stays AgentJack's remaining live Telegram blocker on the canonical ag-webui/runtime path.
 - 02:05 — Selfcheck: AgentJack remains the top lane, the last hour shipped `7ef359f` to make Telegram readiness truthful, public `readyz` now correctly reports live delivery blocked, only the current webchat session is active, and cron remains clean at 22 enabled jobs with bad count 0.
