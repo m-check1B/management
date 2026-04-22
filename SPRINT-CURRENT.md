@@ -61,6 +61,7 @@ _Last updated: 2026-04-22 22:12_
 - 08:04 — Selfcheck: Active session building AgentJack. 4 pages shipped, auth wired, marketing CTAs updated. Continuing product completion.
 - 22:28 — OpenClaw control UI xhigh/state bug fixed. Root cause was stale thinking-option logic in shared/UI helpers; shipped the minimal fix plus regression coverage so `/think` and related suggestion paths include `xhigh` again.
 - 22:38 — CouncilNow verifier lane advanced from schema-only to real shadow persistence. Added feature-flagged post-run request capture plus dedicated verifier table, verified `7 passed`, pushed `advisory-council-app` commit `10866f6`.
+- 23:14 — AgentJack Telegram proof path refreshed. Initial watcher for `AJ-6FB30E` timed out with no inbound continuity reply; reran live validation successfully, new token is `AJ-ED58ED`, and the passive watcher is re-armed on that token.
 
 ## Active Sprint: AGENTJACK COMPLETION
 
@@ -88,7 +89,13 @@ _Last updated: 2026-04-22 22:12_
 - All day — Keep hourly selfcheck discipline and do not idle between proof/fix loops.
 
 ## Blocked
-- No runtime/ownership blocker remains on the canonical AgentJack Telegram lane. The current live blocker is operator pairing: `telegram-validate --live` now fails with `Bad Request: chat not found` for allowlisted chat `177557562`, which means the dedicated `matejs_agent_jack_bot` cannot DM the configured user yet. Next step is external: start the bot from Telegram first or refresh `TELEGRAM_ALLOWED_USERS`, then rerun the delivery test.
+- No runtime/ownership blocker remains on the canonical AgentJack Telegram lane.
+- Current live blocker is still the final human continuity step: the runtime is healthy and can send delivery tests, but `telegram.inboundContinuityVerified` remains false until a Telegram reply arrives containing the current token `AJ-ED58ED`.
+- Current truth:
+  - `telegram-validate --live` succeeds
+  - `readyz` reports `executionReady=true`, `telegram.liveDeliveryReady=true`, `telegram.stableDeliveryReady=true`
+  - only `telegram.inboundContinuityVerified=false` remains red
+- Passive watcher is armed again for `AJ-ED58ED`; next proof event should flip the lane green if the reply lands.
 
 ## Notes
 - Matej confirmed: GLM-5.1 for my coding, Codex (GPT-5.4 xhigh) for heavy lifting, Kimi for web design, Grok 4.3 for current info
