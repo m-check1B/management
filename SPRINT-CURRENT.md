@@ -1,8 +1,9 @@
 # Sprint Current — What Axis Is Working On RIGHT NOW
 
-_Last updated: 2026-04-23 01:43_
+_Last updated: 2026-04-23 02:03_
 
 ## Last Hour
+- 02:03 — Selfcheck: the last hour kept shipping on both live lanes, with CouncilNow’s fresh public auth → billing proof still green at 01:43, AgentJack autodev shipping tenant/account instance API parity in commit `472dc098bbb91ec0ce65df892c1aaa91963a9a13`, Daily Log Review surfacing a separate `swarm-runtime-api` missing-`sqlalchemy` issue while cron bad count stays `0` across `22` enabled jobs, no active sessions surfaced, and NOW the top lane still stays AgentJack because doctor saw Telegram activity but still no confirming `AJ-ED58ED` reply.
 - 01:43 — CouncilNow revenue reminder recheck: reran the full public auth → billing proof on `https://councilnow.com` with fresh production account `axis-reminder-1776901496932@gmail.com`; `/auth/api/v1/auth/register` returned 201, `/auth/api/v1/auth/login` + `/auth/api/v1/auth/me` returned 200, `/api/billing/subscription` and `/api/billing/portal` returned 200 with linked Stripe customer `cus_UNwKaqb8ywiNMi`, all four `/api/billing/checkout` tiers returned live Stripe sessions whose checkout URLs resolved `HEAD 200`, so CouncilNow is still **ready for first customer** while AgentJack remains the top lane.
 - 00:03 — Selfcheck: the last hour shipped and pushed the CouncilNow Google verifier adapter plus its warning/docs follow-ups (`f4eecb0`, `ae0b605`, `18cc157`), cron bad count remains 0 across 23 enabled jobs, no active sessions surfaced, AgentJack doctor still says the top lane is waiting on one real Telegram reply for token `AJ-ED58ED`, and the passive proof watcher was re-armed.
 - 22:12 — Selfcheck: the last hour shipped and pushed the CouncilNow verifier shadow contract plus the AgentJack Telegram proof watcher, repaired the accidental memory-log overwrite immediately, cleared the `openclaw-control-ui` test blocker by installing the missing Playwright Chromium runtime, cron bad count remains 0 across 23 enabled jobs, no other active sessions surfaced, and NOW the top lane still stays AgentJack until one real Telegram reply lands on token `AJ-6FB30E`.
