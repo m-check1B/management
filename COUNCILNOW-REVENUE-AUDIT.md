@@ -1,7 +1,7 @@
 # CouncilNow — Revenue Readiness Audit
 
-_Audited: 2026-04-23 07:47 by Axis_
-_Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE), and the full production auth → billing chain passed again at 07:47 with a fresh public registration/login and live checkout contract on councilnow.com._
+_Audited: 2026-04-23 09:48 by Axis_
+_Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE), and the full production auth → billing chain passed again at 09:48 with a fresh public registration/login and live checkout contract on councilnow.com._
 
 ## What's Working ✅
 
@@ -49,6 +49,7 @@ _Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE), and th
    - Fresh 03:49 recheck PASS with new production account `axis-reminder-1776908966611@gmail.com`.
    - Fresh 05:44 recheck PASS with new production account `axis-reminder-1776915885056@gmail.com`.
    - Fresh 07:47 recheck PASS with new production account `axis-reminder-1776923242233@gmail.com`.
+   - Fresh 09:48 recheck PASS with new production account `axis-reminder-1776930474314@gmail.com`.
    - Public auth proof at 11:46: `/auth/api/v1/auth/register` returned 201, `/auth/api/v1/auth/login` returned 200, and `/auth/api/v1/auth/me` resolved the linked Stripe customer `cus_UNinroo8E90k7Z` for the fresh user.
    - Public auth proof at 13:55: `/auth/api/v1/auth/register` returned 201, `/auth/api/v1/auth/login` returned 200, and `/auth/api/v1/auth/me` resolved the linked Stripe customer `cus_UNkt4tawshEqII` for the fresh user.
    - Public auth proof at 15:47: `/auth/api/v1/auth/register` returned 201, `/auth/api/v1/auth/login` returned 200, `/auth/api/v1/auth/me` returned 200, and both `/auth/api/v1/auth/me` plus `/api/billing/subscription` resolved the linked Stripe customer `cus_UNmhRUF31ahKJ2` for the fresh user.
@@ -58,6 +59,7 @@ _Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE), and th
    - Public auth proof at 03:49: `/auth/api/v1/auth/register` returned 201, `/auth/api/v1/auth/login` returned 200, `/auth/api/v1/auth/me` returned 200, and both `/auth/api/v1/auth/me` plus `/api/billing/subscription` resolved the linked Stripe customer `cus_UNyLOOhxA07wKp` for the fresh user.
    - Public auth proof at 05:44: `/auth/api/v1/auth/register` returned 201, `/auth/api/v1/auth/login` returned 200, `/auth/api/v1/auth/me` returned 200, and both `/auth/api/v1/auth/me` plus `/api/billing/subscription` resolved the linked Stripe customer `cus_UO0CnHg9xUPoNQ` for the fresh user.
    - Public auth proof at 07:47: `/auth/api/v1/auth/register` returned 201, `/auth/api/v1/auth/login` returned 200, `/auth/api/v1/auth/me` returned 200, and both `/auth/api/v1/auth/me` plus `/api/billing/subscription` resolved the linked Stripe customer `cus_UO2B5AYGUXiGdX` for the fresh user.
+   - Public auth proof at 09:48: `/auth/api/v1/auth/register` returned 201, `/auth/api/v1/auth/login` returned 200, `/auth/api/v1/auth/me` returned 200, and both `/auth/api/v1/auth/me` plus `/api/billing/subscription` resolved the linked Stripe customer `cus_UO47Jv0qy6evkb` for the fresh user.
    - `/api/billing/checkout` returned live Stripe sessions for `starter`, `pro`, `scale`, and `enterprise`.
    - Latest 01:45 checkout recheck returned session IDs:
      - starter: `cs_live_b1QsqeGLAUTfLi7CxT4c2XnjeoAtxHDKtXQucJWbRL8lfsAMqBFjB37H71`
@@ -131,14 +133,14 @@ _Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE), and th
      - scale: `cs_live_b13OUapebeFKXZprPTKzcCwZKeyP9RntSpVa0TXF4565D8qvZVJtiiLEcV`
      - enterprise: `cs_live_b1Zn5zt5Pl1YI1gXdbg7XkrbWatJ2PCH3AFQiNvkK33Hukqie7gJk2ktfI`
    - Each 03:49 live Stripe checkout URL returned `HEAD 200`.
-   - Latest 07:47 checkout recheck returned session IDs:
-     - starter: `cs_live_b1pGtpV2y20Ldo5GeTQb4rQKWwXH72Amw7vYjzbKD8f9SeP8UqUpIRTRLh`
-     - pro: `cs_live_b1bWjsJY0y94SA0FM4xIVzuCi4eW0wVMyPKckmFcQhxJ0vEecYLku3ZmdP`
-     - scale: `cs_live_b1USQwuHW3asWMvhd15q4kZdhTxFxgAaq4gI5hQ9Ew49zvZiRsIK5bLWjW`
-     - enterprise: `cs_live_b1gDmMcEOQt7IsEKJt8aDH60C7fcRKmfiI34oODSzrbETlhR6agoSrofcs`
-   - Each 07:47 live Stripe checkout URL returned `HEAD 200`.
-   - Latest `/api/billing/portal` pass returned a live Stripe portal URL and session `bps_1TPG6iLqM8qbAlEhwc33SSuS` for the fresh user at 07:47.
-   - Latest `/api/billing/subscription` pass returned the linked Stripe customer `cus_UO2B5AYGUXiGdX`.
+   - Latest 09:48 checkout recheck returned session IDs:
+     - starter: `cs_live_b10Y4NqHd3iMREvrJ0LDYcyEZ9vszgGVe3j7z9RXXQtl62i8JYIFZ3TjRp`
+     - pro: `cs_live_b1i5R4DA33DCKer0l2a9D0aWo8nvGo6jbZ16gslZXIuEZ1PydwrbLvsSOx`
+     - scale: `cs_live_b1WV5wlY4WEkHtHV9Q2HTVe1y4OZ2K2Z4GgX1fvsLyWFZso0yhNZIvDEcQ`
+     - enterprise: `cs_live_b1m1Hc9b6Y0AFgHfiO8djH6Mozq4lrNPxSZXMMJZkcdxWoS6WJZW1vlvdD`
+   - Each 09:48 live Stripe checkout URL returned `HEAD 200`.
+   - Latest `/api/billing/portal` pass returned a live Stripe portal URL and session `bps_1TPHzMLqM8qbAlEh5IuCoxIh` for the fresh user at 09:48.
+   - Latest `/api/billing/subscription` pass returned the linked Stripe customer `cus_UO47Jv0qy6evkb`.
    - Important test-contract note: bare API payloads with only `tier` fail validation because the live endpoint correctly requires `success_url` and `cancel_url`; `/api/billing/portal` likewise requires `return_url`; the customer path is healthy because the production pricing page sends the full contract (`tier_name`, success/cancel URLs, `mode`, and `return_url` for portal).
    - Response-shape note: live checkout returns `checkout_url` and live portal returns `portal_url`, not only a generic `url` field.
 3. **Webhook delivery:** Stripe → councilnow.com webhook endpoint → subscription activated
