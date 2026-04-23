@@ -1,8 +1,9 @@
 # Sprint Current — What Axis Is Working On RIGHT NOW
 
-_Last updated: 2026-04-23 12:49_
+_Last updated: 2026-04-23 14:03_
 
 ## Last Hour
+- 14:03 — Hourly selfcheck stayed green (PM2 14, hub/OpenViking/embeddings OK, cron still clean at 22 enabled jobs and 0 errors>2), no new sessions surfaced, and AgentJack remains the active top lane.
 - 12:49 — Hourly selfcheck recovered the local PM2 baseline after an empty-table blip (`pm2 resurrect`), then revalidated green health (PM2 14, hub/OpenViking/embeddings OK) with cron still clean at 22 enabled jobs and 0 errors>2.
 - 09:48 — CouncilNow revenue reminder recheck: reran the full public auth → billing proof on `https://councilnow.com` with fresh production account `axis-reminder-1776930474314@gmail.com`; `/auth/api/v1/auth/register` returned `201`, `/auth/api/v1/auth/login` + `/auth/api/v1/auth/me` returned `200`, `/api/billing/subscription` and `/api/billing/portal` returned `200` with linked Stripe customer `cus_UO47Jv0qy6evkb` and portal session `bps_1TPHzMLqM8qbAlEh5IuCoxIh`, all four `/api/billing/checkout` tiers returned live Stripe sessions whose checkout URLs resolved `HEAD 200`, so CouncilNow is still **ready for first customer** while AgentJack remains the top lane.
 - 08:03 — Selfcheck: the last hour refreshed CouncilNow’s live proof at 07:47, `axis-revenue-nudge`, `agentjack-autodev-cycle`, `Mac Security Check`, and `openclaw-doctor-daily` all completed `ok`, cron bad count stays `0` across `22` enabled jobs, no active sessions surfaced, and NOW the top lane still stays AgentJack until the passive watcher sees one real Telegram reply with `AJ-ED58ED`.
