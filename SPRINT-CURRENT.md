@@ -1,8 +1,14 @@
 # Sprint Current — What TBA-One-PA Is Working On RIGHT NOW
 
-_Last updated: 2026-04-24 10:03_
+_Last updated: 2026-04-25 18:09_
 
 ## Last Hour
+- 18:09 — Selfcheck: last hour ran `axis-selfcheck`, `Kraliki Patrol`, `github-changes-monitor`, `agentjack-autodev-cycle`, and `linear-triage` (all `ok`), only the current main webchat session is active, `consecutiveErrors > 2` remains `0`, and NOW top lane stays AgentJack apex-core while adding pro-level infra automation (Cloudflare/Namecheap via MCP/API) to the task list.
+- 18:02 — Founder approved architecture pivot: switch `mail-tba` from full retirement to **DR standby for critical data** (Hub/auth/users/invoicing continuity), while keeping websites on Cloudflare and primary runtime on dev-2026.
+- 17:46 — Founder mail-provider lock: use **Resend + Proton Mail** in the target mail setup.
+- 17:45 — Founder correction lock: `mail-tba` is **not** a mail-only end-state. (Initial call was full discontinuation; superseded at 18:02 by DR-standby decision.)
+- 17:34 — Founder clarification lock: **CouncilNow is a strategic funnel/demo/showcase + business tool** for intelligent decision-making (manual and automated) across both SaaS and API surfaces; keep CouncilNow separately deployable for speed/showcase value while AgentJack apex-core remains the top product priority.
+- 17:32 — Founder directive lock: operating model is now explicit two-line execution — **TBA-One-PA on Mac** runs top-level orchestration and Matej-led development; **Axis/OpenClaw on dev-2026** runs continual autodevelopment and selected hosting. Product priority is unchanged but now explicit: **finish AgentJack as proprietary stable/reliable/secure B2B apex agent ASAP**, then layer vertical apps to complete the kraliki.com/verduona.com ecosystem. Infra split remains locked: websites → Cloudflare Pages/Websites, non-mail infra/apps → dev-2026; latest mail-tba direction is DR-standby (approved at 18:02).
 - 16:26 — Selfcheck: last hour ran `linear-triage`, `agentjack-autodev-cycle`, `github-changes-monitor`, `Kraliki Patrol`, `axis-selfcheck`, and `workspace-github-push` (all `ok`), only the current main webchat session is active, and `consecutiveErrors > 2` remains `0` across enabled cron jobs, so NOW continue the SPRINT top lane on AgentJack’s canonical `ag-webui` + runtime path.
 - 10:03 — Selfcheck: last hour ran `daily-backup`, `Apple Notes Export`, `agentjack-dev-sprint`, `workspace-github-push`, `axis-selfcheck`, `axis-infra-cleanup-nudge`, `Memory Dreaming Promotion`, `OpenClaw Discovery`, `linear-triage`, and `agentjack-autodev-cycle` (all `ok`), no active sessions surfaced, and `consecutiveErrors > 2` remains `0` across 22 enabled jobs, so NOW continue the SPRINT top lane on AgentJack’s canonical `ag-webui` + runtime path.
 - 09:22 — Selfcheck: last hour ran `axis-setup-step`, `agentjack-autodev-cycle`, `linear-triage`, `x-watch-garry-matej`, `axis-revenue-nudge`, and `github-changes-monitor` (all `ok`), no active sessions surfaced, and `consecutiveErrors > 2` remains `0` across 22 enabled jobs, so NOW continue the SPRINT top lane on AgentJack’s canonical `ag-webui` + runtime path.

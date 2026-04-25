@@ -1,0 +1,88 @@
+# Deployment Lane Map (Draft)
+
+_Generated: 2026-04-25 17:24 CET_
+
+Lane labels: `mac-top-level-dev` | `dev-2026-runtime` | `cloudflare-websites-target` | `needs-manual-tag`
+
+## mac-top-level-dev
+- `catch-processor` (mac)
+- `embedding-server` (mac)
+- `glue-engine` (mac)
+- `hub-admin` (mac)
+- `hub-api` (mac)
+- `kraliki-app` (mac)
+- `kraliki-app-academy` (mac)
+- `kraliki-app-admin` (mac)
+- `kraliki-app-collective` (mac)
+- `kraliki-app-comms` (mac)
+- `pa-api` (mac)
+- `swarm-dashboard` (mac)
+- `swarm-runtime-api` (mac)
+- `swarm-sse` (mac)
+
+## cloudflare-websites-target
+- `websites-atlas-client-1` (dev-2026)
+- `websites-box-promo-1` (dev-2026)
+- `websites-business-1` (dev-2026)
+- `websites-company-1` (dev-2026)
+- `websites-consulting-1` (dev-2026)
+- `websites-contentmachine-1` (dev-2026)
+- `websites-courseboost-1` (dev-2026)
+- `websites-demos-1` (dev-2026)
+- `websites-family-1` (dev-2026)
+- `websites-infodump-1` (dev-2026)
+- `websites-internal-wiki-1` (dev-2026)
+- `websites-kraliki-box-1` (dev-2026)
+- `websites-kraliki-desktop-1` (dev-2026)
+- `websites-kraliki-docs-1` (dev-2026)
+- `websites-kraliki-marketing-1` (dev-2026)
+- `websites-kraliki-waitlist-api-1` (dev-2026)
+- `websites-lab-1` (dev-2026)
+- `websites-magicbox-1` (dev-2026)
+- `websites-main-1` (dev-2026)
+- `websites-perfectmission-uk-1` (dev-2026)
+- `websites-resolvnow-1` (dev-2026)
+- `websites-senseit-1` (dev-2026)
+- `websites-tldr-1` (dev-2026)
+- `websites-vibeworker-1` (dev-2026)
+
+## dev-2026-runtime
+- `advisory-zitadel` (dev-2026)
+- `advisory-zitadel-db` (dev-2026)
+- `applications-kraliki-catch-1` (dev-2026)
+- `applications-phone-core-1` (dev-2026)
+- `applications-voice-core-1` (dev-2026)
+- `bubble-server-bubble-1` (dev-2026)
+- `compose-main-1` (dev-2026)
+- `compose-plausible-1` (dev-2026)
+- `compose-plausible-db-1` (dev-2026)
+- `compose-plausible-events-db-1` (dev-2026)
+- `compose-traefik-1` (dev-2026)
+- `kiki-api` (dev-2026)
+- `kiki-db` (dev-2026)
+- `kraliki-postgres` (dev-2026)
+- `kraliki-redis` (dev-2026)
+- `learn-kraliki-frontend` (dev-2026)
+- `mgrep-backend` (dev-2026)
+- `mgrep-infinity` (dev-2026)
+- `mgrep-qdrant` (dev-2026)
+- `twenty-db` (dev-2026)
+- `twenty-redis` (dev-2026)
+- `twenty-server` (dev-2026)
+- `twenty-worker` (dev-2026)
+- `vault` (dev-2026)
+- `voice-hybrid-frontend` (dev-2026)
+- `voice-kraliki-frontend` (dev-2026)
+- `windmill-db` (dev-2026)
+- `windmill-lsp` (dev-2026)
+- `windmill-server` (dev-2026)
+- `windmill-worker` (dev-2026)
+- `zitadel` (dev-2026)
+- `zitadel-db` (dev-2026)
+
+## needs-manual-tag
+- (none)
+
+## Notes
+- `cloudflare-websites-target` means currently containerized but designated to move to Cloudflare Pages/Websites.
+- CouncilNow should be treated as canonical dev-2026 Ubuntu-container deployment pattern.
