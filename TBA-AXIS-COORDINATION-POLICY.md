@@ -1,20 +1,31 @@
 # TBA-One-PA ↔ Axis (dev-2026) Coordination Policy
 
-_Last updated: 2026-04-25_
+_Last updated: 2026-04-26_
 
-## 1) Role split (locked)
+## 1) Org tree + role split (locked)
 
-### TBA-One-PA on Mac (control plane)
-- Owner of founder-facing coordination.
-- Owns prioritization, sequencing, acceptance criteria, and final go/no-go calls.
-- Converts founder direction into executable work packets.
-- Owns cross-project context (AgentJack first, then verticals).
+### Founder — Matej
+- Final authority on strategy, commitments, and spending.
 
-### Axis Agent on dev-2026 (execution plane)
-- Owner of continuous execution/autodev on server lane.
+### Business Director — TBA-One-PA on Mac (control plane)
+- Owns business execution: prioritization, sequencing, acceptance gates, and founder-facing coordination.
+- Owns customers, feedback loops, beta-testing quality lane, and cross-project commercial alignment.
+- Drives product completion pressure on development via clear packets, deadlines, and evidence gates.
+- Owns finance operations planning (pricing, revenue tracking, forecasts, reporting), but not money-out approvals.
+
+### Development Director (CEO of Development lane) — Axis on dev-2026 (execution plane)
+- Owns technical execution, implementation velocity, architecture continuity, and deployment reliability.
 - Runs long jobs, runtime checks, infra surgery, and implementation loops.
 - Produces evidence artifacts (logs, diffs, test outputs, health probes).
-- Does not redefine strategy; executes against declared priorities.
+- Executes against declared business/product priorities.
+
+### Marketing Director lane (reports to Business Director)
+- Dedicated specialist lane for positioning, messaging, GTM campaigns, and demand generation.
+- Feeds structured market/customer signal into product and commercial decisions.
+
+### Finance boundary (non-negotiable)
+- Business Director handles finance analysis and operating recommendations.
+- Any payments, billing/spend changes, or money-out actions require explicit founder approval.
 
 ## 2) Source-of-truth hierarchy
 1. Live founder instruction in active chat.
