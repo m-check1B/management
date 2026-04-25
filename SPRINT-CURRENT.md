@@ -1,8 +1,9 @@
 # Sprint Current — What TBA-One-PA Is Working On RIGHT NOW
 
-_Last updated: 2026-04-26 00:03_
+_Last updated: 2026-04-26 00:22_
 
 ## Last Hour
+- 00:22 — Founder decision locked for Cloudflare blocker: websites remain static on Cloudflare Pages; `/api/kiki/*` should be same-origin proxy only, backed by a dev-2026 Kiki backend container/stable origin (e.g. dedicated Traefik hostname) before DNS cutover.
 - 00:03 — Selfcheck: last hour cron runs were `linear-triage` (23:15), `x-watch-garry-matej` (23:30), `agentjack-autodev-cycle` (23:45), `github-changes-monitor` (00:00), and `Kraliki Patrol` (00:02), all `ok`; only the current main webchat session is active, `consecutiveErrors > 2` remains `0` across `22` enabled jobs, and NOW lane stays Cloudflare Phase 1 unblock (`/api/kiki/*` parity before any DNS cutover).
 - 23:11 — Selfcheck: last-hour cron activity was `agentjack-autodev-cycle` (ok, shipped commit), `axis-revenue-nudge` + `axis-selfcheck` (ok), with only `workspace-github-push` timing out once (`consecutiveErrors=1`, none over `2`); reran CouncilNow full production auth→billing proof (register/login/me/subscription/portal + starter/pro/scale/enterprise checkout) and all checks passed with Stripe checkout `HEAD 200`, so CouncilNow remains **ready for first customer** and NOW lane stays Cloudflare Phase 1 unblock (`/api/kiki` parity before DNS cutover).
 - 23:03 — dev-2026 stability cleanup: neutralized high-churn ghost services `kraliki-voice-hybrid-api.service` and `kraliki-voice-hybrid-web.service` (missing paths + env files, restart counters >16k). Services are now `inactive` + `disabled`, removing restart-loop noise from user systemd.

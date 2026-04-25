@@ -1,6 +1,6 @@
 # Infra Move — Phase 1 (Sites to Cloudflare)
 
-_Last updated: 2026-04-25 23:03 CET_
+_Last updated: 2026-04-26 00:22 CET_
 
 ## Source of truth
 - `/Users/matejhavlin/github/infra/MAIL-VM-MIGRATION-PLAN.md`
@@ -56,14 +56,21 @@ Mail target reminder (later phase):
 ### Blockers to execute cutover
 - Functional parity gap: `/api/kiki/*` currently works on live domains via server-side route, but Pages targets return HTML app fallback at those paths (HTTP 200 with page content, not API JSON). DNS cutover before fixing this would break Kiki API calls on both domains.
 
+### Founder decision (2026-04-26 00:22 CET)
+- Websites are static and should stay static on Cloudflare Pages.
+- Kiki is a backend, not part of the static website artifact.
+- Move/serve the Kiki backend from a **dev-2026 container** and treat it as the stable API origin.
+- Cloudflare Pages should only provide `/api/kiki/*` same-origin proxy behavior to the dev-2026 backend.
+
 ### Unblock plan (next)
-1. Add explicit `/api/kiki/*` proxy behavior to both Pages projects (Cloudflare Function or equivalent edge rewrite).
-2. Back the proxy with a stable origin endpoint that survives apex cutover (cannot depend on `kraliki.com`/`verduona.com` once they move to Pages).
-3. Re-run parity checks:
+1. Stand up or verify the Kiki backend container on `dev-2026` (expected internal service equivalent to current `http://host.docker.internal:8300`).
+2. Expose it through a stable dev-2026 origin that survives apex cutover (preferred: a dedicated hostname such as `kiki-api.verduona.dev` or equivalent explicit Traefik route to `138.201.54.142`).
+3. Add explicit `/api/kiki/*` proxy behavior to both Pages projects (Cloudflare Function or equivalent edge rewrite) pointing at that stable dev-2026 origin.
+4. Re-run parity checks:
    - `curl -si https://kraliki-marketing.pages.dev/api/kiki/health`
    - `curl -si https://verduona-main.pages.dev/api/kiki/health`
-   - expect `content-type: application/json` and healthy payload.
-4. Execute DNS cutover only after parity passes.
+   - expect `content-type: application/json` and healthy payload from the dev-2026 backend.
+5. Execute DNS cutover only after parity passes.
 
 ## Execution checklist
 1. Build and publish static artifacts to Cloudflare Pages projects.
