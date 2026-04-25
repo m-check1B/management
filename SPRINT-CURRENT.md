@@ -1,8 +1,9 @@
 # Sprint Current — What TBA-One-PA Is Working On RIGHT NOW
 
-_Last updated: 2026-04-26 00:22_
+_Last updated: 2026-04-26 00:47_
 
 ## Last Hour
+- 00:47 — CouncilNow first-customer product-quality triage completed. Production product path is functional (fresh auth→create→run→history→share passed; Efficient session `91bbd700-3ac4-4456-bc99-a82e6591ee9d` completed with score 27), but readiness remains blocked by two P0 product issues: analytics is not user-scoped (`KRA-3675`) and Guided Setup can ask irrelevant hire questions (`KRA-3676`). Added pilot/QA follow-ups `KRA-3677` and `KRA-3678`; `KRA-3674` is done as triage, `KRA-3673` stays internal-only until blockers are fixed or founder-accepted.
 - 00:22 — Founder decision locked for Cloudflare blocker: websites remain static on Cloudflare Pages; `/api/kiki/*` should be same-origin proxy only, backed by a dev-2026 Kiki backend container/stable origin (e.g. dedicated Traefik hostname) before DNS cutover.
 - 00:03 — Selfcheck: last hour cron runs were `linear-triage` (23:15), `x-watch-garry-matej` (23:30), `agentjack-autodev-cycle` (23:45), `github-changes-monitor` (00:00), and `Kraliki Patrol` (00:02), all `ok`; only the current main webchat session is active, `consecutiveErrors > 2` remains `0` across `22` enabled jobs, and NOW lane stays Cloudflare Phase 1 unblock (`/api/kiki/*` parity before any DNS cutover).
 - 23:11 — Selfcheck: last-hour cron activity was `agentjack-autodev-cycle` (ok, shipped commit), `axis-revenue-nudge` + `axis-selfcheck` (ok), with only `workspace-github-push` timing out once (`consecutiveErrors=1`, none over `2`); reran CouncilNow full production auth→billing proof (register/login/me/subscription/portal + starter/pro/scale/enterprise checkout) and all checks passed with Stripe checkout `HEAD 200`, so CouncilNow remains **ready for first customer** and NOW lane stays Cloudflare Phase 1 unblock (`/api/kiki` parity before DNS cutover).
@@ -111,8 +112,10 @@ _Last updated: 2026-04-26 00:22_
 - [ ] Triage `/Users/matejhavlin/github/agentjack` repo churn so intentional deployment work is separable from `agentjack-autodevelopment` noise
 
 ### Secondary Lane (KEEP GREEN)
-- [x] CouncilNow revenue path ready for first customer
-- [ ] Re-check CouncilNow only if a live auth/billing regression appears
+- [x] CouncilNow billing path verified / sales-prep ready
+- [x] CouncilNow product-quality triage completed (`KRA-3674`)
+- [ ] Fix or founder-accept CouncilNow first-customer blockers before claiming readiness (`KRA-3675`, `KRA-3676`)
+- [ ] Keep `KRA-3673` external outreach internal-only until blockers are resolved/accepted
 
 ### Infra Cleanup (AFTER AGENTJACK)
 - [ ] Continue explicit-record `verduona.dev` cleanup and stale-router pruning
