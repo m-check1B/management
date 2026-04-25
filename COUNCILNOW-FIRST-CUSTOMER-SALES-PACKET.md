@@ -1,11 +1,11 @@
 # CouncilNow — First Customer Sales Packet
 
-_Last updated: 2026-04-26 00:22 CET_
+_Last updated: 2026-04-26 00:27 CET_
 
 ## Current status
-CouncilNow is **ready for first customer**.
+CouncilNow is **billing-path verified** and sales-prep can continue, but it is **not yet fully first-customer-ready** until remaining product-quality bugs are triaged and either fixed or explicitly accepted for a controlled pilot.
 
-Production proof has repeatedly passed:
+Production billing proof has repeatedly passed:
 - registration
 - login
 - `/auth/me`
@@ -15,7 +15,7 @@ Production proof has repeatedly passed:
 - Stripe checkout URL `HEAD 200`
 
 ## Business objective
-Convert the first real customer without waiting for more product work.
+Prepare first-customer acquisition while closing the quality gate. Do not send external outreach or claim full readiness until bug triage is complete and founder approves the send.
 
 ## Primary ICP for first 10 conversations
 1. Founders / CEOs making strategic product, pricing, hiring, or market-entry decisions.
@@ -65,9 +65,16 @@ Message:
 - The offer must be concrete: who, what decision, what outcome, what next step.
 - Use premium model routing for final copy; do not use weak/default mini models for final customer-facing output.
 
+## Quality/readiness gate before first outreach
+1. List known bugs and classify: launch-blocker / pilot-acceptable / cosmetic.
+2. Re-test core customer path beyond billing: landing page → signup/login → decision/session creation → report/output → billing/portal.
+3. Fix launch-blockers or document pilot limitations explicitly.
+4. Run final formatting/model-quality gate.
+5. Get founder approval before any external send.
+
 ## Next internal actions
-1. Pick first 20 target names.
-2. Draft 3 outreach variants.
-3. Run final quality/model gate.
-4. Get founder approval before any external send.
-5. Track responses and objections.
+1. Build bug triage list.
+2. Pick first 20 target names in parallel, but keep outreach unsent.
+3. Draft 3 outreach variants.
+4. Run final quality/model gate.
+5. Track responses and objections only after founder-approved send.

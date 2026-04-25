@@ -1,6 +1,6 @@
 # Revenue Pipeline
 
-_Last updated: 2026-04-26 00:22_
+_Last updated: 2026-04-26 00:27_
 
 ## CouncilNow (Revenue First)
 
@@ -8,14 +8,16 @@ _Last updated: 2026-04-26 00:22_
 |--------|--------|---------|
 | Website live | ✅ | councilnow.com |
 | Payment flow (Stripe) | ✅ | Live auth→checkout/portal proof repeatedly passed |
-| First paying customer | ❌ | Ready for outbound / first decision sprint |
+| Product-quality readiness | ⚠️ | Billing path verified, but known bugs remain; needs bug triage/acceptance before first customer |
+| First paying customer | ❌ | Sales prep can continue; external outreach/send waits on bug triage + founder approval |
 | MRR target month 1 | €400-1,200 | €0 |
 | MRR target month 3 | €1,500-3,000 | — |
 
 ### Revenue Blockers
 1. ~~Stripe integration not complete~~ ✅ resolved
 2. ~~Sign-up / onboarding flow not verified~~ ✅ resolved
-3. No active marketing or outbound — **current blocker**
+3. Product-quality bug triage before first-customer claim — **current blocker**
+4. No active marketing or outbound — next blocker after quality gate
 
 ### Immediate first-customer packet
 - `/Users/matejhavlin/github/management/COUNCILNOW-FIRST-CUSTOMER-SALES-PACKET.md`
