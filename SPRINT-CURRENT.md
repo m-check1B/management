@@ -1,8 +1,15 @@
 # Sprint Current — What TBA-One-PA Is Working On RIGHT NOW
 
-_Last updated: 2026-04-25 18:09_
+_Last updated: 2026-04-25 23:03_
 
 ## Last Hour
+- 23:03 — dev-2026 stability cleanup: neutralized high-churn ghost services `kraliki-voice-hybrid-api.service` and `kraliki-voice-hybrid-web.service` (missing paths + env files, restart counters >16k). Services are now `inactive` + `disabled`, removing restart-loop noise from user systemd.
+- 22:55 — Cloudflare Phase 1 lane advanced to hard blocker isolation: validated Pages account/project access (`kraliki-marketing`, `verduona-main`), redeployed both projects on production branch `beta`, confirmed apex title parity, then caught functional cutover blocker — `/api/kiki/*` is real JSON on current live domains but returns HTML fallback on Pages targets, so DNS cutover is paused until Kiki API routing parity is preserved.
+- 22:48 — DR execution lane advanced: Phase A formally closed in docs (canonical DB ownership + retention/encryption/replication policy) and Phase B v1 shipped on dev-2026 (`dr-postgres-backup-tier0/1/23` + `dr-postgres-restore-validate` timers). Manual proof run passed with encrypted artifacts replicated to `mail-tba` and successful checksum→decrypt→restore validation on Tier0 DBs.
+- 22:47 — Gateway guardrail hardening: `openclaw-gateway-watchdog.sh` now records restart attribution context (pre/post state + PID + recent journal slice) to `/home/adminmatej/.openclaw/logs/gateway-watchdog.log` on watchdog-triggered recovery.
+- 22:36 — Cloudflare Phase 1 prep updated with explicit DNS change-set boundaries + mail DNS no-touch guardrails and rollback checklist in `INFRA-MOVE-PHASE1-CLOUDFLARE-SITES.md`.
+- 21:02 — Founder refinement locked: Pi-style specialist usage is for **repetitive, long-horizon, narrow tasks** where the lane compounds quality via self-improving loops. Updated policy docs and memory/preferences accordingly.
+- 20:53 — Founder directive executed: adopted Pi-style specialist-agent policy for Mac↔dev-2026 execution. Created `/Users/matejhavlin/github/management/PI-SPECIALIST-AGENT-ADOPTION.md` (solo-purpose lane model, packet contract, reviewer chain, 7-day pilot metrics) and linked it into `/Users/matejhavlin/github/management/TBA-AXIS-COORDINATION-POLICY.md` as active coordination rules.
 - 18:09 — Selfcheck: last hour ran `axis-selfcheck`, `Kraliki Patrol`, `github-changes-monitor`, `agentjack-autodev-cycle`, and `linear-triage` (all `ok`), only the current main webchat session is active, `consecutiveErrors > 2` remains `0`, and NOW top lane stays AgentJack apex-core while adding pro-level infra automation (Cloudflare/Namecheap via MCP/API) to the task list.
 - 18:02 — Founder approved architecture pivot: switch `mail-tba` from full retirement to **DR standby for critical data** (Hub/auth/users/invoicing continuity), while keeping websites on Cloudflare and primary runtime on dev-2026.
 - 17:46 — Founder mail-provider lock: use **Resend + Proton Mail** in the target mail setup.
