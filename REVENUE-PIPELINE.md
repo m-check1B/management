@@ -1,21 +1,24 @@
 # Revenue Pipeline
 
-_Last updated: 2026-04-18 23:21_
+_Last updated: 2026-04-26 00:22_
 
 ## CouncilNow (Revenue First)
 
 | Metric | Target | Current |
 |--------|--------|---------|
 | Website live | ✅ | councilnow.com |
-| Payment flow (Stripe) | ❌ | Not wired |
-| First paying customer | ❌ | — |
+| Payment flow (Stripe) | ✅ | Live auth→checkout/portal proof repeatedly passed |
+| First paying customer | ❌ | Ready for outbound / first decision sprint |
 | MRR target month 1 | €400-1,200 | €0 |
 | MRR target month 3 | €1,500-3,000 | — |
 
 ### Revenue Blockers
-1. Stripe integration not complete
-2. Sign-up / onboarding flow not verified
-3. No active marketing or outbound
+1. ~~Stripe integration not complete~~ ✅ resolved
+2. ~~Sign-up / onboarding flow not verified~~ ✅ resolved
+3. No active marketing or outbound — **current blocker**
+
+### Immediate first-customer packet
+- `/Users/matejhavlin/github/management/COUNCILNOW-FIRST-CUSTOMER-SALES-PACKET.md`
 
 ## AgentJack (B2B Product)
 
