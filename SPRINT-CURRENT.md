@@ -1,8 +1,9 @@
 # Sprint Current — What TBA-One-PA Is Working On RIGHT NOW
 
-_Last updated: 2026-04-25 23:03_
+_Last updated: 2026-04-25 23:11_
 
 ## Last Hour
+- 23:11 — Selfcheck: last-hour cron activity was `agentjack-autodev-cycle` (ok, shipped commit), `axis-revenue-nudge` + `axis-selfcheck` (ok), with only `workspace-github-push` timing out once (`consecutiveErrors=1`, none over `2`); reran CouncilNow full production auth→billing proof (register/login/me/subscription/portal + starter/pro/scale/enterprise checkout) and all checks passed with Stripe checkout `HEAD 200`, so CouncilNow remains **ready for first customer** and NOW lane stays Cloudflare Phase 1 unblock (`/api/kiki` parity before DNS cutover).
 - 23:03 — dev-2026 stability cleanup: neutralized high-churn ghost services `kraliki-voice-hybrid-api.service` and `kraliki-voice-hybrid-web.service` (missing paths + env files, restart counters >16k). Services are now `inactive` + `disabled`, removing restart-loop noise from user systemd.
 - 22:55 — Cloudflare Phase 1 lane advanced to hard blocker isolation: validated Pages account/project access (`kraliki-marketing`, `verduona-main`), redeployed both projects on production branch `beta`, confirmed apex title parity, then caught functional cutover blocker — `/api/kiki/*` is real JSON on current live domains but returns HTML fallback on Pages targets, so DNS cutover is paused until Kiki API routing parity is preserved.
 - 22:48 — DR execution lane advanced: Phase A formally closed in docs (canonical DB ownership + retention/encryption/replication policy) and Phase B v1 shipped on dev-2026 (`dr-postgres-backup-tier0/1/23` + `dr-postgres-restore-validate` timers). Manual proof run passed with encrypted artifacts replicated to `mail-tba` and successful checksum→decrypt→restore validation on Tier0 DBs.

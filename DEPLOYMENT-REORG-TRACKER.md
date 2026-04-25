@@ -71,3 +71,4 @@ For each deployment change, log:
 
 ## New artifact
 - `/Users/matejhavlin/github/management/DR-STANDBY-PLAN-MAIL-TBA.md`
+- `/Users/matejhavlin/github/management/TBA-AXIS-COORDINATION-POLICY.md`
