@@ -288,3 +288,37 @@ Next step before production deploy:
 
 - Set real `COUNCIL_OPEN_NOTEBOOK_PASSWORD` and `COUNCIL_OPEN_NOTEBOOK_ENCRYPTION_KEY` in dev-2026 CouncilNow env.
 - Deploy/restart intentionally, then smoke `/api/v1/research-notebook/status` and the Data page Evidence Notebook flow.
+
+## Brain alternatives check — 2026-04-26 13:55 CEST
+
+Question: is Open Notebook the best open-source brain/NotebookLM replacement, compared with Open Brain / Karpathy-style wiki / GBrain / similar systems?
+
+Verdict by use case:
+
+1. **CouncilNow customer-facing Evidence Notebook:** Open Notebook remains the best starting choice.
+   - It is directly NotebookLM-shaped: notebooks, sources, notes, search, ask/chat, podcasts, REST API, self-hosting.
+   - It is MIT licensed and active (`lfnovo/open-notebook`, ~22.7k stars observed via GitHub CLI).
+   - Its weakness is multi-tenant auth, which CouncilNow is already solving by keeping it internal behind CouncilNow backend permissions.
+
+2. **Internal agent/company brain:** GBrain is stronger than Open Notebook.
+   - Garry Tan's `gbrain` is built for agent memory, typed knowledge graphs, entity timelines, hybrid search, code graph retrieval, skills, cron/maintenance, and minion jobs.
+   - It is not the best drop-in NotebookLM replacement UI for CouncilNow customers; it is better as TBA/OpenClaw/AgentJack internal memory infrastructure.
+
+3. **Personal/wiki-style brain:** Karpathy LLM Wiki pattern / `NicholasSpisak/second-brain` is cleanest.
+   - Best for LLM-maintained Obsidian/wiki knowledge pages.
+   - Not enough as a SaaS Evidence Notebook engine: no product UI/API/tenant layer comparable to Open Notebook.
+
+4. **Open Brain / OB1:** promising shared-memory infrastructure, not the safest CouncilNow product engine yet.
+   - `NateBJones-Projects/OB1` positions itself as one database + AI gateway + chat channel for persistent memory across tools.
+   - Interesting for personal/operator brain architecture; less directly NotebookLM-shaped than Open Notebook and license/product maturity needs deeper vetting.
+
+5. **SurfSense:** strongest challenger for team NotebookLM replacement, but higher product risk today.
+   - `MODSetter/SurfSense` is explicitly team-oriented, privacy-focused, with many connectors and multiplayer claims.
+   - If CouncilNow later needs collaborative enterprise notebooks/connectors, re-evaluate SurfSense. Today, Open Notebook is safer because the current MVP only needs internal engine + REST API + source-grounded notebook semantics.
+
+6. **NotebookLlama / InsightsLM / AnythingLLM / Onyx / Khoj / Open WebUI:** useful but not the best CouncilNow fit.
+   - NotebookLlama is LlamaCloud-backed and more demo/reference than self-owned CouncilNow engine.
+   - InsightsLM is more template/workflow stack (Supabase/N8N/React).
+   - AnythingLLM/Open WebUI/Onyx/Khoj are broader chat/RAG/enterprise-search systems, not as close to NotebookLM-style evidence notebook UX.
+
+Decision: keep the current implementation path. Use **Open Notebook for CouncilNow Evidence Notebook**, **GBrain for internal agent brain**, and **Karpathy/second-brain pattern for personal/wiki-style knowledge compilation**. Do not try to make one brain solve all three jobs.
