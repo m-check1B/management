@@ -1,8 +1,9 @@
 # Sprint Current — What TBA-One-PA Is Working On RIGHT NOW
 
-_Last updated: 2026-04-26 15:50_
+_Last updated: 2026-04-26 16:03_
 
 ## Last Hour
+- 16:03 — Selfcheck: last hour completed and documented the PostHog rollout; cron continuity clean (`22` enabled, `0` consecutiveErrors > 2, `0` overdue), only the current webchat session active, and NOW returns to CouncilNow Evidence Brain product integration (session prompts/UI evidence packets) before AgentJack follow-up.
 - 15:50 — PostHog website rollout completed for live public targets: deployed/verified `kraliki.com`, `verduona.com`, `perfectmission.co.uk`, `councilnow.com`, and `m-check1b.pages.dev`; updated AgentJack static source but public deploy is blocked because `agentjack.kraliki.com` does not resolve. Fixed website deploy permissions so rsync output is web-readable after deploy. Evidence file: `POSTHOG-WEBSITE-ROLLOUT-2026-04-26.md`; commits: websites `bbf02cf`, PerfectMission `477ac35`, advisory-council-app `d24c10b`, blog local `db23aaf`.
 - 15:29 — CouncilNow Evidence Brain MVP deployed publicly to dev-2026/LXC `advisory-council` with tag `evidence-brain-mvp-202604261525`. Build gates passed (backend `70 passed`, frontend check/build, compose config, diff check). Public smoke on `https://councilnow.com` passed: `/health` 200, `/app` 200, fresh auth/register/login/me 201/200, Evidence Brain Riverfront corpus via `/api/v1/evidence/*` returned 6 claims + 2 expected contradictions + packet with sha256 citations, and `/api/v1/research-notebook/status` returned configured/reachable. Evidence file: `COUNCILNOW-EVIDENCE-BRAIN-DEPLOY-2026-04-26.md`.
 - 14:47 — CouncilNow revenue reminder recheck: reran public auth → billing proof on `https://councilnow.com` with fresh production account `axis-reminder-1777207635405@gmail.com`; `/health`, register/login/me, subscription, and portal all passed; linked Stripe customer `cus_UPGcrgRQwp0lrb`; starter/pro/scale/enterprise checkout sessions were created and each Stripe checkout URL resolved `HEAD 200`. Billing path remains verified; product-quality caveat from first-customer triage still applies.
