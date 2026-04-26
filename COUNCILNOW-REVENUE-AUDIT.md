@@ -1,6 +1,6 @@
 # CouncilNow — Revenue Readiness Audit
 
-_Audited: 2026-04-26 03:00 by TBA_
+_Audited: 2026-04-26 04:35 by TBA_
 _Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE). Current production deploy `timestamp-fix-d32d3c2` has passed full auth → checkout and product-path smoke on councilnow.com: register/login/me/subscription/portal, live Stripe checkout for starter/pro/scale/enterprise, council session create/run/complete, HTTPS share URL, public shared report API, user-scoped analytics isolation, and credits summary._
 
 ## What's Working ✅
@@ -32,6 +32,7 @@ _Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE). Curren
 
 1. **Full user journey:** ✅ VERIFIED on production after deploy `timestamp-fix-d32d3c2` — fresh user created session `d2f3d4a5-baeb-4c7b-bd90-2e3da3509bb0`, ran council to `completed`, score `27`, no error, all rounds + synthesis present, shared via HTTPS URL `https://councilnow.com/shared/51d696a3-898a-4262-99fd-78a33d74d953`, public shared API returned `200`, analytics isolation held across two fresh users, and credits summary returned `200`.
 2. **Stripe checkout with real user:** ✅ VERIFIED on production. Authenticated token flow now passes for `/api/billing/checkout` (all tiers), `/api/billing/portal`, and `/api/billing/subscription`.
+   - Fresh 04:35 recheck PASS with new production account `oc-revenue-1777170916-11352@example.com`: `/health` ok, register/login/me/subscription/portal passed, and starter/pro/scale/enterprise checkout sessions plus Stripe checkout URL probes returned `200`.
    - Fresh 19:21 recheck PASS with new production account `axis-reminder-6178313952@gmail.com`.
    - Fresh 21:21 recheck PASS with new production account `axis-reminder-73074093@gmail.com`.
    - Fresh 23:21 recheck PASS with new production account `axis-reminder-1975726468@gmail.com`.
