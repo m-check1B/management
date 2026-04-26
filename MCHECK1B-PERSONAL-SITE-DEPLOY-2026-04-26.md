@@ -59,3 +59,9 @@ curl -I https://www.m-check1b.com/
 - `bec413c` — Create personal AI blog
 - `e801435` — Position site as AI consultant brand
 - `e807393` — Document m-check1B Pages deployment
+## Essay loading fix
+
+Matej reported essays were not loading after first deploy. Root cause was invalid generated HTML: `<html lang={lang}></html>` was placed inside Svelte `<svelte:head>`, producing nested `<html>` tags in `<head>`. Browsers reparsed the page and hydration emptied the body.
+
+Fix deployed from blog commit `bf50154` to Cloudflare Pages deployment `https://2249c45c.m-check1b.pages.dev` and production `https://m-check1b.pages.dev`. Gates: `npm run check`, `npm run build`, `npm run test:static-html`, public curl for homepage/articles, and browser article load with no console errors.
+
