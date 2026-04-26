@@ -322,3 +322,44 @@ Verdict by use case:
    - AnythingLLM/Open WebUI/Onyx/Khoj are broader chat/RAG/enterprise-search systems, not as close to NotebookLM-style evidence notebook UX.
 
 Decision: keep the current implementation path. Use **Open Notebook for CouncilNow Evidence Notebook**, **GBrain for internal agent brain**, and **Karpathy/second-brain pattern for personal/wiki-style knowledge compilation**. Do not try to make one brain solve all three jobs.
+
+## Forced architecture correction — 2026-04-26 14:00 CEST
+
+Matej forced the terminology/architecture distinction:
+
+- **Open Notebook is not the brain.** It is the NotebookLM replacement workbench / UI surface.
+- **Best brain for CouncilNow is a Synthadoc-style Evidence Brain.**
+- **GBrain remains the safer permissive/commercial graph/agent-memory inspiration.**
+- **Final product architecture should be CouncilNow-owned, not a direct dependency bet on any single upstream.**
+
+Updated decision:
+
+```text
+CouncilNow Evidence Brain
+ = Synthadoc-style evidence compiler
+ + GBrain-style typed graph / agent memory
+ + Karpathy raw_sources → wiki → schema discipline
+ + CouncilNow-owned permissions, audit, tenancy, citations
+ + Open Notebook-style Evidence Notebook UI/workbench
+```
+
+Confirmed live/local facts:
+
+- Cloned Synthadoc to `/Users/matejhavlin/github/synthadoc`.
+- Upstream: `axoviq-ai/synthadoc`.
+- Commit inspected: `a91a8ba [bug fix]: Gemini quota handling, orphan detection correctness, and demo reliability (#43)`.
+- GitHub metadata observed: AGPL-3.0 license, ~117 stars, ~10 forks, not archived, pushed 2026-04-25.
+- README/design claims align with the CouncilNow brain need: ingest-time knowledge compilation, persistent Markdown wiki, contradictions surfaced, orphan pages flagged, source-cited answers, audit DB, job queue, CLI/HTTP integration, local-first operation, multiple providers.
+
+Decision refinement:
+
+1. Keep the just-built Open Notebook sidecar as the **first-party Evidence Notebook workbench** and Google NotebookLM replacement path.
+2. Do **not** treat Open Notebook as CouncilNow's long-term evidence brain.
+3. Use Synthadoc as the **architectural blueprint / benchmark** for the evidence compiler.
+4. Use GBrain patterns for typed entities, relationships, timelines, agent memory, and hybrid/graph retrieval.
+5. Be careful with Synthadoc as a dependency because AGPL-3.0 has network/SaaS implications. Do not modify/embed it into proprietary CouncilNow SaaS without legal review; prefer learning from it or keeping any prototype clearly isolated.
+
+Practical next step:
+
+- Add a future `EvidenceBrainService` design pass that compiles raw CouncilNow source material into cited claim/entity/timeline pages before or alongside Open Notebook sync.
+- Keep `ResearchNotebookService` as UX/workbench integration, but rename mental model: **workbench now, brain later**.
