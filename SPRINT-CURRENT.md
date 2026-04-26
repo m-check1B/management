@@ -1,8 +1,9 @@
 # Sprint Current — What TBA-One-PA Is Working On RIGHT NOW
 
-_Last updated: 2026-04-26 00:47_
+_Last updated: 2026-04-26 02:03_
 
 ## Last Hour
+- 02:03 — Selfcheck: last hour handled the live CouncilNow Quick Sprint loading/navigation bug, shipped/pushed/deployed `advisory-council-app` commit `c8b4bfc`, production browser proof now opens stale saved sessions and New Sprint correctly, cron continuity remains clean (`22` enabled, `0` consecutiveErrors > 2, `0` overdue), only current main webchat session is active, and NOW returns to CouncilNow first-customer blockers `KRA-3675`/`KRA-3676` before any external outreach.
 - 00:47 — CouncilNow first-customer product-quality triage completed. Production product path is functional (fresh auth→create→run→history→share passed; Efficient session `91bbd700-3ac4-4456-bc99-a82e6591ee9d` completed with score 27), but readiness remains blocked by two P0 product issues: analytics is not user-scoped (`KRA-3675`) and Guided Setup can ask irrelevant hire questions (`KRA-3676`). Added pilot/QA follow-ups `KRA-3677` and `KRA-3678`; `KRA-3674` is done as triage, `KRA-3673` stays internal-only until blockers are fixed or founder-accepted.
 - 00:22 — Founder decision locked for Cloudflare blocker: websites remain static on Cloudflare Pages; `/api/kiki/*` should be same-origin proxy only, backed by a dev-2026 Kiki backend container/stable origin (e.g. dedicated Traefik hostname) before DNS cutover.
 - 00:03 — Selfcheck: last hour cron runs were `linear-triage` (23:15), `x-watch-garry-matej` (23:30), `agentjack-autodev-cycle` (23:45), `github-changes-monitor` (00:00), and `Kraliki Patrol` (00:02), all `ok`; only the current main webchat session is active, `consecutiveErrors > 2` remains `0` across `22` enabled jobs, and NOW lane stays Cloudflare Phase 1 unblock (`/api/kiki/*` parity before any DNS cutover).
