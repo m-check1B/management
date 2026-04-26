@@ -2,6 +2,17 @@
 
 _Newest on top. Newer always overrides older._
 
+## 2026-04-26 08:39 — AgentJack runtime ownership + side-by-side baseline
+
+- **AgentJack runtime ownership locked to dedicated gateway:** `agentjack-gateway.service` is canonical; `hermes-gateway-axis.service` stays disabled for AgentJack Telegram lane.
+- **Telegram 409 conflict classified as process-ownership bug, not token mismatch.**
+- **OpenClaw vs AgentJack side-by-side audit baseline created** and stored in management (`OPENCLAW-vs-AGENTJACK-AUDIT-2026-04-26.md`) and mirrored to Linear (`KRA-3680`).
+- **Near-term priority order from audit:**
+  1. OpenClaw security criticals
+  2. AgentJack private webchat readyz recovery
+  3. AgentJack integrations extraction maturity
+
+
 ## 2026-04-19 07:32 — 20 Questions Answered
 
 ### Product & Revenue

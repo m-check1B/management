@@ -13,6 +13,7 @@ Axis maintains these files automatically. Matej reads them to stay current.
 | `SPRINT-CURRENT.md` | What Axis is working on RIGHT NOW | Real-time |
 | `INFRA-MAP.md` | Hardware, servers, DNS, services — where everything lives | Weekly |
 | `DECISIONS-LOG.md` | Key decisions with dates — newest on top | As needed |
+| `OPENCLAW-vs-AGENTJACK-AUDIT-2026-04-26.md` | Side-by-side gap audit (runtime, security, integrations) | Snapshot (2026-04-26) |
 
 ## How to use
 

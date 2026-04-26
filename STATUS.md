@@ -1,62 +1,52 @@
 # Status — All Projects & Infrastructure
 
-_Last updated: 2026-04-18 23:21_
+_Last updated: 2026-04-26 08:39 CEST_
 
 ## Products
 
 | Project | Location | Status | Priority | Notes |
 |---------|----------|--------|----------|-------|
-| **AgentJack** | `/github/agentjack` | 🔄 Development | P1 — THE product | Agentic orchestration. SvelteKit UI. Port GoClaw B2B patterns. APPROVED plan. |
-| **CouncilNow** | `/github/applications/advisory-council-app` + `/github/websites/councilnow.com` | 🔄 Active | P1 — Revenue first | Multi-agent debate. Run as real business ASAP |
-| **open-kraliki** | `/github/open-kraliki` | ✅ Stable | P2 | Automation templates. Substrate for AgentJack Automations |
+| **AgentJack** | `/github/agentjack` | 🔄 Active hardening | P1 — THE product | Dedicated gateway ownership fixed (`agentjack-gateway.service` active, Hermes gateway disabled). Telegram lane is healthy. Private webchat local readyz path still blocked. |
+| **CouncilNow** | `/github/applications/advisory-council-app` + `/github/websites/councilnow.com` | 🔄 Active | P1 — Revenue first | Billing/auth lane previously verified repeatedly; focus remains customer acquisition and conversion. |
+| **open-kraliki** | `/github/open-kraliki` | ✅ Stable substrate | P2 | Automation templates backing AgentJack Automations surface. |
 
-## Marketing
+## Workbench / Internal
 
-| Site | Status | Notes |
+| Tool | Status | Notes |
 |------|--------|-------|
-| **kraliki.com** | Live | Brand presence |
-| **verduona.com** | Live | Brand presence |
-| **councilnow.com** | Live | Product site for CouncilNow |
+| **OpenClaw** | ⚠️ Running with critical security findings | Operational control plane, but security audit currently shows critical posture gaps (gateway auth + small-model policy). |
+| **GStack** | ✅ Installed | Primary execution cookbook. |
+| **GBrain** | ✅ Installed | Knowledge infra active (Postgres + vector lane). |
 
 ## Shared Infrastructure
 
 | Component | Status | Notes |
 |-----------|--------|-------|
-| **Zitadel** | Active | identity.verduona.dev — SSO/auth for all products |
-| **Hub** | Active | Shared services (billing, etc.) |
+| **Zitadel** | ✅ Active | identity.verduona.dev |
+| **Hub** | ✅ Active | Shared services + billing path |
+| **dev-2026** | ✅ Online | Main execution host |
+| **Cloudflare / Namecheap / Hetzner** | ✅ Active | Core infra providers operational |
 
-## Heritage (Not Active Dev)
+## Current Audit Snapshot (OpenClaw vs AgentJack)
 
-| Project | Status | Purpose |
-|---------|--------|---------|
-| **kraliki-monorepo** | ⛔ Stopped | Mine for ideas/solutions/code. Don't build on it. |
+Source file: `OPENCLAW-vs-AGENTJACK-AUDIT-2026-04-26.md`
 
-## Internal Tooling
+- OpenClaw: mature ops lane, but largest immediate risk is security posture.
+- AgentJack: runtime isolation and Telegram polling conflict resolved; main gaps are private web surface reliability + integration maturity.
 
-| Tool | Status | Notes |
-|------|--------|-------|
-| **GStack** | Installed | Primary cookbook. 23 specialist commands. Watch for updates. |
-| **GBrain** | Installed | Knowledge infra. Local Postgres + pgvector. Watch for updates. |
-| **OpenClaw** | Running | Gateway/orchestration. Axis lives here. |
+## Known Issues (current)
 
-## Infrastructure Health
+1. **OpenClaw security criticals unresolved**
+   - Gateway auth exposure and small-model sandbox/tool policy findings remain open.
+2. **AgentJack private webchat health blocked**
+   - Local/private readyz path (`127.0.0.1:4173`) not healthy while public AG WebUI readyz is green.
+3. **AgentJack Telegram continuity proof still human-token gated**
+   - Runtime transport is healthy; doctor can remain in attention until proof reply is received.
+4. **AgentJack integrations extraction gap**
+   - Current overview: healthy=2, attention=4, planned=13.
+5. **OpenClaw state-integrity hygiene warnings**
+   - Multi-state-dir / orphan transcript warnings still reported by doctor.
 
-| Component | Location | Status | Last Check |
-|-----------|----------|--------|------------|
-| **Mac (primary)** | Local | ✅ Online | 2026-04-18 |
-| **dev-2026** | Hetzner | ❓ Unknown | Needs check |
-| **Mail VM** | Hetzner | ❓ Unknown | Needs check |
-| **Cloudflare** | Cloud | ✅ Active | — |
-| **Namecheap** | Cloud | ✅ Active | — |
-| **Hetzner** | Cloud | ✅ Active | — |
-| **PM2 (local)** | Mac | ⚠️ 16/16 online but was empty Apr 14-18 | 2026-04-18 |
-| **Docker** | Mac + dev-2026 | ✅ Containers healthy | 2026-04-18 |
-| **Embedding server** | Mac :1934 | ✅ Running | 2026-04-18 |
+## Recently Resolved
 
-## Known Issues
-
-1. **Telegram bot 409 conflict** — duplicate bot polling same token (7.8K occurrences)
-2. **PM2 empty on restart** — needs `pm2 resurrect` each time
-3. **AC Hub `kraliki_common` missing** — AUVS checks fail
-4. **Autodev stuck loops** — councilnow + kraliki-monorepo skipping AI cycles
-5. **Exec preflight block** — Python scripts with flags refused by OpenClaw
+- ✅ **Telegram 409 polling conflict root cause resolved** by removing competing gateway ownership and running dedicated AgentJack gateway service.
