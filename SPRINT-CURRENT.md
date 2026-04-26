@@ -3,6 +3,7 @@
 _Last updated: 2026-04-26 10:22_
 
 ## Last Hour
+- 14:16 — CouncilNow Evidence Notebook sidecar deployed/smoked on dev-2026 (`evidence-notebook-fix-202604261423`): fixed SurrealDB named-volume permission regression in `advisory-council-app` commit `c534d6c`, configured OpenRouter default chat model inside Open Notebook, verified status/sync/ask all return `200`, and confirmed sidecar ports are internal-only with no Traefik exposure.
 - 14:03 — Selfcheck: last hour locked and pushed the CouncilNow Evidence Brain plan (`ad0c863`) plus Open Notebook/Evidence Brain role split; cron is clean (`22` enabled, `0` consecutiveErrors > 2, `0` overdue), only the current AGChat session is active, and NOW follows the plan’s immediate next step: safely deploy/smoke the Open Notebook sidecar before schema/spec + Synthadoc benchmark.
 - 12:29 — `m-check1B` personal AI consultant site deployed to Cloudflare Pages project `m-check1b` at `https://m-check1b.pages.dev/`; custom domains `m-check1b.com` and `www.m-check1b.com` added in Cloudflare Pages but pending Namecheap DNS because API IP whitelist is stale (`193.179.119.136` vs current `193.179.119.168`).
 - 12:09 — Personal blog MVP built at `/Users/matejhavlin/github/blog` on Stack 2026 SvelteKit static stack; imported 2 verified Kraliki Dispatch posts, 3 Substack exports, and 3 future-trilogy essays across EN/CS/ES; checks/build/preview smokes passed; next decision is deploy domain, with `m-check1b.com` the cleaner privacy-preserving self-promotion choice.
