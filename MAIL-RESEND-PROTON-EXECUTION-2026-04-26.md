@@ -55,9 +55,63 @@ Current Resend status after initial verification attempt:
 }
 ```
 
+### Follow-up evidence — 2026-04-26 06:54 UTC / 08:54 Europe/Prague
+
+Resend API GET before re-trigger:
+
+```json
+{
+  "id": "21b7a997-7224-46d3-9067-6e565b3db698",
+  "name": "councilnow.com",
+  "status": "pending",
+  "region": "us-east-1",
+  "records": [
+    { "record": "DKIM", "name": "resend._domainkey", "type": "TXT", "status": "pending" },
+    { "record": "SPF", "name": "send", "type": "MX", "status": "verified", "value": "feedback-smtp.us-east-1.amazonses.com", "priority": 10 },
+    { "record": "SPF", "name": "send", "type": "TXT", "status": "verified", "value": "v=spf1 include:amazonses.com ~all" }
+  ]
+}
+```
+
+Public DNS evidence from `1.1.1.1`, `8.8.8.8`, and `9.9.9.9`:
+
+```bash
+TXT resend._domainkey.councilnow.com
+# present; matches Resend DKIM value
+
+MX send.councilnow.com
+# 10 feedback-smtp.us-east-1.amazonses.com.
+
+TXT send.councilnow.com
+# "v=spf1 include:amazonses.com ~all"
+```
+
+Resend verification was triggered again:
+
+```bash
+POST /domains/21b7a997-7224-46d3-9067-6e565b3db698/verify
+# {"object":"domain","id":"21b7a997-7224-46d3-9067-6e565b3db698"}
+```
+
+Refreshed Resend status immediately after re-trigger:
+
+```json
+{
+  "id": "21b7a997-7224-46d3-9067-6e565b3db698",
+  "name": "councilnow.com",
+  "status": "pending",
+  "region": "us-east-1",
+  "records": [
+    { "record": "DKIM", "name": "resend._domainkey", "type": "TXT", "status": "pending" },
+    { "record": "SPF", "name": "send", "type": "MX", "status": "pending" },
+    { "record": "SPF", "name": "send", "type": "TXT", "status": "pending" }
+  ]
+}
+```
+
 ### Next step
-- Keep checking Resend until status flips from `pending` to `verified` or an actionable DNS error appears.
-- A cron follow-up was scheduled so this does not rely on memory.
+- DNS looks correct on public resolvers, but Resend still reports `pending`.
+- One final cron follow-up is scheduled for 2026-04-26 07:28:19 UTC / 09:28:19 Europe/Prague (`id=26cc2e53-648d-42a4-be01-7fd979703655`); if it is still pending then, report the pending state instead of looping indefinitely.
 
 ---
 
