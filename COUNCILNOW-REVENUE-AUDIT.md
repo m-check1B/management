@@ -52,6 +52,7 @@ _Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE). Curren
    - Fresh 07:47 recheck PASS with new production account `axis-reminder-1776923242233@gmail.com`.
    - Fresh 23:11 recheck PASS with new production account `axis-reminder-1777151452752@gmail.com`.
    - Fresh 09:48 recheck PASS with new production account `axis-reminder-1776930474314@gmail.com`.
+   - Fresh 14:47 recheck PASS with new production account `axis-reminder-1777207635405@gmail.com`: `/health` ok, `/auth/api/v1/auth/register` returned `201`, `/auth/api/v1/auth/login` + `/auth/api/v1/auth/me` returned `200`, `/api/billing/subscription` and `/api/billing/portal` returned `200` with linked Stripe customer `cus_UPGcrgRQwp0lrb`, and starter/pro/scale/enterprise checkout sessions plus Stripe checkout URL `HEAD` probes returned `200`.
    - Public auth proof at 11:46: `/auth/api/v1/auth/register` returned 201, `/auth/api/v1/auth/login` returned 200, and `/auth/api/v1/auth/me` resolved the linked Stripe customer `cus_UNinroo8E90k7Z` for the fresh user.
    - Public auth proof at 13:55: `/auth/api/v1/auth/register` returned 201, `/auth/api/v1/auth/login` returned 200, and `/auth/api/v1/auth/me` resolved the linked Stripe customer `cus_UNkt4tawshEqII` for the fresh user.
    - Public auth proof at 15:47: `/auth/api/v1/auth/register` returned 201, `/auth/api/v1/auth/login` returned 200, `/auth/api/v1/auth/me` returned 200, and both `/auth/api/v1/auth/me` plus `/api/billing/subscription` resolved the linked Stripe customer `cus_UNmhRUF31ahKJ2` for the fresh user.
