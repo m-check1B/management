@@ -41,3 +41,55 @@ Done and deployed to the current production host (`91.99.176.2`).
 
 ## Blockers
 None for this scoped task.
+
+---
+
+## Visual Restoration Follow-up — 2026-04-26
+
+Matej rejected the flatter new rewrite direction for the marketing sites. Restored the richer previous visual language while keeping only surgical current naming and cross-link updates.
+
+### Restoration changes
+- `kraliki.com`
+  - Restored developed visual components from the earlier richer version: animated/dark hero, manifesto, process circle, testimonials, and CTA section.
+  - Kept current naming in the restored visual shell: AgentJack, CouncilNow, Kraliki stack, decision/execution/memory positioning.
+  - Preserved cross-links:
+    - `Launch AgentJack` → `https://agentjack.kraliki.com`
+    - `CouncilNow` / `Open CouncilNow` → `https://councilnow.com` / `https://councilnow.com/app`
+- `verduona.com`
+  - Restored the richer older hero treatment.
+  - Kept current portfolio naming: CouncilNow, AgentJack, Notes, Garage, Security, Courseroom.
+  - Changed secondary hero CTA to `Open CouncilNow` → `https://councilnow.com/app`.
+
+### Commit + deploy
+- Websites commit: `602c3a6 Restore developed marketing visuals`
+- Pushed to `origin/main`.
+- Deployed via `rsync --delete --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r` to:
+  - `/home/adminmatej/websites/kraliki/`
+  - `/home/adminmatej/websites/verduona/`
+- Ran `chmod -R a+rX` and restarted:
+  - `websites-kraliki-1`
+  - `websites-verduona-1`
+
+### Gates
+- `cd kraliki.com && npm run check && npm run build`
+  - Passed with existing unrelated `ChatWidget.svelte` warning only.
+- `cd verduona.com && npm run check && npm run build`
+  - Passed with `0 errors / 0 warnings`.
+- `git diff --check -- kraliki.com verduona.com`
+  - Passed.
+
+### Public verification
+- `https://kraliki.com/en/?restore=602c3a6`
+  - Contains `DECIDE. EXECUTE.`
+  - Contains `LAUNCH AGENTJACK`
+  - Contains `COUNCILNOW`
+  - Browser snapshot confirmed rich restored hero + manifesto/process/testimonial layout.
+- `https://verduona.com/en/?restore=602c3a6`
+  - Contains `Products and training built on Kraliki systems`
+  - Contains `EXPLORE PRODUCTS`
+  - Contains `OPEN COUNCILNOW`
+  - Browser snapshot confirmed restored hero treatment and current product portfolio below.
+
+### Local visual evidence
+- `/Users/matejhavlin/.openclaw/workspace/artifacts/kraliki-marketing-restore.png`
+- `/Users/matejhavlin/.openclaw/workspace/artifacts/verduona-marketing-restore.png`
