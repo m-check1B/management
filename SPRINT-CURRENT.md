@@ -1,8 +1,9 @@
 # Sprint Current — What TBA-One-PA Is Working On RIGHT NOW
 
-_Last updated: 2026-04-26 02:03_
+_Last updated: 2026-04-26 03:00_
 
 ## Last Hour
+- 03:00 — CouncilNow revenue/customer-readiness blocker closed. Shipped `3dbbebd` for customer-readiness blockers (analytics user scoping, Guided Setup smart-question regression, HTTPS share URLs, authenticated session API tests) and `d32d3c2` for production Postgres timestamp compatibility, deployed `timestamp-fix-d32d3c2`, reran full production auth→checkout E2E (register/login/me/subscription/portal + starter/pro/scale/enterprise Stripe checkout URLs `200`), then reran product smoke: session `d2f3d4a5-baeb-4c7b-bd90-2e3da3509bb0` completed with score `27`, HTTPS share/public API passed, analytics isolation passed across two users, and credits summary returned `200`. CouncilNow is ready for first customer; `KRA-3673` can move to founder-approved outreach prep.
 - 02:03 — Selfcheck: last hour handled the live CouncilNow Quick Sprint loading/navigation bug, shipped/pushed/deployed `advisory-council-app` commit `c8b4bfc`, production browser proof now opens stale saved sessions and New Sprint correctly, cron continuity remains clean (`22` enabled, `0` consecutiveErrors > 2, `0` overdue), only current main webchat session is active, and NOW returns to CouncilNow first-customer blockers `KRA-3675`/`KRA-3676` before any external outreach.
 - 00:47 — CouncilNow first-customer product-quality triage completed. Production product path is functional (fresh auth→create→run→history→share passed; Efficient session `91bbd700-3ac4-4456-bc99-a82e6591ee9d` completed with score 27), but readiness remains blocked by two P0 product issues: analytics is not user-scoped (`KRA-3675`) and Guided Setup can ask irrelevant hire questions (`KRA-3676`). Added pilot/QA follow-ups `KRA-3677` and `KRA-3678`; `KRA-3674` is done as triage, `KRA-3673` stays internal-only until blockers are fixed or founder-accepted.
 - 00:22 — Founder decision locked for Cloudflare blocker: websites remain static on Cloudflare Pages; `/api/kiki/*` should be same-origin proxy only, backed by a dev-2026 Kiki backend container/stable origin (e.g. dedicated Traefik hostname) before DNS cutover.
@@ -115,8 +116,8 @@ _Last updated: 2026-04-26 02:03_
 ### Secondary Lane (KEEP GREEN)
 - [x] CouncilNow billing path verified / sales-prep ready
 - [x] CouncilNow product-quality triage completed (`KRA-3674`)
-- [ ] Fix or founder-accept CouncilNow first-customer blockers before claiming readiness (`KRA-3675`, `KRA-3676`)
-- [ ] Keep `KRA-3673` external outreach internal-only until blockers are resolved/accepted
+- [x] Fix CouncilNow first-customer blockers before claiming readiness (`KRA-3675`, `KRA-3676`, `KRA-3677`, `KRA-3678`) — shipped/deployed/proved in `3dbbebd` + `d32d3c2` on 2026-04-26 03:00
+- [ ] Keep `KRA-3673` external outreach founder-approved before any send
 
 ### Infra Cleanup (AFTER AGENTJACK)
 - [ ] Continue explicit-record `verduona.dev` cleanup and stale-router pruning
