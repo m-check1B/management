@@ -1,8 +1,9 @@
 # Sprint Current — What TBA-One-PA Is Working On RIGHT NOW
 
-_Last updated: 2026-04-26 09:03_
+_Last updated: 2026-04-26 10:06_
 
 ## Last Hour
+- 10:06 — Linear execution steering updated so Axis does not idle: created urgent In Progress AgentJack packet `KRA-3681` (`[AgentJack][P0] Axis execution lane: no idle, advance AgentJack gaps`) with explicit scope for integrations extraction, AG WebUI diagnostics truthfulness, and autodev/repo hygiene; linked it from `KRA-3680`. When no higher live founder instruction exists, Axis should pull `KRA-3681` and work AgentJack until checks pass or a real blocker is posted.
 - 09:03 — Founder priority override locked for today: (A) CouncilNow first — fix all bugs/flows/pricing, add/verify coupon workflow, and refresh model routing; (B) AgentJack second — complete the new version and internally deploy/verify it at `https://agentjack-dev.verduona.dev`. Outreach stays behind live CouncilNow product + pricing/coupon proof.
 - 08:40 — Side-by-side OpenClaw vs AgentJack audit completed from live checks, saved in management (`OPENCLAW-vs-AGENTJACK-AUDIT-2026-04-26.md`), and sent to Linear as `KRA-3680`; top gaps now locked: OpenClaw security criticals, AgentJack private AGChat readyz, and AgentJack integration maturity.
 - 06:03 — Selfcheck: last hour kept continuity green and refreshed CouncilNow revenue proof (`a561695` pushed after fresh auth→checkout E2E at 04:35); recent cron activity (`linear-triage`, `axis-revenue-nudge`, `agentjack-autodev-cycle`, `github-changes-monitor`, `Kraliki Patrol`) is OK, no enabled job has `consecutiveErrors > 2`, no overdue non-running jobs surfaced, only current main AGChat session is active, and NOW remains AgentJack canonical `ag-webui` + runtime gaps while CouncilNow stays first-customer-ready pending founder-approved outreach.
