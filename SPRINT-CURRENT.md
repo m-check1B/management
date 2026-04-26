@@ -1,8 +1,9 @@
 # Sprint Current — What TBA-One-PA Is Working On RIGHT NOW
 
-_Last updated: 2026-04-26 10:06_
+_Last updated: 2026-04-26 10:10_
 
 ## Last Hour
+- 10:10 — Git/cloud/dev-server sync completed: `management` local/origin/dev-2026 now at `7ec14b2`; `advisory-council-app` local/origin/dev-2026 now at `c599b30`; pushed dev-2026 AgentJack commits to GitHub and fast-forwarded Mac/local so `agentjack` local/origin/dev-2026 HEAD is `7115e86`. Dev-2026 `agentjack` still has unrelated dirty legacy webchat/generated state; left intact and documented on `KRA-3681` instead of unsafe reset.
 - 10:06 — Linear execution steering updated so Axis does not idle: created urgent In Progress AgentJack packet `KRA-3681` (`[AgentJack][P0] Axis execution lane: no idle, advance AgentJack gaps`) with explicit scope for integrations extraction, AG WebUI diagnostics truthfulness, and autodev/repo hygiene; linked it from `KRA-3680`. When no higher live founder instruction exists, Axis should pull `KRA-3681` and work AgentJack until checks pass or a real blocker is posted.
 - 09:03 — Founder priority override locked for today: (A) CouncilNow first — fix all bugs/flows/pricing, add/verify coupon workflow, and refresh model routing; (B) AgentJack second — complete the new version and internally deploy/verify it at `https://agentjack-dev.verduona.dev`. Outreach stays behind live CouncilNow product + pricing/coupon proof.
 - 08:40 — Side-by-side OpenClaw vs AgentJack audit completed from live checks, saved in management (`OPENCLAW-vs-AGENTJACK-AUDIT-2026-04-26.md`), and sent to Linear as `KRA-3680`; top gaps now locked: OpenClaw security criticals, AgentJack private AGChat readyz, and AgentJack integration maturity.
