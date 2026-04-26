@@ -1,8 +1,9 @@
 # Sprint Current — What TBA-One-PA Is Working On RIGHT NOW
 
-_Last updated: 2026-04-26 08:40_
+_Last updated: 2026-04-26 09:03_
 
 ## Last Hour
+- 09:03 — Founder priority override locked for today: (A) CouncilNow first — fix all bugs/flows/pricing, add/verify coupon workflow, and refresh model routing; (B) AgentJack second — complete the new version and internally deploy/verify it at `https://agentjack-dev.verduona.dev`. Outreach stays behind live CouncilNow product + pricing/coupon proof.
 - 08:40 — Side-by-side OpenClaw vs AgentJack audit completed from live checks, saved in management (`OPENCLAW-vs-AGENTJACK-AUDIT-2026-04-26.md`), and sent to Linear as `KRA-3680`; top gaps now locked: OpenClaw security criticals, AgentJack private AGChat readyz, and AgentJack integration maturity.
 - 06:03 — Selfcheck: last hour kept continuity green and refreshed CouncilNow revenue proof (`a561695` pushed after fresh auth→checkout E2E at 04:35); recent cron activity (`linear-triage`, `axis-revenue-nudge`, `agentjack-autodev-cycle`, `github-changes-monitor`, `Kraliki Patrol`) is OK, no enabled job has `consecutiveErrors > 2`, no overdue non-running jobs surfaced, only current main AGChat session is active, and NOW remains AgentJack canonical `ag-webui` + runtime gaps while CouncilNow stays first-customer-ready pending founder-approved outreach.
 - 04:13 — Selfcheck: last hour was continuity-heavy after CouncilNow readiness proof: Memory Dreaming Promotion, Doc Drift Checker, overnight-maintenance, and agentjack-autodev-cycle completed `ok`; daily-backup and agentjack-dev-sprint show non-accumulating single-error status, while axis-selfcheck/workspace-github-push are currently running; cron continuity remains clean (`22` enabled, `0` consecutiveErrors > 2, `0` overdue), only current main AGChat session is active, and NOW returns to AgentJack canonical `ag-webui` + runtime gaps while CouncilNow stays ready-for-first-customer pending founder-approved outreach.
