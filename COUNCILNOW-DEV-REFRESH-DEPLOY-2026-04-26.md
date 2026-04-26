@@ -53,3 +53,40 @@
 ## Notes / caveat
 - Current live marketing contract still uses `websites/councilnow.com/index.html` as the primary deployed source. Dirty SvelteKit marketing source under `websites/councilnow.com/src/` builds locally, but it is not wired into the live marketing container; deploying it directly would require a routing/assets change because generated `/_app` assets currently conflict with the app frontend Traefik route. I did not change that architecture during this refresh.
 - Public Python `urllib` smoke was blocked by Cloudflare 1010 due browser-signature rules; retrying with a browser-like curl user-agent passed.
+
+## 20:55 Follow-up redeploy — Svelte marketing artifact
+
+- Deploy tag: `councilnow-webapp-20260426205139`
+- Scope: rebuilt and republished `websites/councilnow.com/build/` as the `council-marketing` static artifact, plus current `advisory-council-app` API/hub/frontend images.
+- Build evidence:
+  - `councilnow.com`: `pnpm check` passed, `pnpm build` passed.
+  - `advisory-council-app/frontend`: `pnpm check` passed, smart questions/evidence-notebook/session-report tests passed, `pnpm build` passed.
+  - `advisory-council-app/backend`: targeted app backend suite `70 passed` with Python 3.13 temp venv.
+- Deploy evidence:
+  - `council-api`, `council-hub`, and `council-frontend` recreated with tag `councilnow-webapp-20260426205139`.
+  - `council-api` and `council-hub` healthy after warmup.
+  - Fixed static marketing permissions after Apache initially returned 403; patched `scripts/deploy-on-dev-2026.sh` so future guest extraction runs `chmod -R a+rX marketing`.
+- Public verification:
+  - `https://councilnow.com/` → 200, new Svelte CTA marker present, old static title absent, Svelte `_app/immutable` assets linked.
+  - `https://councilnow.com/_app/version.json` → 200 (`1777229516621`).
+  - `https://councilnow.com/app` → 200, app shell assets present.
+  - `https://councilnow.com/health` → 200, `{"status":"ok","version":"0.4.0","database":"ok"}`.
+  - `https://councilnow.com/login` → 200, login shell assets present.
+- Browser proof: root rendered the new “Open one hard decision. Get six expert advisors working in five minutes” page; primary CTA navigated into the Quick Sprint app screen.
+
+## 21:00 Final deploy — analytics contract restored
+
+- Final deploy tag: `councilnow-webapp-analytics-20260426205838`.
+- Restored the Svelte marketing artifact's analytics/readiness contract before final publish:
+  - `window.COUNCILNOW_POSTHOG_CONFIG` present in live HTML.
+  - Live PostHog key injected at deploy time; placeholder absent from public HTML.
+  - `data-ph-event="cta_clicked"` markers present for nav, hero, closing, and footer CTAs.
+  - `scripts/verify-live-marketing.mjs` now checks the Svelte `build/index.html` artifact and current `src/lib/i18n/en.json` copy.
+- Final verification evidence:
+  - `pnpm verify:live` passed.
+  - Public `https://councilnow.com/` 200; new CTA present; PostHog config and CTA tracking attrs present; no placeholder key.
+  - Public `https://councilnow.com/_app/version.json` 200.
+  - Public `https://councilnow.com/app` 200 with app shell assets.
+  - Public `https://councilnow.com/health` 200 with `status=ok`, `version=0.4.0`, `database=ok`.
+  - Public `https://councilnow.com/login` 200 with login shell assets.
+  - Browser proof: marketing CTA navigated to the Quick Sprint app screen.
