@@ -9,7 +9,7 @@ _Newest on top. Newer always overrides older._
 - **OpenClaw vs AgentJack side-by-side audit baseline created** and stored in management (`OPENCLAW-vs-AGENTJACK-AUDIT-2026-04-26.md`) and mirrored to Linear (`KRA-3680`).
 - **Near-term priority order from audit:**
   1. OpenClaw security criticals
-  2. AgentJack private webchat readyz recovery
+  2. AgentJack private AGChat readyz recovery
   3. AgentJack integrations extraction maturity
 
 
@@ -39,12 +39,12 @@ _Newest on top. Newer always overrides older._
 ### Operations
 - **Money out:** Axis does NOT make payments. Ever. Matej decides.
 - **Comms:** Axis does all marketing when strategy is ready (not yet). Telegram to Matej for updates.
-- **Availability:** Async via Telegram, onsite daily in webchat.
+- **Availability:** Async via Telegram, onsite daily in AGChat.
 - **Autodev:** Axis can use old autodev as a tool, ONLY on AgentJack (not CouncilNow). Pre-production only, never on production.
 - **Weekend:** Possibly working today
 
 ### UI/Harness Decision (APPROVED 07:20)
-- Keep AgentJack SvelteKit webchat
+- Keep AgentJack SvelteKit AGChat
 - Port GoClaw B2B admin patterns (tenants, teams, API keys, usage)
 - Study GoClaw architecture, reimplement in Python
 - GoClaw CC BY-NC — patterns only, no code

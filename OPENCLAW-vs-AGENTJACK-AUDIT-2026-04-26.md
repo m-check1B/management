@@ -6,8 +6,8 @@ Scope: Live runtime + control-plane readiness on `dev-2026`
 ## Executive Summary
 
 - **OpenClaw is operational but currently has critical security posture gaps** (gateway auth/sandboxing) and state-integrity warnings.
-- **AgentJack runtime lane is now correctly isolated on dedicated gateway and Telegram polling is healthy**, but **private webchat readiness is blocked** and integrations are still mostly in planned/attention states.
-- Highest-value near-term move: **close OpenClaw security criticals + fix AgentJack private webchat readyz**; then lock diagnostics consistency and continue integration extraction.
+- **AgentJack runtime lane is now correctly isolated on dedicated gateway and Telegram polling is healthy**, but **private AGChat readiness is blocked** and integrations are still mostly in planned/attention states.
+- Highest-value near-term move: **close OpenClaw security criticals + fix AgentJack private AGChat readyz**; then lock diagnostics consistency and continue integration extraction.
 
 ## Evidence (live checks run)
 
@@ -33,7 +33,7 @@ Scope: Live runtime + control-plane readiness on `dev-2026`
 | Telegram lane health | Telegram channel reports OK (`@TbaTwoBot`) | `telegram-status`: ready, live delivery ready, no active contenders | Core conflict issue resolved; remaining continuity proof still human-token gated | Low |
 | Telegram continuity proof | Not enforcing comparable per-test token proof in doctor output | `telegram-doctor`: `attention` (awaiting reply token `AJ-472513`) despite healthy polling | Diagnostic strictness mismatch causes operational noise / false urgency | Medium |
 | Security posture | `openclaw security audit`: **2 critical**, 2 warn (`gateway auth missing`, `HTTP APIs without auth`, `small models unsandboxed`) | No equivalent critical security finding in current AgentJack doctor output; runtime lane ready | OpenClaw control plane is currently the larger security exposure | **High** |
-| Web surface readiness | Control UI reachable via local gateway | Public AG WebUI readyz OK, but private/local `http://127.0.0.1:4173/readyz` unreachable; `system-doctor` blocked on private webchat | AgentJack private operator surface degraded (public looks healthy, private path not) | **High** |
+| Web surface readiness | Control UI reachable via local gateway | Public AG WebUI readyz OK, but private/local `http://127.0.0.1:4173/readyz` unreachable; `system-doctor` blocked on private AGChat | AgentJack private operator surface degraded (public looks healthy, private path not) | **High** |
 | Integrations maturity | Rich runtime/tooling ecosystem already operational | Integrations plane totals: healthy=2, attention=4, planned=13 | AgentJack extraction maturity gap vs OpenClaw breadth | **High** |
 | State integrity / housekeeping | Doctor reports multi-state-dir + orphan/missing transcript warnings | Runtime/telegram status coherent; some historical artifacts still reference Hermes profile paths in delivery history | OpenClaw state hygiene weaker; AgentJack has residual provenance drift in historical records | Medium |
 | Fleet/heartbeat ops | Main heartbeat active; other agents disabled | Dedicated gateway running; integration modules still mostly planned | Operational asymmetry: OpenClaw mature ops, AgentJack still building modules | Medium |
@@ -46,7 +46,7 @@ Scope: Live runtime + control-plane readiness on `dev-2026`
 ### P0
 1. **OpenClaw security criticals unresolved**
    - Gateway auth and HTTP surface exposure + sandboxing policy for small models.
-2. **AgentJack private webchat path unhealthy**
+2. **AgentJack private AGChat path unhealthy**
    - `system-doctor` blocked because local/private readyz does not report healthy release.
 
 ### P1
@@ -88,7 +88,7 @@ Scope: Live runtime + control-plane readiness on `dev-2026`
 
 - **Epic:** OpenClaw ↔ AgentJack convergence audit closure
 - **Issue A (P0):** OpenClaw security criticals to zero
-- **Issue B (P0):** AgentJack private webchat readyz recovery
+- **Issue B (P0):** AgentJack private AGChat readyz recovery
 - **Issue C (P1):** AgentJack integrations extraction (next 2 surfaces to healthy)
 - **Issue D (P1):** Telegram doctor signal split (health vs proof)
 - **Issue E (P2):** State/provenance cleanup (OpenClaw + AgentJack)

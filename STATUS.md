@@ -6,7 +6,7 @@ _Last updated: 2026-04-26 08:39 CEST_
 
 | Project | Location | Status | Priority | Notes |
 |---------|----------|--------|----------|-------|
-| **AgentJack** | `/github/agentjack` | 🔄 Active hardening | P1 — THE product | Dedicated gateway ownership fixed (`agentjack-gateway.service` active, Hermes gateway disabled). Telegram lane is healthy. Private webchat local readyz path still blocked. |
+| **AgentJack** | `/github/agentjack` | 🔄 Active hardening | P1 — THE product | Dedicated gateway ownership fixed (`agentjack-gateway.service` active, Hermes gateway disabled). Telegram lane is healthy. Private AGChat local readyz path still blocked. |
 | **CouncilNow** | `/github/applications/advisory-council-app` + `/github/websites/councilnow.com` | 🔄 Active | P1 — Revenue first | Billing/auth lane previously verified repeatedly; focus remains customer acquisition and conversion. |
 | **open-kraliki** | `/github/open-kraliki` | ✅ Stable substrate | P2 | Automation templates backing AgentJack Automations surface. |
 
@@ -38,7 +38,7 @@ Source file: `OPENCLAW-vs-AGENTJACK-AUDIT-2026-04-26.md`
 
 1. **OpenClaw security criticals unresolved**
    - Gateway auth exposure and small-model sandbox/tool policy findings remain open.
-2. **AgentJack private webchat health blocked**
+2. **AgentJack private AGChat health blocked**
    - Local/private readyz path (`127.0.0.1:4173`) not healthy while public AG WebUI readyz is green.
 3. **AgentJack Telegram continuity proof still human-token gated**
    - Runtime transport is healthy; doctor can remain in attention until proof reply is received.
