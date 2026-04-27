@@ -1,7 +1,7 @@
 # CouncilNow — Revenue Readiness Audit
 
-_Audited: 2026-04-26 04:35 by TBA_
-_Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE). Current production deploy `timestamp-fix-d32d3c2` has passed full auth → checkout and product-path smoke on councilnow.com: register/login/me/subscription/portal, live Stripe checkout for starter/pro/scale/enterprise, council session create/run/complete, HTTPS share URL, public shared report API, user-scoped analytics isolation, and credits summary._
+_Audited: 2026-04-27 12:25 by TBA_
+_Status: ❌ REVENUE BLOCKED. Price ID mapping remains fixed, but fresh production auth → checkout now fails because the live Stripe secret key is expired. Full checkout cannot pass until Matej rotates `STRIPE_SECRET_KEY` in Stripe/dashboard-controlled secrets and the app is redeployed._
 
 ## What's Working ✅
 
@@ -13,10 +13,10 @@ _Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE). Curren
 | App frontend (/app) | ✅ LIVE | SvelteKit SSR, 200 OK |
 | Pricing page | ✅ LIVE | 4 tiers: Free, €29/mo, €79/mo, €199/mo |
 | Login page | ✅ LIVE | Zitadel OIDC wired |
-| Stripe keys | ✅ LIVE | `sk_live_` + `pk_live_` in hub-fork/.env |
-| Stripe checkout API | ✅ ALL TIERS VERIFIED | `/api/billing/checkout` — starter, pro, scale, enterprise all resolve correctly via internet → CF → Traefik → LXD → hub → Stripe |
+| Stripe keys | ❌ BLOCKED | Production hub logs show `Expired API Key provided` for the live `sk_live_…ED2w` key during customer lookup/create. Rotate `STRIPE_SECRET_KEY`, then redeploy and rerun auth→checkout. |
+| Stripe checkout API | ❌ CURRENTLY FAILING | `/api/billing/checkout` returns `400 No Stripe customer found for user` because Stripe customer lookup/create fails with expired API key before tier price resolution. |
 | Stripe prices configured | ✅ | All 4 tiers: Starter (€29), Pro (€79), Scale (€199), Enterprise (€499) EUR prices |
-| Customer portal | ✅ BUILT | `/api/billing/portal` endpoint exists |
+| Customer portal | ❌ CURRENTLY FAILING | `/api/billing/portal` returns `400 No Stripe customer found for user` for fresh users because Stripe customer lookup/create fails with expired API key. |
 | Credits purchase | ✅ BUILT | `/api/billing/checkout/credits` endpoint |
 | Zitadel SSO | ✅ CONFIGURED | identity.verduona.dev, Google working |
 | Auth → billing flow | ✅ WIRED | JWT → customer_id → Stripe checkout |
@@ -31,7 +31,8 @@ _Status: ✅ READY FOR FIRST CUSTOMER. All price IDs fixed (incl. SCALE). Curren
 ## What Needs Testing 🔍
 
 1. **Full user journey:** ✅ VERIFIED on production after deploy `timestamp-fix-d32d3c2` — fresh user created session `d2f3d4a5-baeb-4c7b-bd90-2e3da3509bb0`, ran council to `completed`, score `27`, no error, all rounds + synthesis present, shared via HTTPS URL `https://councilnow.com/shared/51d696a3-898a-4262-99fd-78a33d74d953`, public shared API returned `200`, analytics isolation held across two fresh users, and credits summary returned `200`.
-2. **Stripe checkout with real user:** ✅ VERIFIED on production. Authenticated token flow now passes for `/api/billing/checkout` (all tiers), `/api/billing/portal`, and `/api/billing/subscription`.
+2. **Stripe checkout with real user:** ❌ CURRENTLY FAILING on production. Authenticated registration/login still pass, but billing cannot create/find Stripe customers because the live Stripe API key is expired.
+   - Fresh 12:25 recheck FAIL with new production account `oc-reminder-1777283767-57702@example.com`: `/health`, register, login, `/me`, and `/api/billing/subscription` passed, but `/api/billing/portal` and `/api/billing/checkout` returned `400 No Stripe customer found for user`; production `council-hub` logs show `Expired API Key provided` during Stripe customer lookup/create. Proof: `/tmp/councilnow-revenue-proof-reminder-1777283767.json`.
    - Fresh 04:35 recheck PASS with new production account `oc-revenue-1777170916-11352@example.com`: `/health` ok, register/login/me/subscription/portal passed, and starter/pro/scale/enterprise checkout sessions plus Stripe checkout URL probes returned `200`.
    - Fresh 19:21 recheck PASS with new production account `axis-reminder-6178313952@gmail.com`.
    - Fresh 21:21 recheck PASS with new production account `axis-reminder-73074093@gmail.com`.
