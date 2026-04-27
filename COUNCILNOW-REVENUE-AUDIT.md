@@ -1,7 +1,7 @@
 # CouncilNow — Revenue Readiness Audit
 
-_Audited: 2026-04-27 15:51 by TBA_
-_Status: ✅ READY FOR FIRST CUSTOMER. Price ID mapping remains fixed (incl. SCALE), and fresh production auth → checkout passed again. Current proof: `/tmp/councilnow-revenue-proof-reminder-1777297901.json` — health/register/login/me/subscription/portal plus starter/pro/scale/enterprise Stripe checkout sessions all `200`, each checkout URL `HEAD 200`._
+_Audited: 2026-04-28 01:48 by TBA_
+_Status: ✅ READY FOR FIRST CUSTOMER. Price ID mapping remains fixed (incl. SCALE), and fresh production auth → checkout passed again. Current proof: `/tmp/councilnow-revenue-proof-reminder-1777334143.json` — health/register/login/me/subscription/portal plus starter/pro/scale/enterprise Stripe checkout sessions all `200`, each checkout URL `HEAD 200`._
 
 ## What's Working ✅
 
@@ -13,8 +13,8 @@ _Status: ✅ READY FOR FIRST CUSTOMER. Price ID mapping remains fixed (incl. SCA
 | App frontend (/app) | ✅ LIVE | SvelteKit SSR, 200 OK |
 | Pricing page | ✅ LIVE | 4 tiers: Free, €29/mo, €79/mo, €199/mo |
 | Login page | ✅ LIVE | Zitadel OIDC wired |
-| Stripe keys | ✅ LIVE | Fresh 15:51 production proof created/resolved Stripe customer `cus_UPetvkoyyM5NI4`; expired-key failure remains resolved. |
-| Stripe checkout API | ✅ ALL TIERS VERIFIED | Fresh 15:51 production proof: `/api/billing/checkout` returned live Stripe sessions for starter/pro/scale/enterprise and each Stripe checkout URL returned `HEAD 200`. |
+| Stripe keys | ✅ LIVE | Fresh 01:48 production proof created/resolved Stripe customer `cus_UPodkk7asdhUPh`; expired-key failure remains resolved. |
+| Stripe checkout API | ✅ ALL TIERS VERIFIED | Fresh 01:48 production proof: `/api/billing/checkout` returned live Stripe sessions for starter/pro/scale/enterprise and each Stripe checkout URL returned `HEAD 200`. |
 | Stripe prices configured | ✅ | All 4 tiers: Starter (€29), Pro (€79), Scale (€199), Enterprise (€499) EUR prices |
 | Customer portal | ✅ LIVE | Fresh 15:51 production proof: `/api/billing/portal` returned `200` with portal session for `cus_UPetvkoyyM5NI4`. |
 | Credits purchase | ✅ BUILT | `/api/billing/checkout/credits` endpoint |
@@ -32,6 +32,7 @@ _Status: ✅ READY FOR FIRST CUSTOMER. Price ID mapping remains fixed (incl. SCA
 
 1. **Full user journey:** ✅ VERIFIED on production after deploy `timestamp-fix-d32d3c2` — fresh user created session `d2f3d4a5-baeb-4c7b-bd90-2e3da3509bb0`, ran council to `completed`, score `27`, no error, all rounds + synthesis present, shared via HTTPS URL `https://councilnow.com/shared/51d696a3-898a-4262-99fd-78a33d74d953`, public shared API returned `200`, analytics isolation held across two fresh users, and credits summary returned `200`.
 2. **Stripe checkout with real user:** ✅ VERIFIED on production. Authenticated token flow passes for `/api/billing/checkout` (all tiers), `/api/billing/portal`, and `/api/billing/subscription`.
+   - Fresh 01:48 recheck PASS with new production account `oc-reminder-1777334143-88531@example.com`: `/health` ok, register/login/me/subscription/portal all returned `200/201`, linked Stripe customer `cus_UPodkk7asdhUPh`, and starter/pro/scale/enterprise checkout sessions plus Stripe checkout URL `HEAD` probes returned `200`. Proof: `/tmp/councilnow-revenue-proof-reminder-1777334143.json`.
    - Fresh 15:51 recheck PASS with new production account `oc-reminder-1777297901-15136@example.com`: `/health` ok, register/login/me/subscription/portal all returned `200/201`, linked Stripe customer `cus_UPetvkoyyM5NI4`, and starter/pro/scale/enterprise checkout sessions plus Stripe checkout URL `HEAD` probes returned `200`. Proof: `/tmp/councilnow-revenue-proof-reminder-1777297901.json`.
    - Fresh 13:51 recheck PASS with new production account `oc-reminder-1777290697-59768@example.com`: `/health` ok, register/login/me/subscription/portal all returned `200/201`, linked Stripe customer `cus_UPcxO18soPjv0i`, and starter/pro/scale/enterprise checkout sessions plus Stripe checkout URL `HEAD` probes returned `200`. Proof: `/tmp/councilnow-revenue-proof-reminder-1777290697.json`.
    - Fresh 12:25 recheck FAIL (resolved by 13:51) with new production account `oc-reminder-1777283767-57702@example.com`: `/health`, register, login, `/me`, and `/api/billing/subscription` passed, but `/api/billing/portal` and `/api/billing/checkout` returned `400 No Stripe customer found for user`; production `council-hub` logs showed `Expired API Key provided` during Stripe customer lookup/create. Proof: `/tmp/councilnow-revenue-proof-reminder-1777283767.json`.
