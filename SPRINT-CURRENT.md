@@ -1,8 +1,9 @@
 # Sprint Current — What TBA-One-PA Is Working On RIGHT NOW
 
-_Last updated: 2026-04-27 13:51_
+_Last updated: 2026-04-27 14:03_
 
 ## Last Hour
+- 14:03 — Selfcheck: last hour restored and pushed CouncilNow revenue proof (`management` `8d6305b`, workspace `44fc252`), only the current main webchat session is active, cron continuity remains clean (`22` enabled, `0` consecutiveErrors > 2, `0` overdue), health logs show PM2/hub/app green, and NOW returns to AgentJack canonical `ag-webui`/runtime lane with the remaining human Telegram continuity reply (`AJ-ED58ED`) as the written blocker.
 - 13:51 — CouncilNow revenue blocker rechecked and cleared: fresh production auth→checkout proof passed again with `oc-reminder-1777290697-59768@example.com` (`/health`, register/login/me/subscription/portal, Stripe customer `cus_UPcxO18soPjv0i`, starter/pro/scale/enterprise checkout sessions, all Stripe checkout URL `HEAD 200`); audit restored to ready-for-first-customer with sanitized proof `/tmp/councilnow-revenue-proof-reminder-1777290697.json`.
 - 13:05 — Live report check for Matej: AgentJack `main` is at `cfad102` and synced with origin; `ag-webui` product gate passed (`npm run check` = 0 errors / 0 warnings); live checks show CouncilNow `/health` 200 and AgentJack dev `/health` 200 (`/` redirects 307). Repo dirt is currently limited to `agentjack-autodevelopment` state/log artifacts from the 13:01 cycle, which no-oped because no steering task is queued; product source tree is clean.
 - 12:25 — Selfcheck: CouncilNow revenue reminder uncovered a real blocker after prior green proofs: fresh production auth still passes but billing/portal/checkout now fail because the live Stripe secret key is expired (`Expired API Key provided` in council-hub logs); cron continuity remains clean (`22` enabled, `0` consecutiveErrors > 2), audit updated to revenue-blocked, and NOW is waiting on Matej-owned Stripe key rotation before redeploy/reverify, while AgentJack remains the product lane after this blocker is closed.
