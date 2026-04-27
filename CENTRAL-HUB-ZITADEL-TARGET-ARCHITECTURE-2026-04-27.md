@@ -22,6 +22,43 @@ This avoids three failure modes already visible in the system: per-app Hub forks
 4. Hub OIDC code currently assumes provider endpoints by appending `/authorize`, `/token`, `/userinfo` to `issuer_url`. Zitadel discovery exposes `/oauth/v2/authorize`, `/oauth/v2/token`, `/oidc/v1/userinfo`, so the implementation should use discovery metadata instead of path guessing.
 5. Hub OIDC discovery currently hardcodes `https://hub.kraliki.com`; target public Hub for the current infra lane is `https://hub.verduona.dev`.
 6. CouncilNow is production-green today because it has a working app-local/hub-fork auth + billing path. That should stay stable while central Hub is rebuilt, then migrate behind an adapter.
+7. There are multiple scattered Hub/admin codebases under `/home/adminmatej/github`; do not implement blindly in the first one found.
+
+## Scattered codebase inventory
+
+### Canonical candidates
+
+| Path | Role | Current classification |
+|---|---|---|
+| `/home/adminmatej/github/applications/kraliki-hub` | Standalone FastAPI Hub repo | **Best central Hub backend candidate.** Separate git repo, latest observed commit `539d189` (`chore: sync server changes`, 2026-04-27). Contains newer standalone-only pieces such as `app/clients`, `app/routers/council.py`, `app/routers/sandbox.py`, and standalone DB/test artifacts. Differs materially from monorepo `apps/hub`; reconcile before declaring it production source of truth. |
+| `/home/adminmatej/github/kraliki-monorepo/apps/hub` | Monorepo FastAPI Hub copy | Legacy/product-monorepo Hub backend. Active history exists, but it differs from standalone `applications/kraliki-hub`. Useful as source material and for old automation context, not safe to treat as canonical without diff review. |
+| `/home/adminmatej/github/kraliki-monorepo/apps/hub-admin` | SvelteKit Hub Admin app | **Canonical admin UI source candidate.** SvelteKit admin dashboard with `/login`, `/dashboard`, `/tenants`, `/users`, `/customers`, `/billing`, `/licensing`, `/instances`, `/byok`, `/monitoring`. Designed to run on `:8280` and proxy Hub backend at `HUB_URL` default `http://127.0.0.1:8203`. |
+
+### Duplicate / fork copies
+
+| Path | Notes |
+|---|---|
+| `/home/adminmatej/github/applications/kraliki-monorepo/apps/hub` | Mostly same as `/home/adminmatej/github/kraliki-monorepo/apps/hub`, with local runtime files (`.env`, secrets, SQLite/test DB artifacts). |
+| `/home/adminmatej/github/applications/kraliki-monorepo-automation/apps/hub` | Exact observed copy of `/home/adminmatej/github/kraliki-monorepo/apps/hub` after excluding build/runtime artifacts. Automation mirror, not a new authority. |
+| `/home/adminmatej/github/applications/kraliki-monorepo/apps/hub-admin` | Same Hub Admin app plus local `package-lock.json`; not a distinct product. |
+| `/home/adminmatej/github/applications/kraliki-monorepo-automation/apps/hub-admin` | Exact observed copy of top-level `apps/hub-admin`. Automation mirror. |
+| `/home/adminmatej/github/applications/advisory-council-app/backend/hub-fork` | CouncilNow app-local Hub fork. Keep stable while central Hub is rebuilt, then migrate behind product adapter. Do not break it during central Hub work. |
+| `/home/adminmatej/github/applications/production-hub` | SvelteKit dashboard for repo-local `open-kraliki` autodevelopment packages, port `3001`. Despite the name, this is **not** the central identity/billing Hub and should not be used for Zitadel/Hub auth work. |
+
+### Hub Admin details
+
+The admin app already exists. Current design:
+
+- Runtime: SvelteKit 5, adapter-node, `node build/index.js`.
+- Intended process name: `hub-admin`.
+- Intended port: `8280`.
+- Intended backend dependency: central Hub on `HUB_URL`, default `http://127.0.0.1:8203`.
+- Session: signed HttpOnly cookie `hub_admin_session` using `HUB_ADMIN_SESSION_SECRET`.
+- Login: `POST {HUB_URL}/api/v1/auth/login`, then requires `is_admin=true` in response or JWT claims.
+- API pattern: SvelteKit server proxies admin routes to Hub with `Authorization: Bearer {admin_jwt}`.
+- Existing routing docs: `infra/PUBLIC_ENDPOINTS.md` lists `hub.verduona.dev -> :8203` and `hub-admin.verduona.dev -> :8280`; current dev-2026 inspection found no local listeners on `:8203` or `:8280`.
+
+Decision: central Hub restoration should wire both surfaces deliberately: **Hub API on `8203`; Hub Admin on `8280`; admin UI must authenticate through Hub, not directly through Zitadel.**
 
 ## Target domains
 
@@ -106,12 +143,15 @@ Zitadel does **not** own product plans, tenants, Stripe, app roles, or vertical 
 
 For the current dev-2026 lane:
 
-- Run Hub as a supervised service bound to `127.0.0.1:8203` or a container published to `127.0.0.1:8203`.
-- Keep Traefik public route: `hub.verduona.dev -> 127.0.0.1:8203`.
+- Run Hub API as a supervised service bound to `127.0.0.1:8203` or a container published to `127.0.0.1:8203`.
+- Run Hub Admin as a supervised SvelteKit service bound to `127.0.0.1:8280` or a container published to `127.0.0.1:8280`.
+- Keep public routes explicit:
+  - `hub.verduona.dev -> Hub API :8203`
+  - `hub-admin.verduona.dev -> Hub Admin :8280`
 - Back Hub by a canonical Postgres database, not SQLite and not app-local forks.
 - Include Hub DB + Zitadel DB in Tier 0 DR backup policy to `mail-tba`.
 
-Recommendation: use **systemd user service or Docker Compose**, not PM2, for the central Hub. PM2 is acceptable for app dev servers, but the central control plane should behave like infra.
+Recommendation: use **systemd user service or Docker Compose** for Hub API. PM2 is acceptable for Hub Admin/app dev servers, but the central API/control plane should behave like infra.
 
 ## Migration plan
 
@@ -126,8 +166,11 @@ Recommendation: use **systemd user service or Docker Compose**, not PM2, for the
 Acceptance:
 
 - `curl https://hub.verduona.dev/health` returns `200`.
+- `curl https://hub-admin.verduona.dev/login` returns `200`.
 - Health body reports shared-control-plane role.
-- Hub process is supervised and restarts cleanly.
+- Hub API process is supervised and restarts cleanly.
+- Hub Admin process is supervised and restarts cleanly.
+- Hub Admin can log in using a Hub admin user and load `/dashboard` without 502.
 - Hub uses production Postgres and EdDSA/JWKS keys.
 
 ### Phase 2 — Fix Hub ↔ Zitadel OIDC properly
@@ -195,11 +238,13 @@ Acceptance:
 **Title:** Restore Central Hub + Zitadel broker proof
 
 **Scope:**
-- Start/supervise central Hub on dev-2026 at `127.0.0.1:8203`.
+- Choose and reconcile the canonical Hub backend codebase, starting from `/home/adminmatej/github/applications/kraliki-hub` and diffing against `/home/adminmatej/github/kraliki-monorepo/apps/hub` before implementation.
+- Start/supervise central Hub API on dev-2026 at `127.0.0.1:8203`.
+- Start/supervise Hub Admin from `/home/adminmatej/github/kraliki-monorepo/apps/hub-admin` at `127.0.0.1:8280`, pointed at `HUB_URL=http://127.0.0.1:8203`.
 - Patch Hub OIDC provider implementation to use discovery metadata.
 - Add provider seed/config for Zitadel.
-- Add tests for discovery endpoint resolution, callback validation, and state expiry persistence.
-- Prove live `hub.verduona.dev` health and `authorize/zitadel` redirect.
+- Add tests for discovery endpoint resolution, callback validation, state expiry persistence, and Hub Admin login/dashboard proxy behavior.
+- Prove live `hub.verduona.dev` health, `hub-admin.verduona.dev/login`, and `authorize/zitadel` redirect.
 
 **Out of scope:**
 - Cutting over CouncilNow or AgentJack product auth.
