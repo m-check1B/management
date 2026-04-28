@@ -67,10 +67,12 @@ Key fixes:
    - Local/main is green and pushed; public/live deployment still requires explicit deploy instruction and deploy verification.
 2. **Cron set needs rebuild, not blanket restore**
    - 39 stored jobs, 0 enabled. On resume, re-enable a lean set only.
-3. **OpenClaw security posture still needs a fresh audit before claims**
+3. **Autonomous VM agent lab is on hold**
+   - Matej explicitly said not to do the OpenClaw/Hermes/AgentJack VM-with-agents plan yet. Do not create VM agents, provision tokens, or start self-development loops.
+4. **OpenClaw security posture still needs a fresh audit before claims**
    - Do not reuse old “critical” or “green” claims without a current doctor/security pass.
-4. **Hermes/OpenClaw/AgentJack token ownership must stay separated**
-   - Prior Telegram/token drift caused conflicts; isolated VM self-development should use scoped staging tokens only.
+5. **Hermes/OpenClaw/AgentJack token ownership must stay separated**
+   - Prior Telegram/token drift caused conflicts; if the VM lab is ever approved later, it must use scoped staging tokens only.
 
 ## Recently resolved
 

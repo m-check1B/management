@@ -6,9 +6,17 @@ _Recorded: 2026-04-28 17:12 CEST_
 
 Would it be workable to put OpenClaw, Hermes, and current-state AgentJack into an isolated VM, provide tokens, and let them self-develop?
 
+## Execution status
+
+**HOLD — do not run this yet.**
+
+Matej explicitly said on 2026-04-28 17:15 CEST: **do not do it with agents on VM, not yet.**
+
+This document is retained as a design/proposal only. It is not authorization to create VM agents, install autonomous workers, provide tokens, start self-development loops, or schedule any cron/heartbeat around this idea.
+
 ## Short answer
 
-**Yes — workable as a sandboxed self-development lab. Not safe as an unconstrained production organism.**
+**Technically workable later as a sandboxed self-development lab. Not approved yet, and not safe as an unconstrained production organism.**
 
 The right model is a contained autonomous dev cell:
 
