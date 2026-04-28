@@ -1,39 +1,73 @@
 # Cron Dashboard
 
-_Last updated: 2026-04-18 23:21_
+_Last updated: 2026-04-28 17:12 CEST_
 
-## Strategic Crons (NEW)
+## Current policy
 
-| Job | Schedule | Status | Purpose |
-|-----|----------|--------|---------|
-| **axis-setup-step** | Daily 23:00 | ✅ New | Advance setup until fully operational |
-| **councilnow-business-ops** | Weekdays 07:00 | ✅ New | Business health check |
-| **agentjack-dev-sprint** | Daily 01:00 | ✅ New | Nightly AgentJack dev push |
-| **gstack-gbrain-update-check** | Mondays 22:00 | ✅ New | Pull latest from both repos |
-| **workspace-github-push** | Every 4h | ✅ New | Auto-push workspace to GitHub |
+**Paused by founder instruction.** Matej said to stop for today and wait for a new start command.
 
-## Operational Crons
+- Total stored cron jobs: **39**
+- Enabled cron jobs: **0**
+- Previously enabled before pause: **21**
+- Restore manifest: `/Users/matejhavlin/.openclaw/workspace/PAUSED-CRON-JOBS-2026-04-28.md`
+- Pause marker: `/Users/matejhavlin/.openclaw/workspace/STOP_FOR_TODAY.md`
+- Heartbeat behavior while paused: return `HEARTBEAT_OK`, do not resume old work.
 
-| Job | Schedule | Status | Errors | Purpose |
-|-----|----------|--------|--------|---------|
-| **Kraliki Patrol** | Every 6h | ✅ OK | 0 | Infrastructure patrol |
-| **qa-hub-admin** | Every 30min | ✅ OK | 0 | Hub route health |
-| **linear-triage** | Hourly :15 | ✅ OK | 0 | Issue triage |
-| **Daily Log Review** | Daily 02:00 | ✅ OK | 0 | Log error review |
-| **Doc Drift Checker** | Daily 03:00 | ✅ OK | 0 | Doc accuracy |
-| **overnight-maintenance** | Daily 03:00 | ✅ Fixed | Was 8 | Memory consolidation, cleanup |
-| **daily-backup** | Daily 04:00 | ✅ Fixed | Was 8 | Multi-layer backup |
-| **Apple Notes Export** | Daily 04:00 | ✅ Fixed | Was 7 | Incremental notes export |
-| **OpenClaw Discovery** | Daily 09:00 | ✅ Fixed | Was 8 | X/Twitter + web research |
-| **OpenClaw Doctor** | Daily 08:00 | ✅ Fixed | Was 8 | Health check |
-| **Mac Security Check** | Daily 08:00 | ✅ Fixed | Was 7 | Security audit |
-| **GitHub Changes** | Every 6h | ✅ Fixed | Was 28 | Commit monitoring |
-| **automation-ops-review** | Every 30min | ✅ Fixed | Was 34 | Autodev dashboard check |
-| **vertical-healthcheck** | Mondays 06:00 | ✅ Fixed | Was 4 | Vertical health |
+## Why this changed
 
-## Disabled / One-shot (Completed)
+The cron set had accumulated too much old strategy/noise:
 
-| Job | Status | Notes |
-|-----|--------|-------|
-| **Weekend Strategy Deep-Dive** | ⛔ Disabled | Ran 2026-03-21 |
-| **Linear Fixer Sprint** | ⛔ Disabled | Was erroring |
+- duplicate AgentJack autodev cycles
+- legacy `axis-*` reminders and selfchecks
+- old one-shot follow-ups
+- overly frequent checks (`linear-triage`, smoke tests, vector reindex)
+- generic discovery/setup/infra cleanup jobs that can resurrect stale agendas
+- announce-style daily jobs that can create visible chat noise
+
+## Restart rule
+
+Do **not** re-enable everything on resume.
+
+When Matej explicitly says start/resume, rebuild the cron set from the restore manifest and keep only the jobs that serve the current live plan.
+
+Recommended lean set:
+
+| Job | Suggested schedule | Reason |
+|-----|--------------------|--------|
+| `workspace-github-push` | every 4–8h or daily | continuity/backup, low cognitive load |
+| `daily-backup` | daily | self-preservation / data safety |
+| `openclaw-doctor-daily` | daily or weekly | health baseline, only if quiet/no announce spam |
+| `agentjack-autodev-cycle` | one canonical job only | product momentum; no duplicates |
+| `gstack-gbrain-update-check` | weekly | keep cookbook + knowledge infra current |
+| `Mac Security Check` | weekly | reasonable safety hygiene |
+| `axis-revenue-nudge` | only while actively selling CouncilNow | avoid stale revenue reminder loops |
+
+## Jobs paused on 2026-04-28
+
+All 21 enabled jobs were disabled. Notable ones:
+
+- `axis-infra-cleanup-nudge`
+- `linear-triage`
+- `agentjack-autodev-cycle`
+- `axis-revenue-nudge`
+- `github-changes-monitor`
+- `Kraliki Patrol`
+- `axis-selfcheck`
+- `workspace-github-push`
+- `OpenClaw Update Checker (KRA-3537)`
+- `axis-setup-step`
+- `x-watch-garry-matej`
+- `agentjack-dev-sprint`
+- `Daily Log Review (KRA-3534)`
+- `Doc Drift Checker (KRA-3535)`
+- `overnight-maintenance`
+- `daily-backup`
+- `Apple Notes Export (Daily)`
+- `openclaw-doctor-daily`
+- `Mac Security Check`
+- `OpenClaw Discovery (X.com + Web)`
+- `gstack-gbrain-update-check`
+
+## Non-negotiable guardrail
+
+Heartbeats and cron reminders are support infrastructure only. They must not outrank live founder direction or recreate an old operating plan.

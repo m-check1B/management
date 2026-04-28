@@ -1,8 +1,20 @@
 # Sprint Current — What TBA-One-PA Is Working On RIGHT NOW
 
-_Last updated: 2026-04-28 14:03_
+_Last updated: 2026-04-28 17:12_
+
+## Current Mode
+
+**Paused by Matej.** No proactive work, old-task resurrection, heartbeat work, or cron-driven execution until Matej gives an explicit new start/resume command.
+
+- AgentJack cleanup/yolo pass is complete and pushed: `agentjack` `ca0a98a` (`chore(ag-webui): sync SvelteKit before builds`).
+- AgentJack repo is clean (`git status --porcelain` = `0`).
+- Verified gates from the yolo pass: full Python suite `582 passed, 6 skipped, 16 subtests passed`; AG WebUI check, strict JS tests, and clean build passed; product vertical check/build/smoke coverage passed for the current app-boundary set.
+- Cron noise is paused: all 21 previously enabled OpenClaw cron jobs are disabled; restore manifest lives at `/Users/matejhavlin/.openclaw/workspace/PAUSED-CRON-JOBS-2026-04-28.md`.
+- HEARTBEAT.md now has a pause override: while `/Users/matejhavlin/.openclaw/workspace/STOP_FOR_TODAY.md` exists, heartbeat should only return `HEARTBEAT_OK` and do no proactive work.
+- No live/public AgentJack deployment was performed after the cleanup.
 
 ## Last Hour
+- 17:12 — Founder stop/pause command handled: created workspace pause marker, disabled all 21 enabled cron jobs, updated heartbeat behavior to no-op while paused, verified no active subagents/running commands, and began updating management docs to reflect AgentJack cleanup + cron pause state. Next action is wait for Matej's explicit start/resume command.
 - 14:03 — Selfcheck: last hour finished AgentJack AG WebUI beta cleanup/proof on `agentjack` `52e6577`, recovered local PM2 heartbeat drift to 14 online, refreshed CouncilNow production auth→checkout proof at 13:48 (`/tmp/councilnow-revenue-proof-reminder-1777377471.json`, management `f50713e`), recent cron runs show only single non-accumulating errors on `linear-triage`/`axis-revenue-nudge` with `agentjack-autodev-cycle` ok (`21` enabled, `0` consecutiveErrors > 2, `0` overdue), only current main webchat session is active, and NOW returns to AgentJack canonical `ag-webui`/runtime follow-through plus repo-churn separation.
 - 10:03 — Selfcheck: last hour kept continuity green, handled strict heartbeat (`HEARTBEAT_OK`) and refreshed CouncilNow production auth→checkout proof at 09:48 (`/tmp/councilnow-revenue-proof-reminder-1777362682.json`, all four tiers `200`/HEAD `200`), only current main webchat session is active, recent cron runs are ok, cron continuity remains clean (`21` enabled, `0` consecutiveErrors > 2, `0` overdue), and NOW resumes AgentJack autonomous goal-loop implementation in `/tmp/agentjack-workspaces-depth-20260427` before sidebar triage.
 - 08:26 — Selfcheck: last hour resumed Matej’s live AgentJack sidebar triage lane after command-search completions, only the current main webchat session is active, cron continuity remains clean (`21` enabled, `0` consecutiveErrors > 2, `0` overdue), workspace has only health-log/state churn, and NOW stays on deep OpenClaw-vs-AgentJack sidebar/backend-capability declutter plus retained-feature verification.

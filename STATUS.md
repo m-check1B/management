@@ -1,20 +1,30 @@
 # Status — All Projects & Infrastructure
 
-_Last updated: 2026-04-26 08:39 CEST_
+_Last updated: 2026-04-28 17:12 CEST_
+
+## Current operating mode
+
+**Paused by Matej.** No proactive work or scheduled execution until Matej gives an explicit start/resume command.
+
+- OpenClaw cron jobs: **0 enabled** after pause cleanup.
+- Heartbeat: pause override active; should no-op and return `HEARTBEAT_OK` while `STOP_FOR_TODAY.md` exists.
+- Active subagents: none at pause check.
+- Running background commands: none at pause check.
 
 ## Products
 
 | Project | Location | Status | Priority | Notes |
 |---------|----------|--------|----------|-------|
-| **AgentJack** | `/github/agentjack` | 🔄 Active hardening | P1 — THE product | Dedicated gateway ownership fixed (`agentjack-gateway.service` active, Hermes gateway disabled). Telegram lane is healthy. Private AGChat local readyz path still blocked. |
-| **CouncilNow** | `/github/applications/advisory-council-app` + `/github/websites/councilnow.com` | 🔄 Active | P1 — Revenue first | Billing/auth lane previously verified repeatedly; focus remains customer acquisition and conversion. |
+| **AgentJack** | `/github/agentjack` | ✅ Clean / gated locally | P1 — THE product | Yolo cleanup completed and pushed. Current HEAD `ca0a98a`; repo clean. Full Python suite passed (`582 passed, 6 skipped, 16 subtests passed`), AG WebUI check/strict JS/build passed, and product vertical check/build/smoke gates passed. No live/public deploy after this cleanup. |
+| **CouncilNow** | `/github/applications/advisory-council-app` + `/github/websites/councilnow.com` | ✅ Revenue path verified | P1 — Revenue first | Latest repeated auth→checkout proof remained green on 2026-04-28. Continue using precise language: billing/revenue path is verified; product-quality readiness is a separate claim. |
 | **open-kraliki** | `/github/open-kraliki` | ✅ Stable substrate | P2 | Automation templates backing AgentJack Automations surface. |
 
 ## Workbench / Internal
 
 | Tool | Status | Notes |
 |------|--------|-------|
-| **OpenClaw** | ⚠️ Running with critical security findings | Operational control plane, but security audit currently shows critical posture gaps (gateway auth + small-model policy). |
+| **OpenClaw** | ✅ Operational / paused | Local health was green at last heartbeat: PM2 14 online, Hub ok, OpenViking ok, embeddings reachable. Proactive cron/heartbeat execution is paused by founder instruction. |
+| **Hermes** | ⚠️ Legacy/reference lane | Not part of the active local baseline unless Matej explicitly reintroduces it. Keep token/channel ownership separate from OpenClaw/AgentJack to avoid polling conflicts. |
 | **GStack** | ✅ Installed | Primary execution cookbook. |
 | **GBrain** | ✅ Installed | Knowledge infra active (Postgres + vector lane). |
 
@@ -25,28 +35,46 @@ _Last updated: 2026-04-26 08:39 CEST_
 | **Zitadel** | ✅ Active | identity.verduona.dev |
 | **Hub** | ✅ Active | Shared services + billing path |
 | **dev-2026** | ✅ Online | Main execution host |
-| **Cloudflare / Namecheap / Hetzner** | ✅ Active | Core infra providers operational |
+| **Cloudflare / Namecheap / Hetzner** | ✅ Active | Core infra providers operational; no DNS/billing/public deployment changes without explicit approval. |
 
-## Current Audit Snapshot (OpenClaw vs AgentJack)
+## AgentJack 2026-04-28 progress snapshot
 
-Source file: `OPENCLAW-vs-AGENTJACK-AUDIT-2026-04-26.md`
+Pushed cleanup/fix commits:
 
-- OpenClaw: mature ops lane, but largest immediate risk is security posture.
-- AgentJack: runtime isolation and Telegram polling conflict resolved; main gaps are private web surface reliability + integration maturity.
+- `898c669` — stabilize beta smoke gates
+- `43ced52` — include app section canvas data
+- `677087e` — align app-boundary assertions with section loader
+- `f6f99d0` — wait for chat composer UI updates
+- `95f34dd` — integrate product vertical contracts
+- `93c8fec` — bound AG WebUI bridge CLI calls
+- `400ae29` — record ops continuity updates
+- `ca0a98a` — sync SvelteKit before builds
 
-## Known Issues (current)
+Key fixes:
 
-1. **OpenClaw security criticals unresolved**
-   - Gateway auth exposure and small-model sandbox/tool policy findings remain open.
-2. **AgentJack private AGChat health blocked**
-   - Local/private readyz path (`127.0.0.1:4173`) not healthy while public AG WebUI readyz is green.
-3. **AgentJack Telegram continuity proof still human-token gated**
-   - Runtime transport is healthy; doctor can remain in attention until proof reply is received.
-4. **AgentJack integrations extraction gap**
-   - Current overview: healthy=2, attention=4, planned=13.
-5. **OpenClaw state-integrity hygiene warnings**
-   - Multi-state-dir / orphan transcript warnings still reported by doctor.
+- AG WebUI beta cleanup and launcher/boundary stabilization.
+- Shared chat page sanitization path.
+- Garage smoke env-auth setup.
+- Notes frontend current branding expectation.
+- Webchat E2E process isolation/dynamic port behavior.
+- Collective/Comms SvelteKit config/bootstrap repair.
+- Comms form label/accessibility fixes.
+- Product vertical contract app check/build/smoke coverage.
 
-## Recently Resolved
+## Known current caveats
 
-- ✅ **Telegram 409 polling conflict root cause resolved** by removing competing gateway ownership and running dedicated AgentJack gateway service.
+1. **No live AgentJack deploy after yolo cleanup**
+   - Local/main is green and pushed; public/live deployment still requires explicit deploy instruction and deploy verification.
+2. **Cron set needs rebuild, not blanket restore**
+   - 39 stored jobs, 0 enabled. On resume, re-enable a lean set only.
+3. **OpenClaw security posture still needs a fresh audit before claims**
+   - Do not reuse old “critical” or “green” claims without a current doctor/security pass.
+4. **Hermes/OpenClaw/AgentJack token ownership must stay separated**
+   - Prior Telegram/token drift caused conflicts; isolated VM self-development should use scoped staging tokens only.
+
+## Recently resolved
+
+- ✅ AgentJack repo churn resolved to clean `main` at `ca0a98a`.
+- ✅ AgentJack local product/test gates are green.
+- ✅ Cron/heartbeat noise paused after Matej’s stop command.
+- ✅ Management docs updated to reflect the new state.

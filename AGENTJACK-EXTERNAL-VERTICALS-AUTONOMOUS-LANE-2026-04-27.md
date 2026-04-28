@@ -62,6 +62,29 @@ Work inside `/Users/matejhavlin/github/agentjack` and adjacent proven substrates
 4. **Repeat for next vertical**: Brain, Catch Notes, Creative, Collective, Comms.
 5. Keep proof packs: diff, test output, screenshot/browser proof where useful, and deploy evidence.
 
+## Progress update — 2026-04-28
+
+The autonomous vertical lane reached a clean local baseline on `agentjack` `main` at `ca0a98a`.
+
+Completed during the yolo cleanup pass:
+
+- AG WebUI app-boundary launcher behavior stabilized.
+- Collective and Comms Center SvelteKit app bootstrap/config repaired.
+- Comms form label/accessibility issues fixed.
+- Product vertical check/build/smoke coverage passed for current app-boundary surfaces.
+- AgentJack repo is clean after pushed commits.
+
+Verification:
+
+- Full Python suite: `582 passed, 6 skipped, 16 subtests passed`.
+- AG WebUI check, strict JS test loop, and clean build passed.
+- Product vertical check/build/smoke gates passed.
+
+Important boundary:
+
+- No live/public AgentJack deploy was done after this cleanup.
+- Matej paused proactive work at 17:07 CEST; all cron jobs are disabled until explicit start/resume.
+
 ## Current note
 
-AgentJack APPS.md already defines the portfolio boundary model. The work is not inventing architecture; it is making those app boundaries operational, testable, and demoable.
+AgentJack APPS.md already defines the portfolio boundary model. The work is not inventing architecture; it is making those app boundaries operational, testable, and demoable. Next autonomous work should restart from the clean baseline, not from stale cron reminders.
