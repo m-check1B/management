@@ -1,0 +1,10 @@
+=== service ===
+active
+=== health ===
+{"status": "ok", "service": "agentjack"}
+=== status ===
+{"running": true, "model": "openai/gpt-5.4-mini", "opencode_server": {"url": null, "managed": false, "process_running": false}, "savings_router": {"url": "http://127.0.0.1:8800", "managed": false, "process_running": false}, "channels": [], "session_count": 0, "session_keys": [], "memory": {"home": "/var/lib/kraliki/agentjack/home/memories", "memory": {"entries": 0, "chars": 0, "limit": 2200}, "user": {"entries": 0, "chars": 0, "limit": 1375}, "snapshot_loaded": true}, "capsules": {"available": true, "db_path": "/var/lib/kraliki/agentjack/home/state/capsules.db", "total_capsules": 0, "active_capsules": 0}, "creative_registry": {"available": true, "db_path": "/var/lib/kraliki/agentjack/home/state/creative_registry.db", "personas": 0, "avatar_profiles": 0, "visual_profiles": 0, "projects": 0, "assets": 0}, "codeintel": {"available": true, "transport": "inproc", "cache_entries": 0, "cache_ttl_seconds": 20.0, "capabilities": ["inspect_workspace", "file_impact", "read_symbol"]}, "mcp_servers": [], "proactive": {"running": true, "tasks": {}, "webhooks": {}}, "heartbeat": {"axis": {"agent_id": "axis", "last_run_at": "2026-04-29T08:17:27.247604Z", "consecutive_suppressed": 0, "consecutive_errors": 0, "total_runs": 0, "total_suppressed": 0, "total_errors": 0}}, "announce_queue": {"pending": 0, "active_processors": 0}}
+=== os ===
+PRETTY_NAME="Ubuntu 26.04 LTS"
+=== uptime ===
+ 08:18:34 up  1:25,  0 users,  load average: 0.19, 0.17, 0.16

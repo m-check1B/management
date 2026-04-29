@@ -1,0 +1,47 @@
+# Live Infra Inventory — 2026-04-29
+2026-04-29T08:14:53+0200
+
+## Local repo heads
+### /Users/matejhavlin/github/infra
+develop
+c398ebc docs: put experiment mission on hold
+
+### /Users/matejhavlin/github/management
+main
+179cbd1 docs: mark autonomous vm lab on hold
+ M SPRINT-CURRENT.md
+?? PRODUCT-INFRA-TOPOLOGY-DECISION-2026-04-29.md
+?? councilnow-agentjack-runtime-inventory-2026-04-29.txt
+?? dev2026-live-inventory-2026-04-29.txt
+?? infra-live-inventory-2026-04-29.txt
+
+### /Users/matejhavlin/github/agentjack
+main
+ca0a98a chore(ag-webui): sync SvelteKit before builds
+ M ag-webui/src/lib/components/layout/SidebarQuickAccess.svelte
+ M ag-webui/src/lib/config/navigation.ts
+
+### /Users/matejhavlin/github/applications/kraliki-hub
+main
+c787216 docs: archive central hub audit
+ M CC-audit-27.4.2026/README.md
+?? docs/SECURITY_GUIDELINES.md
+
+### /Users/matejhavlin/github/applications/advisory-council-app
+master
+0d118ac Harden CouncilNow API authentication
+ M backend/app/config.py
+ M backend/app/main.py
+?? CC-audit-27.4.2026/
+?? backend/app/middleware/
+?? docs/RATE_LIMITING.md
+
+## DNS current
+kraliki.com                  91.99.176.2
+www.kraliki.com              91.99.176.2
+app.kraliki.com              66.241.124.213
+accounts.kraliki.com         api.kraliki.com              hub.kraliki.com              kraliki-hub.fly.dev.
+councilnow.com               188.114.96.9 188.114.97.9
+app.councilnow.com           agentjack.kraliki.com        agentjack-dev.verduona.dev   138.201.54.142
+identity.verduona.dev        138.201.54.142
+hub.verduona.dev             138.201.54.142

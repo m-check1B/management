@@ -1,6 +1,6 @@
 # DR Standby Plan — mail-tba (Hetzner)
 
-_Last updated: 2026-04-25 22:48 CET_
+_Last updated: 2026-04-29 09:31 Europe/Prague_
 
 ## Objective
 Repurpose `mail-tba` as a disaster-recovery standby node for critical data continuity (Hub/auth/users/invoicing), while keeping primary runtime on `dev-2026`.
@@ -67,6 +67,50 @@ Note: Phase A must confirm which DBs are canonical for users/auth/invoicing befo
 - Backup path: `dev-2026 -> mail-tba` (pull or push, but single canonical lane, no split-brain).
 - No production reads/writes are served from `mail-tba` during normal operation.
 - Optional warm-standby replication is allowed only for Tier 0 stores after checksum+restore automation is green.
+
+
+## Phase B addition — AgentJack state DR lane (2026-04-29)
+
+AgentJack was found running on naked `dev-2026` user systemd services with file/SQLite state under `/home/adminmatej/.agentjack` and workspace state under `/home/adminmatej/github/agentjack/axis-workspace`. Before moving AgentJack into `agentjack-control`, a dedicated encrypted file/state backup lane was added.
+
+Implemented on `dev-2026`:
+
+- Backup script: `/home/adminmatej/.local/bin/dr-agentjack-state-backup.sh`
+- Restore-validation script: `/home/adminmatej/.local/bin/dr-agentjack-state-restore-validate.sh`
+- Backup timer: `dr-agentjack-state-backup.timer` every 15 minutes
+- Validation timer: `dr-agentjack-state-restore-validate.timer` daily at 04:25
+- Source artifacts: `/home/adminmatej/backups/dr-files/agentjack/<date>/<time>/*.tar.gpg`
+- Standby copy: `mail-tba:/home/adminmatej/dr-backups/files/agentjack/<date>/*.tar.gpg`
+
+First proof on 2026-04-29 08:27 CEST:
+
+- encrypted bundle checksum verified
+- GPG decrypt succeeded
+- archive contained required AgentJack state/workspace/service-unit paths
+- remote copy landed on `mail-tba`
+
+This closes the immediate “AgentJack has no documented backup path” risk for the pre-migration state.
+
+
+## Rename + Ubuntu 26.04 LTS target (added 2026-04-29)
+
+`mail-tba` is now treated as a legacy name. The target internal/infrastructure name is `kraliki-dr-standby` unless Matej chooses another.
+
+Read-only fact check on 2026-04-29:
+
+- IP: `91.99.176.2`
+- hostname: `mail.kraliki.com`
+- OS: `Ubuntu 22.04.5 LTS` (`jammy`)
+
+Do not in-place upgrade the live VM while it still carries mail/web/CRM/backup duties. The safe plan is:
+
+1. Inventory and evacuate public roles (`kraliki.com`, `mail.kraliki.com`, `crm.kraliki.com`, wildcard drift, any vault/Infisical leftovers).
+2. Preserve/copy/validate current DR backup artifacts off-box.
+3. Rebuild or replace the standby host on Ubuntu 26.04 LTS.
+4. Rename internal aliases/scripts/docs to the final standby name.
+5. Re-run DB + AgentJack restore validation before declaring DR green.
+
+Detailed plan: `/Users/matejhavlin/github/management/MAIL-TBA-RENAME-UBUNTU2604-PLAN-2026-04-29.md`.
 
 ## Phased Execution
 1. **Phase A — Data classification** ✅ **closed 2026-04-25**

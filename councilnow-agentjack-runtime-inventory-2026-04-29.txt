@@ -1,0 +1,65 @@
+# CouncilNow + AgentJack Runtime Inventory — 2026-04-29T08:14:35+02:00
+
+## CouncilNow LXC docker
+advisory-council-council-frontend-1	advisory-council-frontend:manual-20260427123043	Up 44 hours	0.0.0.0:5180->5180/tcp, [::]:5180->5180/tcp
+advisory-council-council-hub-1	advisory-council-hub:manual-20260427123043	Up 44 hours (healthy)	0.0.0.0:8211->8211/tcp, [::]:8211->8211/tcp
+advisory-council-council-api-1	advisory-council-api:manual-20260427123043	Up 44 hours (healthy)	0.0.0.0:8210->8210/tcp, [::]:8210->8210/tcp
+advisory-council-council-router-1	ghcr.io/berriai/litellm:main-stable	Up 44 hours (healthy)	4000/tcp
+advisory-council-open-notebook-surrealdb-1	surrealdb/surrealdb:v2	Up 2 days	127.0.0.1:8001->8000/tcp
+advisory-council-open-notebook-1	lfnovo/open_notebook:v1-latest	Up 2 days (healthy)	127.0.0.1:5055->5055/tcp, 127.0.0.1:8502->8502/tcp
+council-marketing	httpd:2.4-alpine	Up 3 days	0.0.0.0:5181->80/tcp, [::]:5181->80/tcp
+council-db	postgres:16-alpine	Up 3 days (healthy)	5432/tcp
+
+## central-hub LXC docker
+kraliki-hub	kraliki-hub-kraliki-hub	Up 33 hours (healthy)	127.0.0.1:8203->8203/tcp
+kraliki-hub-db	postgres:17-alpine	Up 38 hours (healthy)	5432/tcp
+central-hub-admin	hub-admin-hub-admin	Up 43 hours	127.0.0.1:8280->8280/tcp
+kraliki-hub-rabbitmq	rabbitmq:3-management-alpine	Up 43 hours (healthy)	4369/tcp, 5671/tcp, 127.0.0.1:5672->5672/tcp, 15671/tcp, 15691-15692/tcp, 25672/tcp, 127.0.0.1:15672->15672/tcp
+
+## AgentJack unit files
+# /home/adminmatej/.config/systemd/user/agentjack-ag-webui.service
+[Unit]
+Description=AgentJack AG WebUI
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/adminmatej/github/agentjack
+Environment=AG_WEBUI_ENV_FILE=/home/adminmatej/github/agentjack/ag-webui/.env.production.local
+ExecStart=/home/adminmatej/github/agentjack/scripts/agentjack-ag-webui-server.sh
+Restart=always
+RestartSec=3
+StandardOutput=append:/home/adminmatej/.hermes/profiles/axis/logs/agentjack-ag-webui.log
+StandardError=append:/home/adminmatej/.hermes/profiles/axis/logs/agentjack-ag-webui.error.log
+
+[Install]
+WantedBy=default.target
+
+# /home/adminmatej/.config/systemd/user/agentjack-gateway.service
+[Unit]
+Description=AgentJack Dedicated Gateway
+After=network.target
+StartLimitIntervalSec=600
+StartLimitBurst=5
+
+[Service]
+Type=simple
+ExecStart=/home/adminmatej/github/agentjack/scripts/agentjack-gateway-server.sh
+WorkingDirectory=/home/adminmatej/github/agentjack
+Environment="PATH=/home/adminmatej/.local/bin:/home/adminmatej/bin:/usr/local/bin:/usr/bin:/bin"
+Restart=on-failure
+RestartSec=10
+KillMode=mixed
+KillSignal=SIGTERM
+TimeoutStopSec=90
+StandardOutput=append:/home/adminmatej/logs/agentjack/gateway-stdout.log
+StandardError=append:/home/adminmatej/logs/agentjack/gateway-stderr.log
+
+[Install]
+WantedBy=default.target
+
+## AgentJack ports/processes
+LISTEN 0      511                    0.0.0.0:4273       0.0.0.0:*    users:(("node",pid=2880182,fd=21))          
+LISTEN 0      128                  127.0.0.1:8801       0.0.0.0:*    users:(("python",pid=2880181,fd=8))         
+2880181 /home/adminmatej/github/agentjack/.venv/bin/python -m agentjack.gw --model openai/gpt-5.4-mini --workspace /home/adminmatej/github/agentjack/axis-workspace --home /home/adminmatej/.agentjack --no-cli --no-manage-opencode --api --api-port 8801 --variant xhigh --telegram-token [REDACTED]

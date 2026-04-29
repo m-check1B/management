@@ -1,0 +1,90 @@
+# dev-2026 Live Inventory — 2026-04-29T08:14:35+02:00
+
+## Host
+dev-2026
+Linux dev-2026 7.0.0-14-generic #14-Ubuntu SMP PREEMPT_DYNAMIC Mon Apr 13 11:09:53 UTC 2026 x86_64 GNU/Linux
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/md2        905G  530G  330G  62% /
+               total        used        free      shared  buff/cache   available
+Mem:            61Gi        17Gi        11Gi       7.9Gi        41Gi        44Gi
+Swap:           31Gi       8.2Gi        23Gi
+
+## LXD instances
++------------------+---------+-----------------+------------------------------+
+|       NAME       |  STATE  |      TYPE       |             IPV4             |
++------------------+---------+-----------------+------------------------------+
+| advisory-council | RUNNING | CONTAINER       | 172.18.0.1 (br-0d5c2245ef83) |
+|                  |         |                 | 172.17.0.1 (docker0)         |
+|                  |         |                 | 10.181.203.100 (eth0)        |
++------------------+---------+-----------------+------------------------------+
+| central-hub      | RUNNING | CONTAINER       | 172.19.0.1 (br-d5cfc748a264) |
+|                  |         |                 | 172.18.0.1 (br-95bfd20b3862) |
+|                  |         |                 | 172.17.0.1 (docker0)         |
+|                  |         |                 | 10.181.203.244 (eth0)        |
++------------------+---------+-----------------+------------------------------+
+| experiment       | RUNNING | VIRTUAL-MACHINE | 10.181.203.128 (enp5s0)      |
++------------------+---------+-----------------+------------------------------+
+| firemni          | RUNNING | CONTAINER       | 10.181.203.10 (eth0)         |
++------------------+---------+-----------------+------------------------------+
+| founder          | RUNNING | CONTAINER       | 10.181.203.94 (eth0)         |
++------------------+---------+-----------------+------------------------------+
+| kali-lab         | RUNNING | CONTAINER       | 10.181.203.20 (eth0)         |
++------------------+---------+-----------------+------------------------------+
+| lukas            | RUNNING | CONTAINER       | 10.181.203.13 (eth0)         |
++------------------+---------+-----------------+------------------------------+
+| matej            | RUNNING | CONTAINER       | 10.181.203.178 (eth0)        |
++------------------+---------+-----------------+------------------------------+
+
+## LXD profiles
++---------+---------------------+---------+
+|  NAME   |     DESCRIPTION     | USED BY |
++---------+---------------------+---------+
+| default | Default LXD profile | 8       |
++---------+---------------------+---------+
+
+## LXD storage
++---------+--------+------------------------------------------------+-------------+---------+---------+
+|  NAME   | DRIVER |                     SOURCE                     | DESCRIPTION | USED BY |  STATE  |
++---------+--------+------------------------------------------------+-------------+---------+---------+
+| default | dir    | /var/snap/lxd/common/lxd/storage-pools/default |             | 9       | CREATED |
++---------+--------+------------------------------------------------+-------------+---------+---------+
+
+## Docker core containers
+advisory-zitadel	ghcr.io/zitadel/zitadel:v2.64.1	Up 3 days	0.0.0.0:8086->8080/tcp, [::]:8086->8080/tcp
+advisory-zitadel-db	postgres:16-alpine	Up 3 days (healthy)	5432/tcp
+kraliki-postgres	postgres:16-alpine	Up 3 days (healthy)	127.0.0.1:5432->5432/tcp
+kraliki-redis	redis:7-alpine	Up 3 days (healthy)	127.0.0.1:6379->6379/tcp
+kiki-db	postgres:16-alpine	Up 3 days	5432/tcp
+zitadel	ghcr.io/zitadel/zitadel:v2.64.1	Up 3 days	127.0.0.1:8085->8080/tcp
+compose-traefik-1	traefik:v2.11	Up 44 hours	0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp, 127.0.0.1:8089->8080/tcp
+twenty-db	postgres:16	Up 3 days (healthy)	5432/tcp
+twenty-redis	redis:7-alpine	Up 3 days (healthy)	6379/tcp
+compose-plausible-db-1	postgres:16-alpine	Up 3 days (healthy)	5432/tcp
+zitadel-db	postgres:16-alpine	Up 3 days (healthy)	5432/tcp
+windmill-db	postgres:15	Up 3 days (healthy)	5432/tcp
+
+## AgentJack systemd
+  UNIT                       LOAD   ACTIVE SUB     DESCRIPTION
+  agentjack-ag-webui.service loaded active running AgentJack AG WebUI
+  agentjack-gateway.service  loaded active running AgentJack Dedicated Gateway
+
+Legend: LOAD   → Reflects whether the unit definition was properly loaded.
+        ACTIVE → The high-level unit activation state, i.e. generalization of SUB.
+        SUB    → The low-level unit activation state, values depend on unit type.
+
+2 loaded units listed.
+To show all installed unit files use 'systemctl list-unit-files'.
+
+## DR timers
+NEXT                          LEFT LAST                               PASSED UNIT                               ACTIVATES
+Wed 2026-04-29 08:15:00 CEST   23s Wed 2026-04-29 08:00:00 CEST    14min ago dr-postgres-backup-tier0.timer     dr-postgres-backup-tier0.service
+Wed 2026-04-29 09:00:00 CEST 45min Wed 2026-04-29 08:00:00 CEST    14min ago dr-postgres-backup-tier1.timer     dr-postgres-backup-tier1.service
+Thu 2026-04-30 03:20:00 CEST   19h Wed 2026-04-29 03:20:00 CEST 4h 54min ago dr-postgres-backup-tier23.timer    dr-postgres-backup-tier23.service
+Thu 2026-04-30 04:10:00 CEST   19h Wed 2026-04-29 04:10:00 CEST  4h 4min ago dr-postgres-restore-validate.timer dr-postgres-restore-validate.service
+
+4 timers listed.
+
+## Public health
+{"status":"ok","service":"kraliki-hub","version":"0.1.0","environment":"staging","uptime_seconds":117719.5,"database":"ok","role":"shared_control_plane","primary_consumer":"CouncilNow","capabilities":["identity","billing","monitoring"]}
+https://identity.verduona.dev
+{"ok":true,"app":"ag-webui","runtime":{"executionReady":true},"telegram":{"configured":true,"liveDeliveryReady":true,"stableDeliveryReady":true,"inboundContinuityVerified":true,"latestCorrelationToken":"AJ-472513","doctorNextAction":"No Telegram action required."},"warnings":["ag_webui_public_surface"],"checkedAt":"2026-04-29T06:14:37.032Z"}

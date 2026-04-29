@@ -1,0 +1,21 @@
+# prod-control-plane internal staging proof — 2026-04-29T09:48:05+02:00
+
+## containers
+pcp-kraliki-hub Up 17 seconds (healthy)
+pcp-zitadel Up 5 minutes
+pcp-kraliki-hub-db Up 6 minutes (healthy)
+pcp-zitadel-db Up 6 minutes (healthy)
+pcp-kraliki-hub-rabbitmq Up 6 minutes (healthy)
+
+## hub health
+{"status":"ok","service":"kraliki-hub","environment":"production-internal","database":"ok","role":"shared_control_plane","primary_consumer":"CouncilNow"}
+
+## hub billing status
+{"service":"billing","status":"active","stripe_configured":true,"stripe_key_present":true,"stripe_connection":"ok","stripe_publishable_key":"[REDACTED_PUBLISHABLE_KEY_PRESENT]","environment":"production-internal"}
+
+## zitadel oidc issuer
+{"issuer":"https://identity.verduona.dev","authorization_endpoint":"https://identity.verduona.dev/oauth/v2/authorize","token_endpoint":"https://identity.verduona.dev/oauth/v2/token"}
+
+## known warnings
+- Hub app initially inherited PORT=8205 from source env; compose now overrides PORT=8203 so VM loopback 18203 maps to container 8203.
+- Zitadel clone serves OIDC with Host header but logs projection reduce warnings; investigate before route migration.

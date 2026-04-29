@@ -1,0 +1,73 @@
+# Production Infrastructure Migration — Final Proof
+# Date: 2026-04-29 10:55 CEST
+# Author: TBA-One-PA (Infra agent)
+
+## DNS + Routing (kraliki.com → 138.201.54.142 → Traefik → LXD VMs)
+
+### Public Endpoints
+accounts.kraliki.com → 138.201.54.142 (A record) → Traefik → prod-control-plane:18085 (Zitadel)
+  ⚠️  Zitadel OIDC returns 404: ExternalDomain=identity.verduona.dev, needs accounts.kraliki.com added
+  DNS: ✅  Routing: ✅  App config: ⚠️ (Zitadel ExternalDomain)
+
+api.kraliki.com → 138.201.54.142 (A record) → Traefik → prod-control-plane:18203 (Hub)
+  /health → 200  {"status":"ok","environment":"production-internal"}
+  DNS: ✅  Routing: ✅  App: ✅
+
+hub.kraliki.com → 138.201.54.142 (A record) → Traefik → prod-control-plane:18203 (Hub)
+  /health → 200  {"status":"ok","environment":"production-internal"}
+  DNS: ✅  Routing: ✅  App: ✅
+
+agentjack.kraliki.com → 138.201.54.142 (A record) → Traefik → agentjack-control:8801
+  /health → 200  {"status":"ok","service":"agentjack"}
+  DNS: ✅  Routing: ✅  App: ✅
+
+### verduona.dev (existing — unchanged)
+identity.verduona.dev → 138.201.54.142 → Traefik → prod-control-plane:18085 (Zitadel)
+  OIDC → 200  DNS: ✅  Routing: ✅  App: ✅
+
+hub.verduona.dev → 138.201.54.142 → Traefik → prod-control-plane:18203 (Hub)
+  /health → 200  DNS: ✅  Routing: ✅  App: ✅
+
+agentjack-dev.verduona.dev → 138.201.54.142 → Traefik → agentjack-control:8801
+  /health → 200  DNS: ✅  Routing: ✅  App: ✅
+
+councilnow.com → 200 (untouched)
+
+## VM Topology
+prod-control-plane  → 10.181.203.8   (4 CPU / 8GiB / 80GiB, Ubuntu 26.04 LTS)
+agentjack-control   → 10.181.203.208 (4 CPU / 8GiB / 80GiB, Ubuntu 26.04 LTS)
+agentjack-runner-pool → 10.181.203.43 (8 CPU / 16GiB / 120GiB, Ubuntu 26.04 LTS, /dev/kvm=yes)
+
+## Runner Pool Status
+Service: agentjack-worker.service (systemd)
+Port: 8802
+Health: OK
+Model: openai/gpt-5.4-mini
+Workspace: /var/lib/kraliki/agentjack-runner/workspaces
+
+## Services Running
+prod-control-plane:
+  - Zitadel (OIDC)         :18085  ✅
+  - Hub (API)              :18203  ✅
+  - Zitadel DB (Postgres)  :15432  ✅
+  - Hub DB (Postgres)      :25432  ✅
+  - RabbitMQ               :5672   ✅
+
+agentjack-control:
+  - AgentJack Gateway      :8801   ✅
+
+agentjack-runner-pool:
+  - AgentJack Gateway      :8802   ✅
+
+## DNS Records Created (kraliki.com zone)
+accounts.kraliki.com  A  138.201.54.142  proxied
+api.kraliki.com       A  138.201.54.142  proxied
+hub.kraliki.com       A  138.201.54.142  proxied
+agentjack.kraliki.com A  138.201.54.142  proxied
+(hub.kraliki.com dead CNAME → kraliki-hub.fly.dev deleted)
+
+## Pending
+1. accounts.kraliki.com: Zitadel ExternalDomain config needed (add accounts.kraliki.com)
+2. Let's Encrypt rate limit on some domains (429) — will resolve automatically
+3. mail-tba migration to kraliki-dr-standby (26.04 LTS rebuild)
+4. Hub billing DB table population (billing_enabled=null)
