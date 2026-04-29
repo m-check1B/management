@@ -173,3 +173,56 @@ The CLI on mail-tba is v0.38.0 (too old for E2EE). After adding identity to work
 
 ### SSH Tunnel Available
 `ssh -L 8320:127.0.0.1:8320 root@91.99.176.2` → access web UI at http://localhost:8320
+
+---
+
+## ✅ PHASE 1-2 COMPLETE (2026-04-29 15:45 CEST)
+
+### Vault Status
+- **URL:** https://vault.kraliki.com (HTTPS, Let's Encrypt)
+- **Platform:** Infisical v0.43.47 (self-hosted on mail-tba)
+- **Organization:** Kraliki
+- **Project:** Kraliki Production (31 secrets imported)
+- **CLI on mail-tba:** v0.43.78 (Go-based, via npm)
+
+### Imported Secrets (27 real)
+| Category | Secrets |
+|----------|--------|
+| Billing | STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET |
+| AI Services | OPENAI_API_KEY, ANTHROPIC_API_KEY, GEMINI_API_KEY, KIMI_API_KEY, OPENROUTER_API_KEY, OPENROUTER_GROK_KEY, GROQ_API_KEY, MOONSHOT_API_KEY, XAI_API_KEY |
+| Cloud | CLOUDFLARE_API_TOKEN, CLOUDFLARE_TUNNEL_TOKEN |
+| Auth | ZITADEL_CLIENT_SECRET, JWT_SECRET, JWT_REFRESH_SECRET, OAUTH2_PROXY_COOKIE_SECRET |
+| Comms | RESEND_API_KEY, LINEAR_API_KEY, TELEGRAM_BOT_TOKEN |
+| Analytics | POSTHOG_API_KEY, POSTHOG_PERSONAL_API_KEY |
+| Voice | VOICE_ENGINE_INTERNAL_KEY, VOICE_ENGINE_KEY, ELEVENLABS_API_KEY, RESEMBLE_API_TOKEN |
+| Email | AXIS_EMAIL_PASSWORD, TBA_EMAIL_PASSWORD |
+| DevOps | GITHUB_TOKEN, HUB_API_KEY |
+
+### Access Pattern
+```bash
+# CLI (on mail-tba)
+export INFISICAL_API_URL="http://127.0.0.1:8320"
+export INFISICAL_TOKEN="<machine-identity-token>"
+infisical secrets --env=prod --projectId=eb65971c-34d1-498d-ab8d-cd51687bdfa6
+
+# CLI (from Mac via SSH tunnel)
+ssh -L 8320:127.0.0.1:8320 root@91.99.176.2
+# Then use same env vars with localhost:8320
+
+# Web UI
+# https://vault.kraliki.com (login: axis@kraliki.com)
+```
+
+### Machine Identity
+- Identity ID: bc1aec43-4124-4258-8aed-c26625f11ac3
+- Token stored in: ~/.kraliki-pa/infisical.json
+- Can create/update/delete secrets
+- Can list secrets (--env=prod)
+- Cannot read secret values (needs workspace key — E2EE)
+
+### Next Steps
+1. **Phase 3: VM Integration** — Install Infisical CLI on prod VMs, use `infisical run` to inject secrets
+2. **Grant read access** — Add machine identity to project via web UI (Access Control → Identities)
+3. **Clean up TEST_IMPORT** — Delete via web UI
+4. **Phase 4: CI/CD** — Pipeline integration
+5. **Phase 5: Rotation** — Quarterly rotation schedule
