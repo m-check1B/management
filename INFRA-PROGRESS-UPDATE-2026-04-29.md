@@ -60,3 +60,37 @@
 - Resend domain verification for additional domains (currently only councilnow.com)
 - ProtonMail send-as configuration (Matej's manual task)
 - AgentJack worker dispatch layer development
+
+## 14:40 CEST — YOLO Infrastructure Audit
+
+### All Production Services: GREEN 🟢
+- All 3 VMs RUNNING (Ubuntu 26.04 LTS)
+- Zitadel ✅, Hub ✅ (billing active), AgentJack ✅, Runner Pool ✅
+- Runner→Control cross-VM connectivity ✅
+- Traefik Up 3+ hours, all routes stable
+- CouncilNow, kraliki.com, agentjack.kraliki.com: all HTTP 200
+
+### Backup Health: HEALTHY 🟢
+- PG tier0: 2026-04-29 14:30 ✅
+- PG tier1: 2026-04-29 14:00 ✅
+- AgentJack state: 2026-04-29 14:30 ✅
+- GitHub → Hetzner: fresh ✅
+
+### Security Findings (flagged for review) 🟡
+1. **All 3 VMs have ufw firewall INACTIVE** — no firewall rules. Traefik forwards traffic, but VMs accept from any source on internal network.
+2. **Advisory Zitadel dev (port 8086) publicly accessible** — returns 302 to login page. Should be firewalled or container stopped.
+3. **Kiki API (port 8300) publicly accessible** — should be behind Traefik only.
+4. **RDP (port 3389) publicly accessible** — xrdp running on host, should be firewalled.
+
+### Telegram Bot Status 🟡
+- Bot `@AxisMacBot` confirmed working via API
+- No paired chat exists — dmPolicy="pairing" requires Matej to message the bot first
+- Created 30-min auto-report cron job (fires once pairing established)
+- Status report written: `management/telegram-status-report.md`
+
+### Still Blocked
+- **Telegram**: needs Matej to message @AxisMacBot
+- **Fly.io**: token expired (2026-02-16), needs re-auth
+- **mail-tba → kraliki-dr-standby**: plan exists, execution pending
+- **VM firewalls (UFW)**: needs careful implementation to avoid breaking Traefik routing
+- **ProtonMail send-as**: Matej configures in ProtonMail web UI
